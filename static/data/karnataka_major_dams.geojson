@@ -1,0 +1,185 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Almatti Dam (Lal Bahadur Shastri Sagara)",
+        "river": "Krishna River",
+        "district": "Bagalkot / Vijayapura",
+        "full_capacity_tmc": 123.08,
+        "current_storage_pct": 99.4,
+        "inflow_cusecs": 310000,
+        "outflow_cusecs": 305000,
+        "status": "Full Discharge Operations"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.8885,
+          16.3312
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Krishna Raja Sagara (KRS) Dam",
+        "river": "Kaveri River",
+        "district": "Mandya",
+        "full_capacity_tmc": 49.45,
+        "current_storage_pct": 99.8,
+        "inflow_cusecs": 118000,
+        "outflow_cusecs": 115000,
+        "status": "Maximum Spillway Discharge"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.5724,
+          12.4284
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kabini Reservoir Dam",
+        "river": "Kabini River",
+        "district": "Mysuru (H.D. Kote)",
+        "full_capacity_tmc": 19.52,
+        "current_storage_pct": 99.2,
+        "inflow_cusecs": 68500,
+        "outflow_cusecs": 65000,
+        "status": "Critical Discharge Alert"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.352,
+          11.973
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tungabhadra (TB) Dam",
+        "river": "Tungabhadra River",
+        "district": "Vijayanagara (Hospete)",
+        "full_capacity_tmc": 105.79,
+        "current_storage_pct": 98.6,
+        "inflow_cusecs": 185000,
+        "outflow_cusecs": 180000,
+        "status": "33 Gates Opened"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.337,
+          15.263
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Linganamakki Dam",
+        "river": "Sharavathi River",
+        "district": "Shivamogga (Sagar)",
+        "full_capacity_tmc": 151.75,
+        "current_storage_pct": 97.5,
+        "inflow_cusecs": 78000,
+        "outflow_cusecs": 65000,
+        "status": "Active Spillway Regulated"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.835,
+          14.195
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bhadra Dam (Lakkavalli)",
+        "river": "Bhadra River",
+        "district": "Chikkamagaluru / Shivamogga",
+        "full_capacity_tmc": 71.54,
+        "current_storage_pct": 98.9,
+        "inflow_cusecs": 52000,
+        "outflow_cusecs": 48000,
+        "status": "Spillway Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.642,
+          13.708
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gorur (Hemavathi) Dam",
+        "river": "Hemavathi River",
+        "district": "Hassan",
+        "full_capacity_tmc": 37.1,
+        "current_storage_pct": 99.1,
+        "inflow_cusecs": 41000,
+        "outflow_cusecs": 38000,
+        "status": "Crest Gates Opened"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.052,
+          12.873
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Supa Dam",
+        "river": "Kali River",
+        "district": "Uttara Kannada (Joida)",
+        "full_capacity_tmc": 147.54,
+        "current_storage_pct": 96.2,
+        "inflow_cusecs": 62000,
+        "outflow_cusecs": 55000,
+        "status": "Heavy Power Generation & Spill"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.643,
+          15.278
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Harangi Dam",
+        "river": "Harangi / Kaveri",
+        "district": "Kodagu (Somwarpet)",
+        "full_capacity_tmc": 8.5,
+        "current_storage_pct": 99.5,
+        "inflow_cusecs": 38000,
+        "outflow_cusecs": 36000,
+        "status": "Maximum Release Operations"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.908,
+          12.492
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kabini Reservoir (Normal Pool Level)",
+        "type": "Permanent Water Body",
+        "description": "Baseline water body observed in Sentinel-1 June 2024 SAR acquisition (VV < -18 dB)",
+        "water_type": "Reservoir / River"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.22,
+              11.9
+            ],
+            [
+              76.25,
+              11.91
+            ],
+            [
+              76.28,
+              11.93
+            ],
+            [
+              76.32,
+              11.95
+            ],
+            [
+              76.35,
+              11.97
+            ],
+            [
+              76.36,
+              11.975
+            ],
+            [
+              76.35,
+              11.98
+            ],
+            [
+              76.31,
+              11.96
+            ],
+            [
+              76.26,
+              11.94
+            ],
+            [
+              76.21,
+              11.92
+            ],
+            [
+              76.19,
+              11.91
+            ],
+            [
+              76.22,
+              11.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kabini Downstream River Channel",
+        "type": "Permanent Water Body",
+        "description": "Main river course towards Nanjangud",
+        "water_type": "River Channel"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.36,
+              11.975
+            ],
+            [
+              76.38,
+              11.985
+            ],
+            [
+              76.41,
+              12.0
+            ],
+            [
+              76.44,
+              12.02
+            ],
+            [
+              76.46,
+              12.03
+            ],
+            [
+              76.45,
+              12.035
+            ],
+            [
+              76.4,
+              12.005
+            ],
+            [
+              76.37,
+              11.99
+            ],
+            [
+              76.36,
+              11.975
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

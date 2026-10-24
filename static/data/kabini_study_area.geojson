@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kabini Study Area (QGIS ROI)",
+        "region": "Mysuru District, Karnataka",
+        "sensor": "Sentinel-1 SAR IW GRD",
+        "dates": "June 2024 (Pre-monsoon) & August 2024 (Peak Monsoon)",
+        "total_area_km2": 420.5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.15,
+              11.82
+            ],
+            [
+              76.48,
+              11.82
+            ],
+            [
+              76.48,
+              12.08
+            ],
+            [
+              76.15,
+              12.08
+            ],
+            [
+              76.15,
+              11.82
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

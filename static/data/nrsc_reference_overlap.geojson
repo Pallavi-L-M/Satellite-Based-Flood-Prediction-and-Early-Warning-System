@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NRSC Mysore District Flood Inundation Layer (August 2024)",
+        "source": "National Remote Sensing Centre (NRSC) / ISRO Disaster Management Support",
+        "overlap_type": "Partial Boundary Overlap (Northern edge along Mysore-Kabini border)",
+        "overlap_area_km2": 1.45,
+        "note": "Demonstrates Slide 20 observation: available reference map overlaps only a small edge of the study raster; full-area validation remains incomplete."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.4,
+              12.01
+            ],
+            [
+              76.47,
+              12.02
+            ],
+            [
+              76.48,
+              12.08
+            ],
+            [
+              76.41,
+              12.08
+            ],
+            [
+              76.4,
+              12.01
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

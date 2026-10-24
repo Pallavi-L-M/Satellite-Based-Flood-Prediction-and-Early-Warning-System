@@ -1,0 +1,429 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "region": "Krishna Basin (Belagavi)",
+        "name": "Chikkodi & Athani Krishna Floodplains",
+        "type": "Filtered Flood Inundation Candidate",
+        "area_km2": 18.62,
+        "mean_sar_drop_db": -5.4,
+        "source_sensor": "Sentinel-1 SAR C-Band (10m IW GRD)",
+        "basin": "Krishna Basin",
+        "severity": "Severe Warning"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.55,
+              16.35
+            ],
+            [
+              74.75,
+              16.42
+            ],
+            [
+              74.98,
+              16.58
+            ],
+            [
+              75.12,
+              16.65
+            ],
+            [
+              75.1,
+              16.72
+            ],
+            [
+              74.9,
+              16.64
+            ],
+            [
+              74.68,
+              16.48
+            ],
+            [
+              74.5,
+              16.4
+            ],
+            [
+              74.55,
+              16.35
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "region": "Krishna Basin (Bagalkot)",
+        "name": "Jamkhandi & Bilagi Almatti Submergence Zone",
+        "type": "Filtered Flood Inundation Candidate",
+        "area_km2": 14.55,
+        "mean_sar_drop_db": -5.1,
+        "source_sensor": "Sentinel-1 SAR C-Band",
+        "basin": "Krishna Basin",
+        "severity": "Severe Warning"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              75.25,
+              16.4
+            ],
+            [
+              75.45,
+              16.38
+            ],
+            [
+              75.68,
+              16.32
+            ],
+            [
+              75.82,
+              16.28
+            ],
+            [
+              75.78,
+              16.36
+            ],
+            [
+              75.52,
+              16.45
+            ],
+            [
+              75.3,
+              16.48
+            ],
+            [
+              75.25,
+              16.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "region": "Tungabhadra Basin (Ballari/Vijayanagara)",
+        "name": "Kampli & Siruguppa Tungabhadra Inundation Belt",
+        "type": "Filtered Flood Inundation Candidate",
+        "area_km2": 13.7,
+        "mean_sar_drop_db": -5.2,
+        "source_sensor": "Sentinel-1 SAR C-Band",
+        "basin": "Tungabhadra Basin",
+        "severity": "Severe Warning"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.5,
+              15.35
+            ],
+            [
+              76.72,
+              15.42
+            ],
+            [
+              76.88,
+              15.54
+            ],
+            [
+              77.02,
+              15.68
+            ],
+            [
+              76.96,
+              15.74
+            ],
+            [
+              76.78,
+              15.58
+            ],
+            [
+              76.58,
+              15.46
+            ],
+            [
+              76.46,
+              15.4
+            ],
+            [
+              76.5,
+              15.35
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "region": "Coastal Basin (Dakshina Kannada)",
+        "name": "Bantwal & Uppinangady Netravathi Valley",
+        "type": "Filtered Flood Inundation Candidate",
+        "area_km2": 19.8,
+        "mean_sar_drop_db": -5.9,
+        "source_sensor": "Sentinel-1 SAR C-Band",
+        "basin": "West Coast Basin",
+        "severity": "Severe Warning"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.92,
+              12.82
+            ],
+            [
+              75.05,
+              12.86
+            ],
+            [
+              75.22,
+              12.84
+            ],
+            [
+              75.35,
+              12.8
+            ],
+            [
+              75.32,
+              12.88
+            ],
+            [
+              75.14,
+              12.92
+            ],
+            [
+              74.98,
+              12.91
+            ],
+            [
+              74.88,
+              12.85
+            ],
+            [
+              74.92,
+              12.82
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "region": "Coastal Basin (Udupi)",
+        "name": "Brahmavar & Swarna Lowlands",
+        "type": "Filtered Flood Inundation Candidate",
+        "area_km2": 16.55,
+        "mean_sar_drop_db": -5.7,
+        "source_sensor": "Sentinel-1 SAR C-Band",
+        "basin": "West Coast Basin",
+        "severity": "Severe Warning"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.72,
+              13.38
+            ],
+            [
+              74.82,
+              13.44
+            ],
+            [
+              74.9,
+              13.4
+            ],
+            [
+              74.88,
+              13.48
+            ],
+            [
+              74.78,
+              13.52
+            ],
+            [
+              74.7,
+              13.45
+            ],
+            [
+              74.72,
+              13.38
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "region": "Malnad Basin (Shivamogga)",
+        "name": "Tunga River Gajanur Downstream Overflow",
+        "type": "Filtered Flood Inundation Candidate",
+        "area_km2": 16.2,
+        "mean_sar_drop_db": -5.6,
+        "source_sensor": "Sentinel-1 SAR C-Band",
+        "basin": "Tunga-Bhadra Basin",
+        "severity": "Severe Warning"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              75.48,
+              13.88
+            ],
+            [
+              75.6,
+              13.94
+            ],
+            [
+              75.72,
+              14.02
+            ],
+            [
+              75.68,
+              14.08
+            ],
+            [
+              75.52,
+              14.0
+            ],
+            [
+              75.42,
+              13.92
+            ],
+            [
+              75.48,
+              13.88
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "region": "Kaveri Basin (Mysuru)",
+        "name": "Kabini Spillway Plain (Beechanahalli - Saragur)",
+        "type": "Filtered Flood Inundation Candidate",
+        "area_km2": 6.5572,
+        "mean_sar_drop_db": -6.2,
+        "source_sensor": "Sentinel-1 SAR C-Band",
+        "basin": "Kaveri Basin",
+        "severity": "Severe Warning"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.22,
+              11.9
+            ],
+            [
+              76.28,
+              11.93
+            ],
+            [
+              76.35,
+              11.97
+            ],
+            [
+              76.42,
+              12.01
+            ],
+            [
+              76.46,
+              12.03
+            ],
+            [
+              76.4,
+              12.0
+            ],
+            [
+              76.31,
+              11.96
+            ],
+            [
+              76.21,
+              11.92
+            ],
+            [
+              76.22,
+              11.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "region": "Kaveri Basin (Mandya)",
+        "name": "Srirangapatna & Kaveri Confluence Floodplain",
+        "type": "Filtered Flood Inundation Candidate",
+        "area_km2": 11.1,
+        "mean_sar_drop_db": -5.5,
+        "source_sensor": "Sentinel-1 SAR C-Band",
+        "basin": "Kaveri Basin",
+        "severity": "Severe Warning"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.62,
+              12.4
+            ],
+            [
+              76.72,
+              12.43
+            ],
+            [
+              76.84,
+              12.38
+            ],
+            [
+              76.92,
+              12.32
+            ],
+            [
+              76.88,
+              12.36
+            ],
+            [
+              76.76,
+              12.45
+            ],
+            [
+              76.64,
+              12.44
+            ],
+            [
+              76.62,
+              12.4
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

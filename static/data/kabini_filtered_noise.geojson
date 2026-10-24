@@ -1,0 +1,249 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Speckle Cluster N1 (Smooth Wet Soil / Sandbar)",
+        "status": "Filtered Out (Noise / False Candidate)",
+        "area_km2": 0.725,
+        "removal_reason": "Isolated radar speckle (< 5 pixels connectivity)",
+        "impact": "Part of the 2.1210 km2 (24.44%) area reduction"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.309,
+              11.915
+            ],
+            [
+              76.30821,
+              11.91701
+            ],
+            [
+              76.30612,
+              11.91796
+            ],
+            [
+              76.30409,
+              11.91742
+            ],
+            [
+              76.30125,
+              11.91735
+            ],
+            [
+              76.30166,
+              11.915
+            ],
+            [
+              76.30227,
+              11.91329
+            ],
+            [
+              76.30385,
+              11.91194
+            ],
+            [
+              76.30636,
+              11.9114
+            ],
+            [
+              76.3072,
+              11.91363
+            ],
+            [
+              76.309,
+              11.915
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "False Candidate N2 (Hill Shadow / Steep Ridge)",
+        "status": "Filtered Out (Noise / False Candidate)",
+        "area_km2": 0.684,
+        "removal_reason": "DEM slope > 5 deg (Radar shadow / geometric artifact)",
+        "impact": "Part of the 2.1210 km2 (24.44%) area reduction"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.2085,
+              11.855
+            ],
+            [
+              76.20781,
+              11.85701
+            ],
+            [
+              76.20598,
+              11.85796
+            ],
+            [
+              76.2042,
+              11.85742
+            ],
+            [
+              76.20172,
+              11.85735
+            ],
+            [
+              76.20208,
+              11.855
+            ],
+            [
+              76.20261,
+              11.85329
+            ],
+            [
+              76.20399,
+              11.85194
+            ],
+            [
+              76.20619,
+              11.8514
+            ],
+            [
+              76.20692,
+              11.85363
+            ],
+            [
+              76.2085,
+              11.855
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ephemeral Wetting N3 (Paddy Field Pre-saturation)",
+        "status": "Filtered Out (Noise / False Candidate)",
+        "area_km2": 0.452,
+        "removal_reason": "Specular soil moisture without standing inundation",
+        "impact": "Part of the 2.1210 km2 (24.44%) area reduction"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.458,
+              12.045
+            ],
+            [
+              76.45741,
+              12.04672
+            ],
+            [
+              76.45584,
+              12.04754
+            ],
+            [
+              76.45432,
+              12.04708
+            ],
+            [
+              76.45219,
+              12.04701
+            ],
+            [
+              76.45249,
+              12.045
+            ],
+            [
+              76.45295,
+              12.04353
+            ],
+            [
+              76.45414,
+              12.04238
+            ],
+            [
+              76.45602,
+              12.04191
+            ],
+            [
+              76.45665,
+              12.04382
+            ],
+            [
+              76.458,
+              12.045
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Speckle Cluster N4 (Tarmac / Runway Reflector)",
+        "status": "Filtered Out (Noise / False Candidate)",
+        "area_km2": 0.26,
+        "removal_reason": "Permanent smooth flat surface false positive",
+        "impact": "Part of the 2.1210 km2 (24.44%) area reduction"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.3925,
+              11.96
+            ],
+            [
+              76.39201,
+              11.96115
+            ],
+            [
+              76.3907,
+              11.96169
+            ],
+            [
+              76.38943,
+              11.96138
+            ],
+            [
+              76.38766,
+              11.96134
+            ],
+            [
+              76.38791,
+              11.96
+            ],
+            [
+              76.38829,
+              11.95902
+            ],
+            [
+              76.38928,
+              11.95825
+            ],
+            [
+              76.39085,
+              11.95794
+            ],
+            [
+              76.39137,
+              11.95921
+            ],
+            [
+              76.3925,
+              11.96
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

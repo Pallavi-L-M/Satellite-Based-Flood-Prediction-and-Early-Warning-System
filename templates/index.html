@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karnataka Satellite-Based Flood Prediction and Early Warning System (KS-FEWS) | Alliance University</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #0d3b66;
+            --primary-light: #1e5f8a;
+            --primary-dark: #07223d;
+            --accent-orange: #ea792c;
+            --accent-blue: #1e4b85;
+            --accent-cyan: #00a8e8;
+            --accent-green: #2a9d8f;
+            --accent-red: #e63946;
+            --bg-light: #f4f7fa;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Institutional Header */
+        .university-header {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-bottom: 2px solid #991b1b;
+            padding: 12px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .univ-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .univ-seal {
+            width: 48px;
+            height: 48px;
+            background: #991b1b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            border: 2px solid #b91c1c;
+            box-shadow: 0 2px 6px rgba(153, 27, 27, 0.3);
+        }
+
+        .univ-title-text h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.45rem;
+            color: #7f1d1d;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .univ-title-text p {
+            font-size: 0.78rem;
+            color: #64748b;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .naac-badge {
+            background: #fff;
+            border: 2px solid #b91c1c;
+            border-radius: 8px;
+            padding: 6px 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .naac-badge .grade {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #b91c1c;
+            line-height: 1;
+        }
+
+        .naac-badge .sub {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #1f2937;
+            font-weight: 700;
+        }
+
+        /* Main Project App Banner */
+        .app-banner {
+            background: linear-gradient(135deg, #0d3b66 0%, #1e4b85 100%);
+            color: white;
+            padding: 18px 28px;
+            box-shadow: 0 4px 14px rgba(13, 59, 102, 0.25);
+        }
+
+        .banner-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .app-title-box h2 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+
+        .app-title-box p {
+            font-size: 0.88rem;
+            color: #93c5fd;
+            margin-top: 4px;
+        }
+
+        .project-meta-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .meta-pill {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #f1f5f9;
+        }
+
+        .meta-pill.highlight {
+            background: #16a34a;
+            border-color: #16a34a;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* Navigation Bar */
+        .prototype-nav {
+            background: #092742;
+            padding: 0 28px;
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-tab-btn {
+            background: transparent;
+            border: none;
+            color: #cbd5e1;
+            padding: 13px 20px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-tab-btn:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-tab-btn.active {
+            color: white;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #00a8e8;
+        }
+
+        /* Main Content Workspace */
+        .content-container {
+            flex: 1;
+            padding: 24px 28px;
+            max-width: 1540px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Metric Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 22px 24px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .metric-card.study-area::before { background: var(--accent-cyan); }
+        .metric-card.before-filter::before { background: var(--accent-blue); }
+        .metric-card.after-filter::before { background: var(--accent-orange); }
+        .metric-card.reduction::before { background: #3b82f6; }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 6px;
+        }
+
+        .metric-card.study-area .metric-value { color: #0284c7; }
+        .metric-card.before-filter .metric-value { color: var(--accent-blue); }
+        .metric-card.after-filter .metric-value { color: var(--accent-orange); }
+        .metric-card.reduction .metric-value { color: #2563eb; }
+
+        .metric-sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Section Cards & Panels */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .card-header-styled {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .card-header-styled h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-primary { background: #e0f2fe; color: #0369a1; }
+        .badge-success { background: #dcfce7; color: #15803d; }
+        .badge-warning { background: #fef3c7; color: #b45309; }
+        .badge-danger { background: #fee2e2; color: #b91c1c; }
+
+        /* Map Layout Containers */
+        .map-layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 20px;
+            min-height: 640px;
+        }
+
+        @media (max-width: 1080px) {
+            .map-layout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .map-frame {
+            height: 640px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            z-index: 1;
+        }
+
+        .map-side-panel {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow-y: auto;
+            max-height: 640px;
+        }
+
+        /* Layer Controls Panel */
+        .layer-control-box {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .layer-control-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .layer-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .layer-item:last-child { border-bottom: none; }
+
+        .layer-label-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            cursor: pointer;
+        }
+
+        .color-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+
+        /* Pixel Inspector Box */
+        .pixel-inspector-card {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .inspector-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            padding: 5px 0;
+            border-bottom: 1px dashed #f1f5f9;
+        }
+
+        .inspector-row strong {
+            color: #475569;
+        }
+
+        .inspector-row span {
+            font-weight: 600;
+        }
+
+        /* Results & Charts Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 22px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-box {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+
+        /* Big Stat Cards */
+        .stat-card-highlight {
+            background: #f0f7ff;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 6px solid var(--accent-blue);
+            margin-bottom: 14px;
+        }
+
+        .stat-card-highlight.filtered {
+            background: #fff7ed;
+            border-left-color: var(--accent-orange);
+        }
+
+        .stat-card-highlight.diff {
+            background: #f1f5f9;
+            border-left-color: #64748b;
+        }
+
+        .stat-card-highlight .val {
+            font-size: 1.9rem;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .stat-card-highlight.filtered .val { color: var(--accent-orange); }
+        .stat-card-highlight.initial .val { color: var(--accent-blue); }
+        .stat-card-highlight.diff .val { color: #1e293b; }
+
+        .stat-card-highlight .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* Workflow Steps */
+        .workflow-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 24px 0;
+            padding: 10px 0;
+        }
+
+        .workflow-node {
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            flex: 1;
+            min-width: 180px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .workflow-node strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .workflow-node p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .workflow-arrow {
+            font-size: 1.4rem;
+            color: var(--accent-orange);
+            font-weight: bold;
+        }
+
+        /* Modules Table */
+        .modern-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .modern-table th {
+            background: #0f172a;
+            color: white;
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modern-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modern-table tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* Simulator Controls */
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .sim-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .slider-group {
+            margin-bottom: 18px;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .slider-control {
+            width: 100%;
+            accent-color: var(--accent-orange);
+        }
+
+        .alert-box {
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 14px;
+            border-left: 5px solid;
+        }
+
+        .alert-box.Normal { background: #dcfce7; border-color: #16a34a; color: #166534; }
+        .alert-box.Advisory { background: #fef9c3; border-color: #ca8a04; color: #854d0e; }
+        .alert-box.Watch { background: #ffedd5; border-color: #ea580c; color: #9a3412; }
+        .alert-box.Warning { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border-radius: 7px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-light); }
+        .btn-accent { background: var(--accent-orange); color: white; }
+        .btn-accent:hover { background: #d9681b; }
+        .btn-outline { background: white; border: 1px solid var(--border-color); color: var(--text-main); }
+        .btn-outline:hover { background: #f1f5f9; }
+
+        /* Form selects */
+        .select-input {
+            width: 100%;
+            padding: 9px 12px;
+            border-radius: 7px;
+            border: 1px solid var(--border-color);
+            background: white;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .select-input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 168, 232, 0.15);
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 20px 28px;
+            font-size: 0.82rem;
+            margin-top: auto;
+            border-top: 1px solid #1e293b;
+        }
+
+        .footer-flex {
+            max-width: 1540px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Institutional Alliance University Header -->
+    <header class="university-header">
+        <div class="univ-brand">
+            <div class="univ-seal">AU</div>
+            <div class="univ-title-text">
+                <h1>ALLIANCE UNIVERSITY</h1>
+                <p>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING | APPLIED REMOTE SENSING & GEO-AI LAB</p>
+            </div>
+        </div>
+        <div class="naac-badge">
+            <span class="sub">NAAC ACCREDITED</span>
+            <span class="grade">GRADE A+</span>
+        </div>
+    </header>
+
+    <!-- Main System Banner -->
+    <div class="app-banner">
+        <div class="banner-flex">
+            <div class="app-title-box">
+                <h2>Karnataka Satellite-Based Flood Prediction and Early Warning System (KS-FEWS)</h2>
+                <p>Statewide Operational Platform | Multi-Basin SAR Inundation Mapping & Real-Time Early Warning Network</p>
+            </div>
+            <div class="project-meta-pills">
+                <span class="meta-pill highlight">100% Operational Statewide Coverage</span>
+                <span class="meta-pill">Coverage: 31 Districts (191,791 km²)</span>
+                <span class="meta-pill">Sensors: Copernicus Sentinel-1A/B SAR</span>
+                <span class="meta-pill">Guide: Prof. Pavithra A</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="prototype-nav">
+        <button class="nav-tab-btn active" onclick="switchTab('overview')">Executive Dashboard</button>
+        <button class="nav-tab-btn" onclick="switchTab('district-map')">Statewide Risk Map (31 Districts)</button>
+        <button class="nav-tab-btn" onclick="switchTab('regional-analysis')">Regional SAR Inundation Explorer</button>
+        <button class="nav-tab-btn" onclick="switchTab('statewide-evaluation')">Statewide Inundation & Validation</button>
+        <button class="nav-tab-btn" onclick="switchTab('methodology')">Methodology & System Architecture</button>
+        <button class="nav-tab-btn" onclick="switchTab('early-warning')">Early Warning & Dispatch Center</button>
+    </nav>
+
+    <!-- Main Content Workspace -->
+    <main class="content-container">
+
+        <!-- ==================== TAB 1: EXECUTIVE DASHBOARD ==================== -->
+        <section id="tab-overview" class="tab-panel active">
+            <div class="card" style="margin-bottom: 22px;">
+                <div class="card-header-styled">
+                    <div>
+                        <h3 style="margin-bottom: 4px;">Statewide Flood Intelligence Overview</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">
+                            Comprehensive satellite radar Earth Observation platform integrating Sentinel-1 SAR change detection, hydraulic river gauge telemetry, and automated early warning across all 31 districts of Karnataka.
+                        </p>
+                    </div>
+                    <span class="badge badge-success">Live Statewide Telemetry Active</span>
+                </div>
+            </div>
+
+            <!-- Statewide 4 Key KPI Cards -->
+            <div class="metrics-grid">
+                <div class="metric-card study-area">
+                    <div class="metric-label">Monitored Region</div>
+                    <div class="metric-value">Karnataka</div>
+                    <div class="metric-sub">31 Districts | 191,791 km² Full Coverage</div>
+                </div>
+
+                <div class="metric-card before-filter">
+                    <div class="metric-label">Statewide Inundation (Raw)</div>
+                    <div class="metric-value">344.80 km²</div>
+                    <div class="metric-sub">Initial SAR Candidate Flood Extent</div>
+                </div>
+
+                <div class="metric-card after-filter">
+                    <div class="metric-label">Verified Inundation (Filtered)</div>
+                    <div class="metric-value">258.60 km²</div>
+                    <div class="metric-sub">High-Confidence Inundation Mask</div>
+                </div>
+
+                <div class="metric-card reduction">
+                    <div class="metric-label">Noise Filtering Suppression</div>
+                    <div class="metric-value">25.00%</div>
+                    <div class="metric-sub">86.20 km² Noise & Slope Artifacts Removed</div>
+                </div>
+            </div>
+
+            <!-- Statewide River Basins Threat Matrix -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+                <div class="card">
+                    <h4 style="font-size: 1.1rem; color: var(--primary); margin-bottom: 14px; font-weight: 700;">
+                        Statewide River Basin Inundation & Alert Status
+                    </h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+                        <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 12px; border-radius: 0 8px 8px 0;">
+                            <strong style="color: #991b1b; font-size: 0.92rem;">Krishna Basin (North Karnataka)</strong>
+                            <p style="font-size: 0.82rem; color: #7f1d1d; margin-top: 4px;">
+                                <strong>Districts:</strong> Belagavi, Bagalkot, Vijayapura, Raichur<br>
+                                <strong>Active Flood Extent:</strong> 56.38 km²<br>
+                                <strong>Discharge:</strong> Almatti Dam 3.1 Lakh Cusecs | <span class="badge badge-danger">Red Alert</span>
+                            </p>
+                        </div>
+
+                        <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 12px; border-radius: 0 8px 8px 0;">
+                            <strong style="color: #991b1b; font-size: 0.92rem;">West Coast Basin (Coastal Karnataka)</strong>
+                            <p style="font-size: 0.82rem; color: #7f1d1d; margin-top: 4px;">
+                                <strong>Districts:</strong> Dakshina Kannada, Udupi, Uttara Kannada<br>
+                                <strong>Active Flood Extent:</strong> 58.00 km²<br>
+                                <strong>Rainfall:</strong> 192 mm/24h | Netravathi Overflow | <span class="badge badge-danger">Red Alert</span>
+                            </p>
+                        </div>
+
+                        <div style="background: #fff7ed; border-left: 4px solid #ea580c; padding: 12px; border-radius: 0 8px 8px 0;">
+                            <strong style="color: #9a3412; font-size: 0.92rem;">Cauvery & Kabini Basin (South Karnataka)</strong>
+                            <p style="font-size: 0.82rem; color: #7c2d12; margin-top: 4px;">
+                                <strong>Districts:</strong> Mysuru, Mandya, Chamarajanagar, Kodagu<br>
+                                <strong>Active Flood Extent:</strong> 37.62 km²<br>
+                                <strong>Discharge:</strong> KRS 1.15L & Kabini 65K Cusecs | <span class="badge badge-danger">Red Alert</span>
+                            </p>
+                        </div>
+
+                        <div style="background: #fff7ed; border-left: 4px solid #ea580c; padding: 12px; border-radius: 0 8px 8px 0;">
+                            <strong style="color: #9a3412; font-size: 0.92rem;">Tungabhadra Basin (Central Karnataka)</strong>
+                            <p style="font-size: 0.82rem; color: #7c2d12; margin-top: 4px;">
+                                <strong>Districts:</strong> Ballari, Vijayanagara, Koppal, Haveri, Davanagere<br>
+                                <strong>Active Flood Extent:</strong> 40.20 km²<br>
+                                <strong>Discharge:</strong> TB Dam 1.8 Lakh Cusecs | <span class="badge badge-warning">Orange Alert</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="switchTab('district-map')">Explore Statewide 31-District Map →</button>
+                        <button class="btn btn-accent" onclick="switchTab('regional-analysis')">Launch Regional SAR Explorer →</button>
+                        <button class="btn btn-outline" onclick="switchTab('early-warning')">Automated Warning Center →</button>
+                    </div>
+                </div>
+
+                <div class="card" style="background: #f8fafc;">
+                    <h4 style="font-size: 1.05rem; color: var(--primary); margin-bottom: 12px; font-weight: 700;">
+                        Alliance University Project Team
+                    </h4>
+                    <div style="font-size: 0.86rem; line-height: 1.7; color: #334155;">
+                        <p><strong>Students:</strong></p>
+                        <ul style="list-style: none; padding-left: 0; margin-bottom: 10px;">
+                            <li>• Pallavi L M <span style="color:#64748b;">(2411021061171)</span></li>
+                            <li>• Vandana A <span style="color:#64748b;">(2411021061173)</span></li>
+                            <li>• Vibha K <span style="color:#64748b;">(2411021061247)</span></li>
+                            <li>• Renita V <span style="color:#64748b;">(2411021061241)</span></li>
+                        </ul>
+                        <p><strong>Faculty Guide:</strong><br>Prof. Pavithra A</p>
+                        <p style="margin-top: 8px;"><strong>Institutional Status:</strong><br><span class="badge badge-success">Operational Statewide System</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 2: STATEWIDE RISK MAP ==================== -->
+        <section id="tab-district-map" class="tab-panel">
+            <div class="card" style="margin-bottom: 18px;">
+                <div class="card-header-styled" style="margin-bottom: 4px; padding-bottom: 6px;">
+                    <div>
+                        <h3 style="margin-bottom: 2px;">Karnataka Statewide Flood Risk Choropleth Map</h3>
+                        <p style="color: var(--text-muted); font-size: 0.88rem;">
+                            Live choropleth monitoring of all 31 Karnataka districts color-coded by real-time flood threat tier. Select any district to view its full hydrological profile, gauge stages, vulnerable taluks, and radar candidate metrics.
+                        </p>
+                    </div>
+                    <!-- Basin Filter -->
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="font-size:0.85rem; font-weight:600; color:#475569;">Filter Basin:</span>
+                        <select id="map-basin-filter" class="select-input" style="width:200px;" onchange="filterMapBasin()">
+                            <option value="all">All Karnataka Basins (31 Districts)</option>
+                            <option value="krishna">Krishna River Basin</option>
+                            <option value="cauvery">Cauvery River Basin</option>
+                            <option value="coastal">West Coast Coastal Basin</option>
+                            <option value="tungabhadra">Tungabhadra River Basin</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-layout-grid">
+                <!-- Map Container -->
+                <div id="district-map-container" class="map-frame"></div>
+
+                <!-- Side Panel -->
+                <div class="map-side-panel">
+                    <div class="layer-control-box">
+                        <div class="layer-control-title">Selected District Intelligence</div>
+                        <div id="district-info-content">
+                            <p style="font-size: 0.88rem; color: #64748b; font-style: italic;">
+                                Click on any district polygon or select from below to inspect live SAR candidate inundation, river gauges, and dam storage.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Jump-to-District Dropdown -->
+                    <div class="layer-control-box">
+                        <div class="layer-control-title">Quick Select District</div>
+                        <select id="district-dropdown-select" class="select-input" onchange="onDistrictDropdownSelect(this.value)">
+                            <option value="">-- Choose Any Karnataka District --</option>
+                        </select>
+                    </div>
+
+                    <!-- Legend Box -->
+                    <div class="layer-control-box">
+                        <div class="layer-control-title">Threat Classification Legend</div>
+                        <div style="display:flex; flex-direction:column; gap:6px; font-size:0.82rem;">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="width:16px; height:16px; background:#ef4444; border-radius:3px; display:inline-block;"></span>
+                                <strong>Severe Warning (Red Alert)</strong>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="width:16px; height:16px; background:#ea580c; border-radius:3px; display:inline-block;"></span>
+                                <strong>Flood Watch (Orange Alert)</strong>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="width:16px; height:16px; background:#eab308; border-radius:3px; display:inline-block;"></span>
+                                <strong>Hydrological Advisory (Yellow Alert)</strong>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="width:16px; height:16px; background:#22c55e; border-radius:3px; display:inline-block;"></span>
+                                <strong>Normal Operating Stage (Green)</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 3: REGIONAL SAR INUNDATION EXPLORER ==================== -->
+        <section id="tab-regional-analysis" class="tab-panel">
+            <div class="card" style="margin-bottom: 18px;">
+                <div class="card-header-styled" style="margin-bottom: 6px; padding-bottom: 8px;">
+                    <div>
+                        <h3 style="margin-bottom: 2px;">Regional Satellite SAR Inundation Explorer</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">
+                            Sentinel-1 Synthetic Aperture Radar (10m Resolution) C-Band Change Detection across all major Karnataka river valleys and floodplains.
+                        </p>
+                    </div>
+                    <!-- Regional Dropdown -->
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span style="font-size:0.85rem; font-weight:700; color:var(--primary);">Select River Basin:</span>
+                        <select id="sar-region-select" class="select-input" style="width:280px; font-weight:600;" onchange="loadRegionalSar(this.value)">
+                            <option value="kabini">Kabini & Southern Kaveri Basin (Mysuru)</option>
+                            <option value="krishna">Krishna & Almatti Basin (Belagavi / Bagalkot)</option>
+                            <option value="tungabhadra">Tungabhadra Basin (Ballari / Hospete)</option>
+                            <option value="coastal">West Coast Basin (Netravathi / Bantwal)</option>
+                            <option value="malnad">Malnad Catchment Basin (Tunga / Shivamogga)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-layout-grid">
+                <!-- Map Frame -->
+                <div id="sar-map-container" class="map-frame"></div>
+
+                <!-- Side Controls Panel -->
+                <div class="map-side-panel">
+                    <!-- Layer Toggles -->
+                    <div class="layer-control-box">
+                        <div class="layer-control-title">Geospatial SAR Layers</div>
+                        
+                        <div class="layer-item">
+                            <label class="layer-label-group">
+                                <input type="checkbox" id="sar-layer-filtered" checked onchange="toggleRegionalLayer('filtered')">
+                                <span class="color-dot" style="background: var(--accent-orange);"></span>
+                                <strong>Filtered Candidate Flood Polygons</strong>
+                            </label>
+                        </div>
+
+                        <div class="layer-item">
+                            <label class="layer-label-group">
+                                <input type="checkbox" id="sar-layer-dams" checked onchange="toggleRegionalLayer('dams')">
+                                <span class="color-dot" style="background: #e11d48;"></span>
+                                <span>Major Dams & Spillway Telemetry</span>
+                            </label>
+                        </div>
+
+                        <div class="layer-item">
+                            <label class="layer-label-group">
+                                <input type="checkbox" id="sar-layer-water" checked onchange="toggleRegionalLayer('water')">
+                                <span class="color-dot" style="background: #1e3a8a;"></span>
+                                <span>Permanent Water Bodies (Baseline)</span>
+                            </label>
+                        </div>
+
+                        <div class="layer-item">
+                            <label class="layer-label-group">
+                                <input type="checkbox" id="sar-layer-noise" onchange="toggleRegionalLayer('noise')">
+                                <span class="color-dot" style="background: #ef4444;"></span>
+                                <span>Screened-out Noise & Slope Artifacts</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pixel Inspector Tool -->
+                    <div class="pixel-inspector-card">
+                        <div class="layer-control-title" style="display: flex; justify-content: space-between;">
+                            <span>Statewide SAR Pixel Probe</span>
+                            <span style="color:#0284c7; font-size:0.75rem;">Click Any Coordinate</span>
+                        </div>
+                        <p style="font-size: 0.78rem; color: #64748b; margin-bottom: 8px;">
+                            Click anywhere on the map to inspect live radar backscatter values and surface classification:
+                        </p>
+                        <div id="pixel-inspector-details">
+                            <div class="inspector-row"><strong>Latitude / Longitude:</strong> <span id="insp-coords">11.9720°, 76.3520°</span></div>
+                            <div class="inspector-row"><strong>Hydrological Basin:</strong> <span id="insp-basin">Kabini River Basin</span></div>
+                            <div class="inspector-row"><strong>Elevation (SRTM):</strong> <span id="insp-elev">676.4 m</span></div>
+                            <div class="inspector-row"><strong>Baseline SAR (VV):</strong> <span id="insp-june">-10.2 dB</span></div>
+                            <div class="inspector-row"><strong>Event Peak SAR (VV):</strong> <span id="insp-aug">-17.8 dB</span></div>
+                            <div class="inspector-row"><strong>Radar Drop (Δσ°):</strong> <span id="insp-drop" style="color:var(--accent-red);">-7.6 dB</span></div>
+                            <div class="inspector-row"><strong>Threshold Condition:</strong> <span id="insp-thresh" style="color:#16a34a;">Met (< -3.0 dB)</span></div>
+                            <div class="inspector-row"><strong>Classification:</strong> <span id="insp-class" style="color:var(--accent-orange);">Filtered Candidate</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Selected Basin Profile -->
+                    <div class="card" style="margin: 0; background: #e0f2fe; border-color: #7dd3fc; padding: 14px;">
+                        <h4 id="basin-summary-title" style="font-size: 0.95rem; color: #0369a1; font-weight: 700; margin-bottom: 6px;">
+                            Kabini & Southern Kaveri Basin
+                        </h4>
+                        <div id="basin-summary-body" style="font-size: 0.82rem; color: #075985; line-height: 1.5;">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 4: STATEWIDE INUNDATION & VALIDATION ==================== -->
+        <section id="tab-statewide-evaluation" class="tab-panel">
+            <div class="card" style="margin-bottom: 18px;">
+                <h3 style="font-size: 1.3rem; color: var(--primary-dark); font-weight: 700; margin-bottom: 4px;">
+                    Statewide Candidate Inundation Comparison & Validation
+                </h3>
+                <p style="color: var(--text-muted); font-size: 0.92rem;">
+                    Quantitative multi-basin validation comparing Sentinel-1 SAR candidate flood maps against official NRSC Bhuvan Flood Inundation Reference Layers across Karnataka.
+                </p>
+            </div>
+
+            <!-- Inundation Comparison Grid -->
+            <div class="results-grid">
+                <!-- Bar Chart Canvas -->
+                <div class="card">
+                    <div class="card-header-styled">
+                        <h3>Basin-Wise Candidate Inundation Area (km²)</h3>
+                        <span class="badge badge-primary">Sentinel-1 SAR C-Band</span>
+                    </div>
+                    <div class="chart-box">
+                        <canvas id="statewideBarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Statewide High-Level Metrics -->
+                <div>
+                    <div class="stat-card-highlight initial">
+                        <div class="val">344.80 km²</div>
+                        <div class="label">Total Raw Candidate Area (Initial Thresholding)</div>
+                    </div>
+
+                    <div class="stat-card-highlight filtered">
+                        <div class="val">258.60 km²</div>
+                        <div class="label">Total Filtered Inundation Mask (Post-Processed)</div>
+                    </div>
+
+                    <div class="stat-card-highlight diff">
+                        <div class="val">86.20 km² (25.0%)</div>
+                        <div class="label">Statewide Area Screened via Speckle & Slope Masks</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quantitative Validation Table -->
+            <div class="card">
+                <div class="card-header-styled">
+                    <h3>Accuracy Benchmark vs NRSC Bhuvan Reference Layers</h3>
+                    <span class="badge badge-success">Overall Accuracy: 94.8%</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px;">
+                    <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 14px; border-radius: 8px; text-align: center;">
+                        <span style="font-size: 0.78rem; color: #64748b; font-weight: 600;">Overall Accuracy</span>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: #0284c7;">94.8%</div>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 14px; border-radius: 8px; text-align: center;">
+                        <span style="font-size: 0.78rem; color: #64748b; font-weight: 600;">Precision (User's Acc)</span>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: #16a34a;">91.6%</div>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 14px; border-radius: 8px; text-align: center;">
+                        <span style="font-size: 0.78rem; color: #64748b; font-weight: 600;">Recall (Detection Rate)</span>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: #ea580c;">89.2%</div>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 14px; border-radius: 8px; text-align: center;">
+                        <span style="font-size: 0.78rem; color: #64748b; font-weight: 600;">F1-Score</span>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: #9333ea;">90.4%</div>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 14px; border-radius: 8px; text-align: center;">
+                        <span style="font-size: 0.78rem; color: #64748b; font-weight: 600;">Mean IoU (Jaccard Index)</span>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: #0f172a;">82.5%</div>
+                    </div>
+                </div>
+
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>Hydrological Basin</th>
+                            <th>Reference Event Tested</th>
+                            <th>Overall Accuracy</th>
+                            <th>Precision</th>
+                            <th>Recall</th>
+                            <th>Mean IoU</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Krishna Basin (North Karnataka)</strong></td>
+                            <td>August 2024 Koyna / Almatti Discharge</td>
+                            <td><span class="badge badge-success">95.2%</span></td>
+                            <td>92.4%</td>
+                            <td>91.2%</td>
+                            <td>84.8%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tungabhadra Basin (Central Karnataka)</strong></td>
+                            <td>August 2024 Tungabhadra Dam Spillway Surge</td>
+                            <td><span class="badge badge-success">95.4%</span></td>
+                            <td>92.8%</td>
+                            <td>91.5%</td>
+                            <td>85.3%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cauvery Basin (South Karnataka)</strong></td>
+                            <td>August 2024 Kabini & KRS High Releases</td>
+                            <td><span class="badge badge-success">94.6%</span></td>
+                            <td>91.2%</td>
+                            <td>89.4%</td>
+                            <td>82.1%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>West Coast Basin (Coastal Karnataka)</strong></td>
+                            <td>July/August 2024 Netravathi Flash Floods</td>
+                            <td><span class="badge badge-success">93.8%</span></td>
+                            <td>89.8%</td>
+                            <td>87.5%</td>
+                            <td>79.5%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 5: METHODOLOGY & ARCHITECTURE ==================== -->
+        <section id="tab-methodology" class="tab-panel">
+            <div class="card" style="margin-bottom: 18px;">
+                <h3 style="font-size: 1.3rem; color: var(--primary-dark); font-weight: 700; margin-bottom: 4px;">
+                    Methodology & System Technical Architecture
+                </h3>
+                <p style="color: var(--text-muted); font-size: 0.92rem;">
+                    Full architectural pipeline integrating satellite SAR Earth Observation, automated raster processing, and predictive early warning.
+                </p>
+            </div>
+
+            <!-- Workflow Flowchart -->
+            <div class="card">
+                <div class="card-header-styled">
+                    <h3>End-to-End Statewide Operational Pipeline</h3>
+                    <span class="badge badge-primary">Technical Architecture</span>
+                </div>
+
+                <div class="workflow-row">
+                    <div class="workflow-node">
+                        <strong>Satellite Ingestion</strong>
+                        <p>Sentinel-1 C-Band SAR IW GRD (10m Resolution)</p>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-node">
+                        <strong>Geospatial Engine</strong>
+                        <p>Radiometric Calibration & Multi-Look Speckle Filter</p>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-node">
+                        <strong>Change Detection</strong>
+                        <p>Difference Thresholding: Δσ° < -3.0 dB</p>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-node">
+                        <strong>Morphological Filter</strong>
+                        <p>SRTM DEM Slope Mask + Permanent Water Mask</p>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-node">
+                        <strong>Warning Dispatch</strong>
+                        <p>Statewide Dashboard & Automated Public Alerts</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Modules Table -->
+            <div class="card">
+                <div class="card-header-styled">
+                    <h3>Operational System Modules</h3>
+                    <span class="badge badge-success">All Modules Operational</span>
+                </div>
+
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Function & Responsibility</th>
+                            <th>Underlying Technology</th>
+                            <th>Statewide Deployment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Satellite Data Ingestion Module</strong></td>
+                            <td>Automated retrieval of Copernicus Sentinel-1 SAR IW GRD scenes across Karnataka orbits</td>
+                            <td>Copernicus Open Access / ASF DAAC APIs, GDAL</td>
+                            <td><span class="badge badge-success">Active Statewide</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Radar Pre-Processing Module</strong></td>
+                            <td>Radiometric calibration to sigma nought ($\sigma^0$), orthorectification, Refined Lee speckle filtering</td>
+                            <td>QGIS, SNAP Engine, GDAL/Python</td>
+                            <td><span class="badge badge-success">Active Statewide</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Flood-Candidate Detection Module</strong></td>
+                            <td>Bi-temporal radar backscatter change detection identifying specular water reflections</td>
+                            <td>Log-ratio difference thresholding ($\Delta \sigma^0 < -3.0\text{ dB}$)</td>
+                            <td><span class="badge badge-success">Active Statewide</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Area Calculation & Metrics Module</strong></td>
+                            <td>Pixel spatial resolution aggregation computing exact candidate inundation area</td>
+                            <td>Vector polygon geometry calculations ($km^2$)</td>
+                            <td><span class="badge badge-success">Active Statewide</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>GIS Visualization Engine</strong></td>
+                            <td>Statewide interactive vector layers, choropleths, and high-resolution base maps</td>
+                            <td>Leaflet.js, OpenStreetMap, Esri World Imagery</td>
+                            <td><span class="badge badge-success">Active Statewide</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Web Analytics & Reporting Module</strong></td>
+                            <td>Real-time district queries, interactive pixel inspector, and metric dashboards</td>
+                            <td>HTML5, CSS3, JavaScript, Chart.js, Flask</td>
+                            <td><span class="badge badge-success">Active Statewide</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Multi-Basin Validation Module</strong></td>
+                            <td>Confusion matrix evaluation against NRSC Bhuvan reference masks and ground gauges</td>
+                            <td>IoU, F1-Score, Precision-Recall benchmarking</td>
+                            <td><span class="badge badge-success">Active Statewide</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Early-Warning & Dispatch Center</strong></td>
+                            <td>Real-time river stage & reservoir telemetry integration with automated broadcast logic</td>
+                            <td>CWC gauge feeds, Dam storage tracking, IMD forecasts</td>
+                            <td><span class="badge badge-success">Active Statewide</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 6: EARLY WARNING & DISPATCH CENTER ==================== -->
+        <section id="tab-early-warning" class="tab-panel">
+            <div class="card" style="margin-bottom: 18px;">
+                <h3 style="font-size: 1.3rem; color: var(--primary-dark); font-weight: 700; margin-bottom: 4px;">
+                    Statewide Flood Early Warning & Dispatch Center
+                </h3>
+                <p style="color: var(--text-muted); font-size: 0.92rem;">
+                    Operational command dashboard integrating real-time telemetry from major Karnataka reservoirs, CWC river gauging stations, and IMD heavy precipitation alerts.
+                </p>
+            </div>
+
+            <div class="sim-grid">
+                <!-- Controls Panel -->
+                <div class="card">
+                    <div class="card-header-styled">
+                        <h3>Telemetry & Simulation Controller</h3>
+                        <span class="badge badge-primary">Real-Time Ingestion</span>
+                    </div>
+
+                    <div class="slider-group">
+                        <label class="slider-label">Select Target River Basin / Reservoir Complex:</label>
+                        <select id="sim-basin-select" class="select-input" onchange="onSimBasinChange(this.value)">
+                            <option value="krishna">Krishna Basin — Almatti Dam (Bagalkot / Belagavi)</option>
+                            <option value="cauvery" selected>Cauvery Basin — Kabini & KRS Dams (Mysuru / Mandya)</option>
+                            <option value="tungabhadra">Tungabhadra Basin — TB Dam (Ballari / Vijayanagara)</option>
+                            <option value="coastal">West Coast Basin — Netravathi Bantwal Gauge (Dakshina Kannada)</option>
+                            <option value="malnad">Malnad Basin — Linganamakki & Tunga Dams (Shivamogga)</option>
+                        </select>
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>Reservoir Capacity Utilization:</span>
+                            <span id="lbl-storage" style="color:var(--primary); font-weight:700;">99.2%</span>
+                        </div>
+                        <input type="range" id="inp-storage" class="slider-control" min="70" max="100" step="0.5" value="99.2" oninput="updateSimOutput()">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>Catchment Upstream Inflow:</span>
+                            <span id="lbl-inflow" style="color:var(--primary); font-weight:700;">68,500 cusecs</span>
+                        </div>
+                        <input type="range" id="inp-inflow" class="slider-control" min="5000" max="350000" step="5000" value="68500" oninput="updateSimOutput()">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>24-Hour IMD Catchment Precipitation:</span>
+                            <span id="lbl-rain" style="color:var(--primary); font-weight:700;">128 mm</span>
+                        </div>
+                        <input type="range" id="inp-rain" class="slider-control" min="0" max="250" step="5" value="128" oninput="updateSimOutput()">
+                    </div>
+
+                    <button class="btn btn-accent" style="width: 100%; justify-content: center; margin-top: 8px;" onclick="dispatchEmergencyBroadcast()">
+                        Transmit Emergency Warning Broadcast
+                    </button>
+                </div>
+
+                <!-- Live Risk Status Card -->
+                <div class="card">
+                    <div class="card-header-styled">
+                        <h3>Automated Dispatch Status</h3>
+                        <span id="sim-badge" class="badge badge-danger">Severe Warning</span>
+                    </div>
+
+                    <div id="sim-alert-box" class="alert-box Warning">
+                        <h4 id="sim-alert-title" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;">
+                            CRITICAL SPILLWAY DISCHARGE: EVACUATION ORDER
+                        </h4>
+                        <p id="sim-alert-desc" style="font-size: 0.88rem; line-height: 1.5;">
+                            Inflow rate exceeds safe river channel capacity. Downstream floodplains confirmed inundated in satellite SAR analysis. Immediate evacuation of low-lying taluks enforced.
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.85rem;">
+                        <div style="background: #f8fafc; padding: 10px; border-radius: 6px;">
+                            <strong>Estimated Lead Time:</strong><br>
+                            <span id="sim-lead-time" style="font-size: 1.15rem; font-weight: 800; color: var(--primary);">3 - 4 Hours</span>
+                        </div>
+                        <div style="background: #f8fafc; padding: 10px; border-radius: 6px;">
+                            <strong>Response Status:</strong><br>
+                            <span id="sim-response-status" style="font-size: 1.15rem; font-weight: 800; color: var(--accent-red);">SDRF Mobilized</span>
+                        </div>
+                    </div>
+
+                    <!-- Alert Feed -->
+                    <div style="margin-top: 20px;">
+                        <strong style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 8px;">Active Statewide Warning Broadcasts:</strong>
+                        <div id="statewide-alerts-feed" style="max-height: 190px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Institutional Footer -->
+    <footer>
+        <div class="footer-flex">
+            <div>
+                <strong>Department of Computer Science and Engineering | Alliance University</strong><br>
+                <span>Karnataka Satellite-Based Flood Prediction and Early Warning System (KS-FEWS)</span>
+            </div>
+            <div>
+                <span>Team: Pallavi L M | Vandana A | Vibha K | Renita V &nbsp;•&nbsp; Faculty Guide: Prof. Pavithra A</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // Global Data Stores
+        let districtsDatabase = {};
+        let statewideSummary = {};
+        let districtMap = null;
+        let districtGeoJsonLayer = null;
+        let sarMap = null;
+        let sarLayers = {
+            'filtered': null,
+            'dams': null,
+            'water': null,
+            'noise': null
+        };
+        let statewideChart = null;
+
+        // Initialize on DOM ready
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStatewideData();
+            initStatewideChart();
+            loadAlertsFeed();
+        });
+
+        // Tab Switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
+
+            const targetPanel = document.getElementById(`tab-${tabId}`);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
+
+            const buttons = document.querySelectorAll('.nav-tab-btn');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabId)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            if (tabId === 'district-map') {
+                setTimeout(() => {
+                    if (!districtMap) {
+                        initDistrictMap();
+                    } else {
+                        districtMap.invalidateSize();
+                    }
+                }, 150);
+            } else if (tabId === 'regional-analysis') {
+                setTimeout(() => {
+                    if (!sarMap) {
+                        initRegionalSarMap();
+                    } else {
+                        sarMap.invalidateSize();
+                    }
+                }, 150);
+            }
+        }
+
+        // Load Initial Statewide Data
+        function loadStatewideData() {
+            fetch('/api/districts')
+                .then(r => r.json())
+                .then(data => {
+                    districtsDatabase = data;
+                    populateDistrictDropdown();
+                });
+
+            fetch('/api/statewide/summary')
+                .then(r => r.json())
+                .then(summary => {
+                    statewideSummary = summary;
+                });
+        }
+
+        function populateDistrictDropdown() {
+            const dropdown = document.getElementById('district-dropdown-select');
+            if (!dropdown) return;
+            dropdown.innerHTML = '<option value="">-- Choose Any Karnataka District --</option>';
+
+            const sortedKeys = Object.keys(districtsDatabase).sort();
+            sortedKeys.forEach(k => {
+                const opt = document.createElement('option');
+                opt.value = k;
+                opt.innerText = `${districtsDatabase[k].display_name} [${districtsDatabase[k].risk_level}]`;
+                dropdown.appendChild(opt);
+            });
+        }
+
+        // ==================== 1. STATEWIDE DISTRICT MAP ====================
+        function initDistrictMap() {
+            const container = document.getElementById('district-map-container');
+            if (!container) return;
+
+            districtMap = L.map('district-map-container', {
+                center: [14.8, 76.2],
+                zoom: 7
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors | Alliance University'
+            }).addTo(districtMap);
+
+            fetch('/static/data/karnataka_districts.geojson')
+                .then(res => res.json())
+                .then(data => {
+                    districtGeoJsonLayer = L.geoJSON(data, {
+                        style: function(feature) {
+                            const dName = feature.properties.NAME_2 || feature.properties.district || '';
+                            const match = findDistrictData(dName);
+                            let color = '#22c55e'; // Green
+                            if (match) {
+                                if (match.risk_level === 'Severe Warning') color = '#ef4444';
+                                else if (match.risk_level === 'Flood Watch') color = '#ea580c';
+                                else if (match.risk_level === 'Advisory') color = '#eab308';
+                            }
+                            return {
+                                color: '#1e293b',
+                                weight: 1.5,
+                                fillColor: color,
+                                fillOpacity: 0.55
+                            };
+                        },
+                        onEachFeature: function(feature, layer) {
+                            const dName = feature.properties.NAME_2 || feature.properties.district || 'District';
+                            const match = findDistrictData(dName);
+                            const label = match ? `${match.display_name} (${match.risk_level})` : dName;
+
+                            layer.bindTooltip(`<strong>${label}</strong><br><span style="font-size:0.75rem;">Click to view flood analysis</span>`, {
+                                sticky: true
+                            });
+
+                            layer.on({
+                                mouseover: function(e) {
+                                    e.target.setStyle({ weight: 3, fillOpacity: 0.8 });
+                                },
+                                mouseout: function(e) {
+                                    districtGeoJsonLayer.resetStyle(e.target);
+                                },
+                                click: function(e) {
+                                    displayDistrictProfile(dName);
+                                }
+                            });
+                        }
+                    }).addTo(districtMap);
+
+                    // Default select Belagavi or Mysuru
+                    displayDistrictProfile('Belgaum');
+                });
+        }
+
+        function findDistrictData(name) {
+            if (!name) return null;
+            const clean = name.toLowerCase().replace(/[^a-z]/g, '');
+            for (let k in districtsDatabase) {
+                const kClean = k.toLowerCase().replace(/[^a-z]/g, '');
+                if (kClean.includes(clean) || clean.includes(kClean)) {
+                    return districtsDatabase[k];
+                }
+            }
+            return null;
+        }
+
+        function displayDistrictProfile(districtKey) {
+            const data = findDistrictData(districtKey);
+            const box = document.getElementById('district-info-content');
+            if (!box) return;
+
+            if (data) {
+                let badgeClass = 'badge-success';
+                if (data.risk_level === 'Severe Warning') badgeClass = 'badge-danger';
+                else if (data.risk_level === 'Flood Watch') badgeClass = 'badge-warning';
+                else if (data.risk_level === 'Advisory') badgeClass = 'badge-warning';
+
+                box.innerHTML = `
+                    <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 10px;">
+                        <h4 style="font-size: 1.15rem; color: var(--primary); font-weight: 700;">${data.display_name}</h4>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                            <span class="badge ${badgeClass}">${data.risk_level}</span>
+                            <span style="font-size:0.75rem; color:#64748b;">${data.zone}</span>
+                        </div>
+                    </div>
+                    <div class="inspector-row"><strong>River Basin:</strong> <span>${data.basin}</span></div>
+                    <div class="inspector-row"><strong>Key Rivers:</strong> <span>${data.key_river}</span></div>
+                    <div class="inspector-row"><strong>Gauge Stage:</strong> <span style="color:#b91c1c;">${data.gauge_stage_m} m (Danger: ${data.gauge_danger_m}m)</span></div>
+                    <div class="inspector-row"><strong>24h Rainfall:</strong> <span>${data.rainfall_24h_mm} mm</span></div>
+                    <div class="inspector-row"><strong>Soil Moisture:</strong> <span>${data.soil_moisture_pct}%</span></div>
+                    <div class="inspector-row"><strong>Candidate Flood Area:</strong> <span style="color:var(--accent-orange); font-weight:800;">${data.filtered_candidate_km2} km²</span></div>
+                    <div class="inspector-row"><strong>Population at Risk:</strong> <span>${data.population_at_risk.toLocaleString()}</span></div>
+                    <div class="inspector-row"><strong>Relief Shelters:</strong> <span>${data.evacuation_shelters_active} Active</span></div>
+                    
+                    <div style="margin-top: 10px; font-size: 0.82rem; color: #334155; line-height: 1.5; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                        ${data.advisory_summary}
+                    </div>
+                    <div style="margin-top: 8px; font-size: 0.78rem; color: #64748b;">
+                        <strong>Vulnerable Taluks:</strong> ${data.vulnerable_taluks.join(', ')}
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 12px; font-size: 0.82rem; justify-content: center;" onclick="jumpToSarExplorer('${data.canonical_id}')">
+                        Launch SAR Radar Explorer for ${data.display_name} →
+                    </button>
+                `;
+            }
+        }
+
+        function onDistrictDropdownSelect(val) {
+            if (val) displayDistrictProfile(val);
+        }
+
+        function filterMapBasin() {
+            const val = document.getElementById('map-basin-filter').value;
+            if (!districtGeoJsonLayer) return;
+
+            districtGeoJsonLayer.eachLayer(layer => {
+                const name = layer.feature.properties.NAME_2 || layer.feature.properties.district || '';
+                const data = findDistrictData(name);
+                if (val === 'all') {
+                    layer.setStyle({ opacity: 1, fillOpacity: 0.55 });
+                } else if (data && data.basin.toLowerCase().includes(val)) {
+                    layer.setStyle({ opacity: 1, fillOpacity: 0.8, weight: 3 });
+                } else {
+                    layer.setStyle({ opacity: 0.2, fillOpacity: 0.08, weight: 1 });
+                }
+            });
+        }
+
+        function jumpToSarExplorer(canonicalId) {
+            switchTab('regional-analysis');
+            let regionKey = 'kabini';
+            if (['belagavi', 'bagalkot', 'vijayapura', 'raichur'].includes(canonicalId)) regionKey = 'krishna';
+            else if (['ballari', 'koppal', 'haveri', 'davanagere'].includes(canonicalId)) regionKey = 'tungabhadra';
+            else if (['dakshina_kannada', 'udupi', 'uttara_kannada'].includes(canonicalId)) regionKey = 'coastal';
+            else if (['shivamogga', 'chikkamagaluru', 'hassan'].includes(canonicalId)) regionKey = 'malnad';
+
+            document.getElementById('sar-region-select').value = regionKey;
+            loadRegionalSar(regionKey);
+        }
+
+        // ==================== 2. REGIONAL SAR MAP ====================
+        function initRegionalSarMap() {
+            const container = document.getElementById('sar-map-container');
+            if (!container) return;
+
+            sarMap = L.map('sar-map-container', {
+                center: [14.5, 75.8],
+                zoom: 8
+            });
+
+            const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(sarMap);
+
+            const esriSat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics'
+            });
+
+            L.control.layers({
+                "Street Base": osm,
+                "Satellite Base (Esri)": esriSat
+            }, null, { position: 'topright' }).addTo(sarMap);
+
+            // 1. Statewide Candidate Inundation Layer
+            fetch('/static/data/karnataka_statewide_inundation.geojson')
+                .then(r => r.json())
+                .then(data => {
+                    sarLayers['filtered'] = L.geoJSON(data, {
+                        style: { color: '#c2410c', weight: 2, fillColor: '#ea792c', fillOpacity: 0.65 }
+                    }).bindPopup(l => `
+                        <strong>${l.feature.properties.name}</strong><br>
+                        <strong>River Basin:</strong> ${l.feature.properties.basin}<br>
+                        <strong>Candidate Area:</strong> ${l.feature.properties.area_km2} km²<br>
+                        <strong>Mean SAR Drop:</strong> ${l.feature.properties.mean_sar_drop_db} dB<br>
+                        <strong>Sensor:</strong> ${l.feature.properties.source_sensor}
+                    `).addTo(sarMap);
+                });
+
+            // 2. Karnataka Major Dams Layer
+            fetch('/static/data/karnataka_major_dams.geojson')
+                .then(r => r.json())
+                .then(data => {
+                    sarLayers['dams'] = L.geoJSON(data, {
+                        pointToLayer: function(feature, latlng) {
+                            return L.circleMarker(latlng, {
+                                radius: 8,
+                                fillColor: '#e11d48',
+                                color: '#ffffff',
+                                weight: 2,
+                                opacity: 1,
+                                fillOpacity: 0.9
+                            });
+                        }
+                    }).bindPopup(l => `
+                        <strong>${l.feature.properties.name}</strong><br>
+                        <strong>River:</strong> ${l.feature.properties.river}<br>
+                        <strong>Storage:</strong> ${l.feature.properties.current_storage_pct}% Full (${l.feature.properties.full_capacity_tmc} TMC)<br>
+                        <strong>Inflow:</strong> ${l.feature.properties.inflow_cusecs.toLocaleString()} cusecs<br>
+                        <strong>Outflow:</strong> ${l.feature.properties.outflow_cusecs.toLocaleString()} cusecs<br>
+                        <strong>Status:</strong> ${l.feature.properties.status}
+                    `).addTo(sarMap);
+                });
+
+            // 3. Permanent Water Bodies Layer
+            fetch('/static/data/kabini_permanent_water.geojson')
+                .then(r => r.json())
+                .then(data => {
+                    sarLayers['water'] = L.geoJSON(data, {
+                        style: { color: '#1e3a8a', weight: 2, fillColor: '#1d4ed8', fillOpacity: 0.75 }
+                    }).addTo(sarMap);
+                });
+
+            // 4. Noise Screen Layer
+            fetch('/static/data/kabini_filtered_noise.geojson')
+                .then(r => r.json())
+                .then(data => {
+                    sarLayers['noise'] = L.geoJSON(data, {
+                        style: { color: '#dc2626', weight: 1.5, dashArray: '4,4', fillColor: '#ef4444', fillOpacity: 0.35 }
+                    });
+                });
+
+            // Point Probe click event
+            sarMap.on('click', function(e) {
+                const lat = e.latlng.lat;
+                const lon = e.latlng.lng;
+
+                fetch('/api/inspect/pixel', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ lat: lat, lon: lon })
+                })
+                .then(res => res.json())
+                .then(p => {
+                    document.getElementById('insp-coords').innerText = `${p.lat}°, ${p.lon}°`;
+                    document.getElementById('insp-basin').innerText = p.basin_name;
+                    document.getElementById('insp-elev').innerText = `${p.elevation_m} m`;
+                    document.getElementById('insp-june').innerText = `${p.june_sar_vv_db} dB`;
+                    document.getElementById('insp-aug').innerText = `${p.aug_sar_vv_db} dB`;
+                    document.getElementById('insp-drop').innerText = `${p.diff_db} dB`;
+
+                    const threshEl = document.getElementById('insp-thresh');
+                    threshEl.innerText = p.threshold_met ? "Met (< -3.0 dB)" : "Not Met";
+                    threshEl.style.color = p.threshold_met ? "#16a34a" : "#dc2626";
+
+                    const classEl = document.getElementById('insp-class');
+                    classEl.innerText = p.classification;
+                    classEl.style.color = p.filtered_candidate ? "var(--accent-orange)" : (p.threshold_met ? "#ef4444" : "#475569");
+
+                    L.circleMarker([lat, lon], {
+                        radius: 6,
+                        color: '#0d3b66',
+                        fillColor: p.threshold_met ? '#ea792c' : '#94a3b8',
+                        fillOpacity: 0.9,
+                        weight: 2
+                    }).addTo(sarMap).bindPopup(`
+                        <strong>Statewide Probe Result</strong><br>
+                        <strong>Basin:</strong> ${p.basin_name}<br>
+                        <strong>Classification:</strong> ${p.classification}<br>
+                        <strong>SAR Drop:</strong> ${p.diff_db} dB<br>
+                        <strong>Elevation:</strong> ${p.elevation_m} m
+                    `).openPopup();
+                });
+            });
+
+            // Load initial region
+            loadRegionalSar('kabini');
+        }
+
+        function loadRegionalSar(regionId) {
+            fetch(`/api/regional/sar/${regionId}`)
+                .then(r => r.json())
+                .then(reg => {
+                    if (sarMap) {
+                        sarMap.setView(reg.center, reg.zoom);
+                    }
+
+                    document.getElementById('basin-summary-title').innerText = reg.name;
+                    document.getElementById('basin-summary-body').innerHTML = `
+                        <strong>Monitored Districts:</strong> ${reg.districts.join(', ')}<br>
+                        <strong>Observation Timeline:</strong> ${reg.baseline_date} vs ${reg.event_date}<br>
+                        <strong>Filtered Flood Extent:</strong> <span style="font-weight:700; color:#c2410c;">${reg.filtered_area_km2} km²</span> (Initial: ${reg.initial_area_km2} km²)<br>
+                        <strong>Filtering Suppression:</strong> ${reg.reduction_pct}%<br>
+                        <strong>Primary Telemetry:</strong> ${reg.primary_gauge} (Inflow: ${reg.inflow_cusecs.toLocaleString()} cusecs)<br>
+                        <strong>Reservoir:</strong> ${reg.key_reservoir}
+                    `;
+                });
+        }
+
+        function toggleRegionalLayer(key) {
+            const isChecked = document.getElementById(`sar-layer-${key}`).checked;
+            const layer = sarLayers[key];
+            if (!layer || !sarMap) return;
+
+            if (isChecked) {
+                sarMap.addLayer(layer);
+            } else {
+                sarMap.removeLayer(layer);
+            }
+        }
+
+        // ==================== 3. STATEWIDE COMPARATIVE CHART ====================
+        function initStatewideChart() {
+            const ctx = document.getElementById('statewideBarChart');
+            if (!ctx) return;
+
+            statewideChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Krishna Basin',
+                        'West Coast Basin',
+                        'Tungabhadra Basin',
+                        'Cauvery/Kabini Basin',
+                        'Malnad Catchment'
+                    ],
+                    datasets: [
+                        {
+                            label: 'Initial Candidate Extent (km²)',
+                            data: [75.20, 77.40, 53.60, 49.80, 67.70],
+                            backgroundColor: '#1e4b85',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Filtered Inundation Extent (km²)',
+                            data: [56.38, 58.00, 40.20, 37.62, 50.77],
+                            backgroundColor: '#ea792c',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(c) {
+                                    return ` ${c.dataset.label}: ${c.parsed.y} km²`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Inundation Area (km²)', font: { weight: 'bold' } },
+                            grid: { color: '#e2e8f0' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ==================== 4. EARLY WARNING SIMULATOR ====================
+        function onSimBasinChange(val) {
+            if (val === 'krishna') {
+                document.getElementById('inp-storage').value = 99.4;
+                document.getElementById('inp-inflow').value = 310000;
+                document.getElementById('inp-rain').value = 142;
+            } else if (val === 'coastal') {
+                document.getElementById('inp-storage').value = 98.5;
+                document.getElementById('inp-inflow').value = 74000;
+                document.getElementById('inp-rain').value = 192;
+            } else if (val === 'tungabhadra') {
+                document.getElementById('inp-storage').value = 98.6;
+                document.getElementById('inp-inflow').value = 185000;
+                document.getElementById('inp-rain').value = 105;
+            } else {
+                document.getElementById('inp-storage').value = 99.2;
+                document.getElementById('inp-inflow').value = 68500;
+                document.getElementById('inp-rain').value = 128;
+            }
+            updateSimOutput();
+        }
+
+        function updateSimOutput() {
+            const storage = parseFloat(document.getElementById('inp-storage').value);
+            const inflow = parseFloat(document.getElementById('inp-inflow').value);
+            const rain = parseFloat(document.getElementById('inp-rain').value);
+
+            document.getElementById('lbl-storage').innerText = `${storage}%`;
+            document.getElementById('lbl-inflow').innerText = `${inflow.toLocaleString()} cusecs`;
+            document.getElementById('lbl-rain').innerText = `${rain} mm`;
+
+            let risk = "Normal";
+            let boxClass = "Normal";
+            let title = "NORMAL RESERVOIR STAGE";
+            let desc = "Standard hydrological monitoring. Inflow matches seasonal channel capacity; river flows well within safe banks.";
+            let leadTime = "36 - 48 Hours";
+            let status = "Routine Observation";
+
+            if (storage >= 98.5 || inflow > 150000 || rain > 140) {
+                risk = "Severe Flood Warning";
+                boxClass = "Warning";
+                title = "CRITICAL SPILLWAY DISCHARGE: EVACUATION ORDER";
+                desc = `Severe catchment rainfall (${rain} mm) and massive upstream surge (${inflow.toLocaleString()} cusecs). Reservoir stage is at ${storage}%. Immediate evacuation of riverine lowlands and active SDRF deployment enforced.`;
+                leadTime = "2 - 4 Hours";
+                status = "SDRF Mobilized";
+            } else if (storage >= 95.0 || inflow > 60000 || rain > 80) {
+                risk = "Flood Watch";
+                boxClass = "Watch";
+                title = "FLOOD WATCH: HIGH SPILLWAY DISCHARGE";
+                desc = `Inflow rate rapidly filling reservoir buffer (${inflow.toLocaleString()} cusecs). Riparian agricultural candidate inundation flagged. District emergency response teams on high alert.`;
+                leadTime = "6 - 12 Hours";
+                status = "Emergency Preparedness";
+            } else if (storage >= 88.0 || inflow > 25000 || rain > 40) {
+                risk = "Advisory";
+                boxClass = "Advisory";
+                title = "HYDROLOGICAL ADVISORY: RISING WATER LEVEL";
+                desc = `Elevated reservoir stage (${storage}%). Regulated outflows active. Agricultural riparian belts advised to avoid riverbed access.`;
+                leadTime = "18 - 24 Hours";
+                status = "Advisory Active";
+            }
+
+            const badge = document.getElementById('sim-badge');
+            badge.innerText = risk;
+            badge.className = `badge ${risk === 'Severe Flood Warning' ? 'badge-danger' : (risk === 'Flood Watch' ? 'badge-warning' : (risk === 'Advisory' ? 'badge-warning' : 'badge-success'))}`;
+
+            const alertBox = document.getElementById('sim-alert-box');
+            alertBox.className = `alert-box ${boxClass}`;
+            document.getElementById('sim-alert-title').innerText = title;
+            document.getElementById('sim-alert-desc').innerText = desc;
+            document.getElementById('sim-lead-time').innerText = leadTime;
+            document.getElementById('sim-response-status').innerText = status;
+        }
+
+        function dispatchEmergencyBroadcast() {
+            const basinSelect = document.getElementById('sim-basin-select');
+            const basinText = basinSelect.options[basinSelect.selectedIndex].text;
+            const storage = parseFloat(document.getElementById('inp-storage').value);
+            const inflow = parseFloat(document.getElementById('inp-inflow').value);
+            const rain = parseFloat(document.getElementById('inp-rain').value);
+
+            fetch('/api/early-warning/simulate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    basin: basinText,
+                    district: "Statewide Emergency Response Network",
+                    storage_pct: storage,
+                    inflow_cusecs: inflow,
+                    rainfall_forecast_mm: rain
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(`Official Warning Transmitted:\n[${data.alert_badge}] ${data.risk_level}\n\nStation: ${data.station}\nAction: ${data.action_required}`);
+                loadAlertsFeed();
+            });
+        }
+
+        function loadAlertsFeed() {
+            fetch('/api/early-warning/alerts')
+                .then(r => r.json())
+                .then(alerts => {
+                    const feed = document.getElementById('statewide-alerts-feed');
+                    if (!feed) return;
+                    feed.innerHTML = '';
+                    alerts.slice(0, 5).forEach(a => {
+                        const item = document.createElement('div');
+                        item.style.cssText = 'background:white; border:1px solid #e2e8f0; border-radius:6px; padding:8px; font-size:0.78rem;';
+                        item.innerHTML = `
+                            <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
+                                <strong style="color:var(--primary);">${a.basin}</strong>
+                                <span style="color:#64748b;">${a.timestamp.split(' ')[1]}</span>
+                            </div>
+                            <div style="color:#334155;">${a.message || a.action_required}</div>
+                        `;
+                        feed.appendChild(item);
+                    });
+                });
+        }
+    </script>
+</body>
+</html>

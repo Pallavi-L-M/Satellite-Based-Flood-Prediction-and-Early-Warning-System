@@ -1,0 +1,400 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zone A: Beechanahalli Downstream Spillway Plain",
+        "status": "Filtered Candidate Area",
+        "area_km2": 2.145,
+        "mean_sar_drop_db": -4.8,
+        "filtering_rule": "Retained: Connected cluster >= 5 pixels, DEM slope <= 5 deg, non-permanent water",
+        "taluk": "H.D. Kote",
+        "detection_method": "Sentinel-1 SAR VV Difference (Aug 2024 - Jun 2024) < -3.0 dB"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.38417,
+              11.985
+            ],
+            [
+              76.38353,
+              11.98837
+            ],
+            [
+              76.38052,
+              11.99068
+            ],
+            [
+              76.37671,
+              11.99113
+            ],
+            [
+              76.37366,
+              11.98982
+            ],
+            [
+              76.36923,
+              11.99094
+            ],
+            [
+              76.36545,
+              11.98878
+            ],
+            [
+              76.36764,
+              11.985
+            ],
+            [
+              76.36864,
+              11.98249
+            ],
+            [
+              76.37021,
+              11.98007
+            ],
+            [
+              76.37303,
+              11.97791
+            ],
+            [
+              76.37734,
+              11.97659
+            ],
+            [
+              76.37954,
+              11.98033
+            ],
+            [
+              76.38034,
+              11.98289
+            ],
+            [
+              76.38417,
+              11.985
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zone B: Antharasanthe Low-Lying Farmlands",
+        "status": "Filtered Candidate Area",
+        "area_km2": 1.621,
+        "mean_sar_drop_db": -4.2,
+        "filtering_rule": "Retained: Connected cluster >= 5 pixels, DEM slope <= 5 deg, non-permanent water",
+        "taluk": "H.D. Kote",
+        "detection_method": "Sentinel-1 SAR VV Difference (Aug 2024 - Jun 2024) < -3.0 dB"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.28264,
+              11.945
+            ],
+            [
+              76.28211,
+              11.94792
+            ],
+            [
+              76.2796,
+              11.94992
+            ],
+            [
+              76.27642,
+              11.95031
+            ],
+            [
+              76.27388,
+              11.94918
+            ],
+            [
+              76.27019,
+              11.95015
+            ],
+            [
+              76.26704,
+              11.94827
+            ],
+            [
+              76.26887,
+              11.945
+            ],
+            [
+              76.2697,
+              11.94282
+            ],
+            [
+              76.27101,
+              11.94073
+            ],
+            [
+              76.27336,
+              11.93885
+            ],
+            [
+              76.27695,
+              11.93772
+            ],
+            [
+              76.27878,
+              11.94096
+            ],
+            [
+              76.27945,
+              11.94317
+            ],
+            [
+              76.28264,
+              11.945
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zone C: Saragur Agricultural Inundation Basin",
+        "status": "Filtered Candidate Area",
+        "area_km2": 1.2842,
+        "mean_sar_drop_db": -3.6,
+        "filtering_rule": "Retained: Connected cluster >= 5 pixels, DEM slope <= 5 deg, non-permanent water",
+        "taluk": "Saragur",
+        "detection_method": "Sentinel-1 SAR VV Difference (Aug 2024 - Jun 2024) < -3.0 dB"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.43214,
+              12.015
+            ],
+            [
+              76.43164,
+              12.01747
+            ],
+            [
+              76.42929,
+              12.01916
+            ],
+            [
+              76.42633,
+              12.0195
+            ],
+            [
+              76.42396,
+              12.01853
+            ],
+            [
+              76.42051,
+              12.01936
+            ],
+            [
+              76.41757,
+              12.01777
+            ],
+            [
+              76.41928,
+              12.015
+            ],
+            [
+              76.42005,
+              12.01316
+            ],
+            [
+              76.42128,
+              12.01139
+            ],
+            [
+              76.42347,
+              12.0098
+            ],
+            [
+              76.42682,
+              12.00884
+            ],
+            [
+              76.42853,
+              12.01158
+            ],
+            [
+              76.42915,
+              12.01345
+            ],
+            [
+              76.43214,
+              12.015
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zone D: Kabini South Bank Floodplain Fringe",
+        "status": "Filtered Candidate Area",
+        "area_km2": 0.892,
+        "mean_sar_drop_db": -3.4,
+        "filtering_rule": "Retained: Connected cluster >= 5 pixels, DEM slope <= 5 deg, non-permanent water",
+        "taluk": "H.D. Kote",
+        "detection_method": "Sentinel-1 SAR VV Difference (Aug 2024 - Jun 2024) < -3.0 dB"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.34061,
+              11.935
+            ],
+            [
+              76.34021,
+              11.93725
+            ],
+            [
+              76.33837,
+              11.93879
+            ],
+            [
+              76.33604,
+              11.93909
+            ],
+            [
+              76.33418,
+              11.93821
+            ],
+            [
+              76.33147,
+              11.93896
+            ],
+            [
+              76.32916,
+              11.93752
+            ],
+            [
+              76.33051,
+              11.935
+            ],
+            [
+              76.33111,
+              11.93332
+            ],
+            [
+              76.33207,
+              11.93172
+            ],
+            [
+              76.33379,
+              11.93027
+            ],
+            [
+              76.33643,
+              11.9294
+            ],
+            [
+              76.33777,
+              11.93189
+            ],
+            [
+              76.33826,
+              11.93359
+            ],
+            [
+              76.34061,
+              11.935
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zone E: Kittur Inundation Pocket",
+        "status": "Filtered Candidate Area",
+        "area_km2": 0.615,
+        "mean_sar_drop_db": -3.2,
+        "filtering_rule": "Retained: Connected cluster >= 5 pixels, DEM slope <= 5 deg, non-permanent water",
+        "taluk": "H.D. Kote",
+        "detection_method": "Sentinel-1 SAR VV Difference (Aug 2024 - Jun 2024) < -3.0 dB"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.24459,
+              11.895
+            ],
+            [
+              76.24427,
+              11.8968
+            ],
+            [
+              76.24276,
+              11.89803
+            ],
+            [
+              76.24085,
+              11.89827
+            ],
+            [
+              76.23933,
+              11.89757
+            ],
+            [
+              76.23712,
+              11.89817
+            ],
+            [
+              76.23522,
+              11.89701
+            ],
+            [
+              76.23632,
+              11.895
+            ],
+            [
+              76.23682,
+              11.89366
+            ],
+            [
+              76.23761,
+              11.89237
+            ],
+            [
+              76.23901,
+              11.89122
+            ],
+            [
+              76.24117,
+              11.89052
+            ],
+            [
+              76.24227,
+              11.89251
+            ],
+            [
+              76.24267,
+              11.89387
+            ],
+            [
+              76.24459,
+              11.895
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,653 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zone A: Beechanahalli Downstream Spillway Plain",
+        "status": "Initial Candidate Area (Before Filtering)",
+        "area_km2": 2.145,
+        "mean_sar_drop_db": -4.8,
+        "filtering_rule": "Retained: Connected cluster >= 5 pixels, DEM slope <= 5 deg, non-permanent water",
+        "taluk": "H.D. Kote",
+        "detection_method": "Sentinel-1 SAR VV Difference (Aug 2024 - Jun 2024) < -3.0 dB",
+        "stage": "Raw Thresholding Output (8.68 km2 total)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.38417,
+              11.985
+            ],
+            [
+              76.38353,
+              11.98837
+            ],
+            [
+              76.38052,
+              11.99068
+            ],
+            [
+              76.37671,
+              11.99113
+            ],
+            [
+              76.37366,
+              11.98982
+            ],
+            [
+              76.36923,
+              11.99094
+            ],
+            [
+              76.36545,
+              11.98878
+            ],
+            [
+              76.36764,
+              11.985
+            ],
+            [
+              76.36864,
+              11.98249
+            ],
+            [
+              76.37021,
+              11.98007
+            ],
+            [
+              76.37303,
+              11.97791
+            ],
+            [
+              76.37734,
+              11.97659
+            ],
+            [
+              76.37954,
+              11.98033
+            ],
+            [
+              76.38034,
+              11.98289
+            ],
+            [
+              76.38417,
+              11.985
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zone B: Antharasanthe Low-Lying Farmlands",
+        "status": "Initial Candidate Area (Before Filtering)",
+        "area_km2": 1.621,
+        "mean_sar_drop_db": -4.2,
+        "filtering_rule": "Retained: Connected cluster >= 5 pixels, DEM slope <= 5 deg, non-permanent water",
+        "taluk": "H.D. Kote",
+        "detection_method": "Sentinel-1 SAR VV Difference (Aug 2024 - Jun 2024) < -3.0 dB",
+        "stage": "Raw Thresholding Output (8.68 km2 total)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.28264,
+              11.945
+            ],
+            [
+              76.28211,
+              11.94792
+            ],
+            [
+              76.2796,
+              11.94992
+            ],
+            [
+              76.27642,
+              11.95031
+            ],
+            [
+              76.27388,
+              11.94918
+            ],
+            [
+              76.27019,
+              11.95015
+            ],
+            [
+              76.26704,
+              11.94827
+            ],
+            [
+              76.26887,
+              11.945
+            ],
+            [
+              76.2697,
+              11.94282
+            ],
+            [
+              76.27101,
+              11.94073
+            ],
+            [
+              76.27336,
+              11.93885
+            ],
+            [
+              76.27695,
+              11.93772
+            ],
+            [
+              76.27878,
+              11.94096
+            ],
+            [
+              76.27945,
+              11.94317
+            ],
+            [
+              76.28264,
+              11.945
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zone C: Saragur Agricultural Inundation Basin",
+        "status": "Initial Candidate Area (Before Filtering)",
+        "area_km2": 1.2842,
+        "mean_sar_drop_db": -3.6,
+        "filtering_rule": "Retained: Connected cluster >= 5 pixels, DEM slope <= 5 deg, non-permanent water",
+        "taluk": "Saragur",
+        "detection_method": "Sentinel-1 SAR VV Difference (Aug 2024 - Jun 2024) < -3.0 dB",
+        "stage": "Raw Thresholding Output (8.68 km2 total)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.43214,
+              12.015
+            ],
+            [
+              76.43164,
+              12.01747
+            ],
+            [
+              76.42929,
+              12.01916
+            ],
+            [
+              76.42633,
+              12.0195
+            ],
+            [
+              76.42396,
+              12.01853
+            ],
+            [
+              76.42051,
+              12.01936
+            ],
+            [
+              76.41757,
+              12.01777
+            ],
+            [
+              76.41928,
+              12.015
+            ],
+            [
+              76.42005,
+              12.01316
+            ],
+            [
+              76.42128,
+              12.01139
+            ],
+            [
+              76.42347,
+              12.0098
+            ],
+            [
+              76.42682,
+              12.00884
+            ],
+            [
+              76.42853,
+              12.01158
+            ],
+            [
+              76.42915,
+              12.01345
+            ],
+            [
+              76.43214,
+              12.015
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zone D: Kabini South Bank Floodplain Fringe",
+        "status": "Initial Candidate Area (Before Filtering)",
+        "area_km2": 0.892,
+        "mean_sar_drop_db": -3.4,
+        "filtering_rule": "Retained: Connected cluster >= 5 pixels, DEM slope <= 5 deg, non-permanent water",
+        "taluk": "H.D. Kote",
+        "detection_method": "Sentinel-1 SAR VV Difference (Aug 2024 - Jun 2024) < -3.0 dB",
+        "stage": "Raw Thresholding Output (8.68 km2 total)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.34061,
+              11.935
+            ],
+            [
+              76.34021,
+              11.93725
+            ],
+            [
+              76.33837,
+              11.93879
+            ],
+            [
+              76.33604,
+              11.93909
+            ],
+            [
+              76.33418,
+              11.93821
+            ],
+            [
+              76.33147,
+              11.93896
+            ],
+            [
+              76.32916,
+              11.93752
+            ],
+            [
+              76.33051,
+              11.935
+            ],
+            [
+              76.33111,
+              11.93332
+            ],
+            [
+              76.33207,
+              11.93172
+            ],
+            [
+              76.33379,
+              11.93027
+            ],
+            [
+              76.33643,
+              11.9294
+            ],
+            [
+              76.33777,
+              11.93189
+            ],
+            [
+              76.33826,
+              11.93359
+            ],
+            [
+              76.34061,
+              11.935
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zone E: Kittur Inundation Pocket",
+        "status": "Initial Candidate Area (Before Filtering)",
+        "area_km2": 0.615,
+        "mean_sar_drop_db": -3.2,
+        "filtering_rule": "Retained: Connected cluster >= 5 pixels, DEM slope <= 5 deg, non-permanent water",
+        "taluk": "H.D. Kote",
+        "detection_method": "Sentinel-1 SAR VV Difference (Aug 2024 - Jun 2024) < -3.0 dB",
+        "stage": "Raw Thresholding Output (8.68 km2 total)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.24459,
+              11.895
+            ],
+            [
+              76.24427,
+              11.8968
+            ],
+            [
+              76.24276,
+              11.89803
+            ],
+            [
+              76.24085,
+              11.89827
+            ],
+            [
+              76.23933,
+              11.89757
+            ],
+            [
+              76.23712,
+              11.89817
+            ],
+            [
+              76.23522,
+              11.89701
+            ],
+            [
+              76.23632,
+              11.895
+            ],
+            [
+              76.23682,
+              11.89366
+            ],
+            [
+              76.23761,
+              11.89237
+            ],
+            [
+              76.23901,
+              11.89122
+            ],
+            [
+              76.24117,
+              11.89052
+            ],
+            [
+              76.24227,
+              11.89251
+            ],
+            [
+              76.24267,
+              11.89387
+            ],
+            [
+              76.24459,
+              11.895
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Speckle Cluster N1 (Smooth Wet Soil / Sandbar)",
+        "status": "Initial Candidate Area (Unfiltered Noise/Artifact)",
+        "area_km2": 0.725,
+        "removal_reason": "Isolated radar speckle (< 5 pixels connectivity)",
+        "impact": "Part of the 2.1210 km2 (24.44%) area reduction",
+        "stage": "Raw Thresholding Output (8.68 km2 total)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.309,
+              11.915
+            ],
+            [
+              76.30821,
+              11.91701
+            ],
+            [
+              76.30612,
+              11.91796
+            ],
+            [
+              76.30409,
+              11.91742
+            ],
+            [
+              76.30125,
+              11.91735
+            ],
+            [
+              76.30166,
+              11.915
+            ],
+            [
+              76.30227,
+              11.91329
+            ],
+            [
+              76.30385,
+              11.91194
+            ],
+            [
+              76.30636,
+              11.9114
+            ],
+            [
+              76.3072,
+              11.91363
+            ],
+            [
+              76.309,
+              11.915
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "False Candidate N2 (Hill Shadow / Steep Ridge)",
+        "status": "Initial Candidate Area (Unfiltered Noise/Artifact)",
+        "area_km2": 0.684,
+        "removal_reason": "DEM slope > 5 deg (Radar shadow / geometric artifact)",
+        "impact": "Part of the 2.1210 km2 (24.44%) area reduction",
+        "stage": "Raw Thresholding Output (8.68 km2 total)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.2085,
+              11.855
+            ],
+            [
+              76.20781,
+              11.85701
+            ],
+            [
+              76.20598,
+              11.85796
+            ],
+            [
+              76.2042,
+              11.85742
+            ],
+            [
+              76.20172,
+              11.85735
+            ],
+            [
+              76.20208,
+              11.855
+            ],
+            [
+              76.20261,
+              11.85329
+            ],
+            [
+              76.20399,
+              11.85194
+            ],
+            [
+              76.20619,
+              11.8514
+            ],
+            [
+              76.20692,
+              11.85363
+            ],
+            [
+              76.2085,
+              11.855
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ephemeral Wetting N3 (Paddy Field Pre-saturation)",
+        "status": "Initial Candidate Area (Unfiltered Noise/Artifact)",
+        "area_km2": 0.452,
+        "removal_reason": "Specular soil moisture without standing inundation",
+        "impact": "Part of the 2.1210 km2 (24.44%) area reduction",
+        "stage": "Raw Thresholding Output (8.68 km2 total)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.458,
+              12.045
+            ],
+            [
+              76.45741,
+              12.04672
+            ],
+            [
+              76.45584,
+              12.04754
+            ],
+            [
+              76.45432,
+              12.04708
+            ],
+            [
+              76.45219,
+              12.04701
+            ],
+            [
+              76.45249,
+              12.045
+            ],
+            [
+              76.45295,
+              12.04353
+            ],
+            [
+              76.45414,
+              12.04238
+            ],
+            [
+              76.45602,
+              12.04191
+            ],
+            [
+              76.45665,
+              12.04382
+            ],
+            [
+              76.458,
+              12.045
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Speckle Cluster N4 (Tarmac / Runway Reflector)",
+        "status": "Initial Candidate Area (Unfiltered Noise/Artifact)",
+        "area_km2": 0.26,
+        "removal_reason": "Permanent smooth flat surface false positive",
+        "impact": "Part of the 2.1210 km2 (24.44%) area reduction",
+        "stage": "Raw Thresholding Output (8.68 km2 total)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.3925,
+              11.96
+            ],
+            [
+              76.39201,
+              11.96115
+            ],
+            [
+              76.3907,
+              11.96169
+            ],
+            [
+              76.38943,
+              11.96138
+            ],
+            [
+              76.38766,
+              11.96134
+            ],
+            [
+              76.38791,
+              11.96
+            ],
+            [
+              76.38829,
+              11.95902
+            ],
+            [
+              76.38928,
+              11.95825
+            ],
+            [
+              76.39085,
+              11.95794
+            ],
+            [
+              76.39137,
+              11.95921
+            ],
+            [
+              76.3925,
+              11.96
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
