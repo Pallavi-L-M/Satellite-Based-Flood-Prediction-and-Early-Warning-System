@@ -271,7 +271,7 @@
     "advisory_summary": "Bennihalla stream exhibiting minor flow rise; no active population threat."
   },
   "Bellary": {
-    "display_name": "Ballari (Bellary) & Vijayanagara",
+    "display_name": "Ballari (Bellary)",
     "canonical_id": "ballari",
     "basin": "Tungabhadra Basin",
     "zone": "Central Karnataka",
@@ -921,5 +921,144 @@
     "population_at_risk": 1500,
     "evacuation_shelters_active": 0,
     "advisory_summary": "Tanks recharging safely; no flood warning active."
+  },
+  "Vijayanagara": {
+    "display_name": "Vijayanagara",
+    "canonical_id": "vijayanagara",
+    "basin": "Tungabhadra Basin",
+    "zone": "Central Karnataka",
+    "risk_level": "Severe Warning",
+    "alert_badge": "Red Alert",
+    "initial_candidate_km2": 15.4,
+    "filtered_candidate_km2": 11.2,
+    "reduction_pct": 27.27,
+    "rainfall_24h_mm": 98.0,
+    "soil_moisture_pct": 84.5,
+    "key_river": "Tungabhadra",
+    "gauge_station": "Kampli / Hospete Gauge",
+    "gauge_stage_m": 485.8,
+    "gauge_danger_m": 484.5,
+    "key_reservoirs": "Tungabhadra Dam (TB Dam)",
+    "vulnerable_taluks": [
+      "Hospete",
+      "Kampli",
+      "Hagaribommanahalli",
+      "Kudligi",
+      "Harapanahalli"
+    ],
+    "center": [
+      15.2689,
+      76.3909
+    ],
+    "zoom": 10,
+    "last_sar_acquisition": "2024-08-08",
+    "mean_backscatter_drop_db": -5.4,
+    "population_at_risk": 28500,
+    "evacuation_shelters_active": 8,
+    "advisory_summary": "High spillway discharges from Tungabhadra Dam inundating agricultural riparian lowlands along Kampli and Hospete taluks."
+  },
+  "Yadgir": {
+    "display_name": "Yadgir",
+    "canonical_id": "yadgir",
+    "basin": "Krishna Basin",
+    "zone": "North Karnataka",
+    "risk_level": "Flood Watch",
+    "alert_badge": "Orange Alert",
+    "initial_candidate_km2": 12.8,
+    "filtered_candidate_km2": 9.6,
+    "reduction_pct": 25.0,
+    "rainfall_24h_mm": 78.5,
+    "soil_moisture_pct": 79.2,
+    "key_river": "Krishna, Bhima",
+    "gauge_station": "Yadgir Bhima River Bridge Gauge",
+    "gauge_stage_m": 358.4,
+    "gauge_danger_m": 357.0,
+    "key_reservoirs": "Basavasagara (Narayanpur) Dam",
+    "vulnerable_taluks": [
+      "Yadgir",
+      "Shahapur",
+      "Surpur",
+      "Hunsagi",
+      "Gurmitkal"
+    ],
+    "center": [
+      16.7618,
+      77.1378
+    ],
+    "zoom": 10,
+    "last_sar_acquisition": "2024-08-07",
+    "mean_backscatter_drop_db": -4.8,
+    "population_at_risk": 19400,
+    "evacuation_shelters_active": 6,
+    "advisory_summary": "Narayanpur Dam release and Bhima river runoff causing backwater flooding in lowlands of Surpur and Shahapur."
+  },
+  "Chikkaballapura": {
+    "display_name": "Chikkaballapura",
+    "canonical_id": "chikkaballapura",
+    "basin": "Palar & Pennar Basin",
+    "zone": "Eastern Karnataka",
+    "risk_level": "Advisory",
+    "alert_badge": "Yellow Alert",
+    "initial_candidate_km2": 6.2,
+    "filtered_candidate_km2": 4.8,
+    "reduction_pct": 22.58,
+    "rainfall_24h_mm": 42.0,
+    "soil_moisture_pct": 68.0,
+    "key_river": "North Pennar, Papagni, Chitravathi",
+    "gauge_station": "Gauribidanur River Gauge",
+    "gauge_stage_m": 682.0,
+    "gauge_danger_m": 684.5,
+    "key_reservoirs": "Kandavara & Jakkalamadagu Tanks",
+    "vulnerable_taluks": [
+      "Chikkaballapura",
+      "Gauribidanur",
+      "Bagepalli",
+      "Chintamani",
+      "Sidlaghatta"
+    ],
+    "center": [
+      13.4325,
+      77.7275
+    ],
+    "zoom": 10,
+    "last_sar_acquisition": "2024-08-05",
+    "mean_backscatter_drop_db": -3.8,
+    "population_at_risk": 8500,
+    "evacuation_shelters_active": 3,
+    "advisory_summary": "Moderate seasonal flow in Papagni and Chitravathi tributaries. Tank cascades monitored."
+  },
+  "Ramanagara": {
+    "display_name": "Ramanagara",
+    "canonical_id": "ramanagara",
+    "basin": "Cauvery / Arkavathi Basin",
+    "zone": "South Karnataka",
+    "risk_level": "Advisory",
+    "alert_badge": "Yellow Alert",
+    "initial_candidate_km2": 8.4,
+    "filtered_candidate_km2": 6.2,
+    "reduction_pct": 26.19,
+    "rainfall_24h_mm": 48.5,
+    "soil_moisture_pct": 71.5,
+    "key_river": "Arkavathi, Kanva, Shimsha",
+    "gauge_station": "Ramanagara Town Bridge Gauge",
+    "gauge_stage_m": 618.5,
+    "gauge_danger_m": 620.0,
+    "key_reservoirs": "Manchanabele & Kanva Dams",
+    "vulnerable_taluks": [
+      "Ramanagara",
+      "Channapatna",
+      "Kanakapura",
+      "Magadi"
+    ],
+    "center": [
+      12.7159,
+      77.2811
+    ],
+    "zoom": 10,
+    "last_sar_acquisition": "2024-08-06",
+    "mean_backscatter_drop_db": -4.1,
+    "population_at_risk": 11200,
+    "evacuation_shelters_active": 4,
+    "advisory_summary": "Arkavathi and Kanva river channels flowing at normal monsoon capacity. Kanakapura low-lying causeways on watch."
   }
 }

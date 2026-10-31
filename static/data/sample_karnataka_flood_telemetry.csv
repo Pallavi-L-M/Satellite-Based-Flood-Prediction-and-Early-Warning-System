@@ -1,0 +1,17 @@
+date,district,station_name,river_basin,rainfall_24h_mm,river_stage_m,danger_stage_m,dam_inflow_cusecs,dam_outflow_cusecs,flood_status
+2024-08-01,Belagavi,Kudachi Gauge,Krishna Basin,48.5,522.4,525.0,145000,140000,Normal
+2024-08-02,Belagavi,Kudachi Gauge,Krishna Basin,76.2,523.8,525.0,192000,185000,Advisory
+2024-08-03,Belagavi,Kudachi Gauge,Krishna Basin,118.0,525.2,525.0,265000,260000,Flood Watch
+2024-08-04,Belagavi,Kudachi Gauge,Krishna Basin,142.5,528.4,525.0,310000,305000,Severe Warning
+2024-08-05,Belagavi,Kudachi Gauge,Krishna Basin,125.0,527.9,525.0,295000,290000,Severe Warning
+2024-08-06,Belagavi,Kudachi Gauge,Krishna Basin,82.4,526.1,525.0,220000,215000,Flood Watch
+2024-08-01,Mysuru,Beechanahalli Spillway,Kabini Basin,42.0,691.5,694.0,32000,30000,Normal
+2024-08-02,Mysuru,Beechanahalli Spillway,Kabini Basin,88.5,693.2,694.0,48000,45000,Advisory
+2024-08-03,Mysuru,Beechanahalli Spillway,Kabini Basin,115.0,694.8,694.0,61000,58000,Flood Watch
+2024-08-04,Mysuru,Beechanahalli Spillway,Kabini Basin,128.5,696.1,694.0,68500,65000,Severe Warning
+2024-08-05,Mysuru,Beechanahalli Spillway,Kabini Basin,94.0,695.2,694.0,59000,56000,Flood Watch
+2024-08-01,Dakshina Kannada,Bantwal Station,Netravathi Basin,68.0,7.4,8.5,35000,32000,Normal
+2024-08-02,Dakshina Kannada,Bantwal Station,Netravathi Basin,135.0,8.2,8.5,54000,51000,Advisory
+2024-08-03,Dakshina Kannada,Bantwal Station,Netravathi Basin,182.0,8.9,8.5,68000,65000,Flood Watch
+2024-08-04,Dakshina Kannada,Bantwal Station,Netravathi Basin,192.0,9.8,8.5,74000,71000,Severe Warning
+2024-08-05,Dakshina Kannada,Bantwal Station,Netravathi Basin,110.0,8.6,8.5,52000,49000,Flood Watch
