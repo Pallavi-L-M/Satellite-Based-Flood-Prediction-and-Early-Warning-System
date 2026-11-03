@@ -137,7 +137,7 @@
     "advisory_summary": "High discharge from Narayanpur Dam into Krishna River flooding river islands in Devadurga and Lingsugur taluks."
   },
   "Gulbarga": {
-    "display_name": "Kalaburagi (Gulbarga) & Yadgir",
+    "display_name": "Kalaburagi (Gulbarga)",
     "canonical_id": "kalaburagi",
     "basin": "Bhima & Krishna Basins",
     "zone": "North Karnataka",
@@ -855,7 +855,7 @@
     "advisory_summary": "Urban stormwater flash floods detected in low-lying layouts, lake buffer zones, and IT corridor valleys."
   },
   "Bangalore Rural": {
-    "display_name": "Bengaluru Rural & Ramanagara",
+    "display_name": "Bengaluru Rural",
     "canonical_id": "bengaluru_rural",
     "basin": "Arkavathi & Kanva Basins",
     "zone": "Bangalore Metropolitan",
@@ -889,7 +889,7 @@
     "advisory_summary": "Manchanabele and Kanva reservoirs managing steady outflows; minor agricultural wetting."
   },
   "Kolar": {
-    "display_name": "Kolar & Chikkaballapura",
+    "display_name": "Kolar",
     "canonical_id": "kolar",
     "basin": "Palar & North Pennar Basins",
     "zone": "Eastern Plains",

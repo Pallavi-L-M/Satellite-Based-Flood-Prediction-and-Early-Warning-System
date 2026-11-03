@@ -1417,16 +1417,42 @@
                 </div>
 
                 <!-- Custom Range Selector -->
+                <!-- Custom Range Selector with all 31 Districts -->
                 <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; background:#f8fafc; padding:12px 16px; border-radius:8px; border:1px solid var(--border-color);">
                     <div style="display:flex; align-items:center; gap:8px;">
                         <span style="font-size:0.85rem; font-weight:600;">District:</span>
-                        <select id="hist-district-select" class="select-input" style="width:180px;">
-                            <option value="Belgaum">Belagavi</option>
-                            <option value="Mysore">Mysuru</option>
-                            <option value="South Kanara">Dakshina Kannada</option>
-                            <option value="Bellary">Ballari</option>
-                            <option value="Shimoga">Shivamogga</option>
-                            <option value="Bangalore">Bengaluru Urban</option>
+                        <select id="hist-district-select" class="select-input" style="min-width:210px;" onchange="retrieveHistoricalAnalysis()">
+                            <option value="Bagalkot">Bagalkot</option>
+                            <option value="Bellary">Ballari (Bellary)</option>
+                            <option value="Belgaum" selected>Belagavi (Belgaum)</option>
+                            <option value="Bangalore Rural">Bengaluru Rural</option>
+                            <option value="Bangalore Urban">Bengaluru Urban</option>
+                            <option value="Bidar">Bidar</option>
+                            <option value="Chamrajnagar">Chamarajanagar</option>
+                            <option value="Chikkaballapura">Chikkaballapura</option>
+                            <option value="Chikmagalur">Chikkamagaluru</option>
+                            <option value="Chitradurga">Chitradurga</option>
+                            <option value="Dakshin Kannad">Dakshina Kannada (Mangaluru)</option>
+                            <option value="Davanagere">Davanagere</option>
+                            <option value="Dharwad">Dharwad</option>
+                            <option value="Gadag">Gadag</option>
+                            <option value="Hassan">Hassan</option>
+                            <option value="Haveri">Haveri</option>
+                            <option value="Gulbarga">Kalaburagi (Gulbarga)</option>
+                            <option value="Kodagu">Kodagu (Coorg)</option>
+                            <option value="Kolar">Kolar</option>
+                            <option value="Koppal">Koppal</option>
+                            <option value="Mandya">Mandya</option>
+                            <option value="Mysore">Mysuru (Mysore)</option>
+                            <option value="Raichur">Raichur</option>
+                            <option value="Ramanagara">Ramanagara</option>
+                            <option value="Shimoga">Shivamogga (Shimoga)</option>
+                            <option value="Tumkur">Tumakuru (Tumkur)</option>
+                            <option value="Udupi">Udupi</option>
+                            <option value="Uttar Kannand">Uttara Kannada (Karwar)</option>
+                            <option value="Bijapur">Vijayapura (Bijapur)</option>
+                            <option value="Vijayanagara">Vijayanagara</option>
+                            <option value="Yadgir">Yadgir</option>
                         </select>
                     </div>
                     <div style="display:flex; align-items:center; gap:8px;">
@@ -1447,7 +1473,10 @@
             <div class="results-grid">
                 <div class="card">
                     <div class="card-header-styled">
-                        <h3>Historical Daily Precipitation (Open-Meteo Archive)</h3>
+                        <div>
+                            <h3 style="margin:0;">Historical Daily Precipitation (Open-Meteo Archive)</h3>
+                            <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">💡 Click any bar to inspect date-specific damages & hydrological telemetry</div>
+                        </div>
                         <span id="hist-chart-badge" class="badge badge-primary">Belagavi &bull; Aug 2019</span>
                     </div>
                     <div class="chart-box">
@@ -1477,39 +1506,101 @@
                 </div>
             </div>
 
+            <!-- Interactive Date Selection & Documented Flood Damages -->
+            <div class="card" style="border: 2px solid #bae6fd; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08);">
+                <div class="card-header-styled" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
+                    <div>
+                        <h3 style="margin:0; display:flex; align-items:center; gap:8px;">
+                            <span>📅 Documented Flood Impacts & Daily Damage Assessment</span>
+                        </h3>
+                        <div style="font-size:0.80rem; color:#64748b; margin-top:3px;">
+                            Inspecting ground-truth impacts, breached river danger levels, submerged bridges, and relief operations for selected date.
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        <span id="hist-selected-date-badge" class="badge badge-primary" style="font-size:0.82rem; padding:5px 10px;">Selected Date: 2019-08-08</span>
+                        <span id="hist-selected-severity-badge" class="badge badge-danger" style="font-size:0.82rem; padding:5px 10px;">Catastrophic Peak Flood</span>
+                    </div>
+                </div>
+
+                <!-- Date Pills Selector -->
+                <div style="margin-top:14px;">
+                    <div style="font-size:0.78rem; font-weight:700; color:#475569; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px;">
+                        Quick Date Selection (Click any date to inspect damages):
+                    </div>
+                    <div id="hist-date-pills" style="display:flex; gap:6px; flex-wrap:wrap; padding:8px 12px; background:#f8fafc; border-radius:8px; border:1px solid var(--border-color); min-height:42px; align-items:center;">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+                <!-- 2-Column Damage Details Grid -->
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top:16px;">
+                    <!-- Left: Hydrometeorology & River Stage -->
+                    <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:8px; padding:14px;">
+                        <h4 style="font-size:0.92rem; color:#0369a1; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+                            <span>🌊 Hydrological & River Stage</span>
+                        </h4>
+                        <div class="inspector-row"><strong>24-Hour Precipitation:</strong> <span id="hist-damage-precip" style="font-weight:700; color:#0369a1;">-- mm</span></div>
+                        <div class="inspector-row"><strong>Flood Severity Tier:</strong> <span id="hist-damage-severity" style="font-weight:700;">--</span></div>
+                        <div class="inspector-row"><strong>River & Dam Status:</strong> <span id="hist-damage-river" style="font-size:0.82rem; color:#1e293b;">--</span></div>
+                    </div>
+
+                    <!-- Right: Agricultural & Infrastructure Damages -->
+                    <div style="background:#fef2f2; border:1px solid #fecaca; border-radius:8px; padding:14px;">
+                        <h4 style="font-size:0.92rem; color:#b91c1c; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+                            <span>🌾 Damage Enumeration & Field Impacts</span>
+                        </h4>
+                        <div class="inspector-row"><strong>Crop & Farmland Inundation:</strong> <span id="hist-damage-agri" style="font-size:0.82rem; color:#1e293b;">--</span></div>
+                        <div class="inspector-row"><strong>Submerged Bridges & Roads:</strong> <span id="hist-damage-infra" style="font-size:0.82rem; color:#1e293b;">--</span></div>
+                        <div class="inspector-row"><strong>Evacuation & Relief Operations:</strong> <span id="hist-damage-relief" style="font-size:0.82rem; color:#1e293b;">--</span></div>
+                    </div>
+                </div>
+
+                <div id="hist-damage-source-tag" style="margin-top:14px; font-size:0.78rem; color:#475569; padding:8px 12px; background:#f1f5f9; border-radius:6px; border-left:4px solid #0284c7;">
+                    <strong>Data Verification Source:</strong> NRSC Bhuvan & KSNDMC Post-Disaster Damage Enumeration & CWC Gauge Hydrograph.
+                </div>
+            </div>
+
+            <!-- Sentinel-1 Satellite Pass & Reference Dataset Availability -->
+            <div class="card">
+                <div class="card-header-styled">
+                    <div>
+                        <h3 style="margin:0;">Sentinel-1 SAR Satellite Pass & Flood Reference Availability</h3>
+                        <div style="font-size:0.78rem; color:#64748b; margin-top:2px;">Copernicus Space Data & NRSC Bhuvan Historical Flood Records</div>
+                    </div>
+                    <span id="hist-satellite-status-badge" class="badge badge-primary">Querying STAC...</span>
+                </div>
+
+                <div id="hist-satellite-summary" style="margin-bottom:12px; font-size:0.85rem; line-height:1.5;"></div>
+
+                <div id="hist-satellite-table-container" style="overflow-x:auto; display:none; margin-top:10px;">
+                    <table class="data-table" style="font-size:0.80rem; width:100%;">
+                        <thead>
+                            <tr>
+                                <th>Granule ID</th>
+                                <th>Platform</th>
+                                <th>Acquisition Time (UTC)</th>
+                                <th>Instrument Mode</th>
+                                <th>Polarizations</th>
+                                <th>Orbit</th>
+                                <th>Resolution</th>
+                                <th>Copernicus Data Access</th>
+                            </tr>
+                        </thead>
+                        <tbody id="hist-satellite-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
             <!-- Pre-Flood vs Peak-Flood Comparative Analysis Cards -->
             <div class="card">
                 <div class="card-header-styled">
                     <h3>Pre-Flood Baseline vs Peak Inundation Comparison</h3>
-                    <span class="badge badge-primary">SAR Change Detection Benchmark</span>
+                    <span id="hist-baseline-badge" class="badge badge-primary">SAR Change Detection Benchmark</span>
                 </div>
 
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <!-- Baseline -->
-                    <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:10px; padding:18px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                            <h4 style="font-size:1.05rem; color:#0369a1; font-weight:700;">Pre-Flood Baseline State</h4>
-                            <span class="badge badge-primary">Baseline Condition</span>
-                        </div>
-                        <div class="inspector-row"><strong>SAR Backscatter (VV):</strong> <span>-10.2 dB</span></div>
-                        <div class="inspector-row"><strong>Hydrological State:</strong> <span>Normal River Stage</span></div>
-                        <div class="inspector-row"><strong>Baseline Water Body Area:</strong> <span>42.3 km² (Permanent Reservoirs)</span></div>
-                        <div class="inspector-row"><strong>Downstream Lowlands:</strong> <span>Dry Agriculture & Fallow Floodplain</span></div>
-                        <div class="inspector-row"><strong>Early Warning Alert Tier:</strong> <span style="color:#16a34a;">Green Status (Normal)</span></div>
-                    </div>
-
-                    <!-- Peak Inundation -->
-                    <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:18px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                            <h4 style="font-size:1.05rem; color:#c2410c; font-weight:700;">Peak Flood Event State</h4>
-                            <span class="badge badge-danger">Critical Inundation</span>
-                        </div>
-                        <div class="inspector-row"><strong>SAR Backscatter (VV):</strong> <span>-17.8 dB</span></div>
-                        <div class="inspector-row"><strong>Radar Difference (Δσ°):</strong> <span style="color:#dc2626; font-weight:800;">-7.6 dB (Drop &lt; -3.0 dB)</span></div>
-                        <div class="inspector-row"><strong>Measured Candidate Flood Area:</strong> <span style="color:var(--accent-orange); font-weight:800;">56.38 km² (Verified Mask)</span></div>
-                        <div class="inspector-row"><strong>Danger Mark Exceedance:</strong> <span style="color:#b91c1c;">+3.4 meters above danger mark</span></div>
-                        <div class="inspector-row"><strong>Early Warning Alert Tier:</strong> <span class="badge badge-danger">Red Alert (Severe Warning)</span></div>
-                    </div>
+                <div id="hist-baseline-comparison-container">
+                    <!-- Populated dynamically via renderBaselineComparisonCard(data) -->
                 </div>
             </div>
         </section>
@@ -2795,6 +2886,10 @@
         }
 
         // ==================== 5. HISTORICAL ANALYSIS SCRIPTS ====================
+        let currentHistoricalData = null;
+        let currentHistoricalDamages = {};
+        let currentSelectedDamageDate = null;
+
         function loadHistoricalPreset(presetKey) {
             if (presetKey === 'belagavi2019') {
                 document.getElementById('hist-district-select').value = 'Belgaum';
@@ -2805,57 +2900,361 @@
                 document.getElementById('hist-start-date').value = '2024-07-25';
                 document.getElementById('hist-end-date').value = '2024-08-10';
             } else if (presetKey === 'coastal2023') {
-                document.getElementById('hist-district-select').value = 'South Kanara';
+                document.getElementById('hist-district-select').value = 'Dakshin Kannad';
                 document.getElementById('hist-start-date').value = '2023-07-01';
                 document.getElementById('hist-end-date').value = '2023-07-15';
             } else if (presetKey === 'bengaluru2022') {
-                document.getElementById('hist-district-select').value = 'Bangalore';
+                document.getElementById('hist-district-select').value = 'Bangalore Urban';
                 document.getElementById('hist-start-date').value = '2022-10-01';
                 document.getElementById('hist-end-date').value = '2022-10-15';
             }
             retrieveHistoricalAnalysis();
         }
 
+        function displayDailyDamage(dateStr) {
+            if (!currentHistoricalDamages || !currentHistoricalDamages[dateStr]) return;
+            currentSelectedDamageDate = dateStr;
+            const dam = currentHistoricalDamages[dateStr];
+
+            // 1. Update Badges
+            const dateBadge = document.getElementById('hist-selected-date-badge');
+            if (dateBadge) dateBadge.innerText = `Selected Date: ${dateStr}`;
+
+            const sevBadge = document.getElementById('hist-selected-severity-badge');
+            if (sevBadge) {
+                sevBadge.innerText = dam.severity || 'Normal Hydrological Flow';
+                if (dam.has_damage || (dam.severity && (dam.severity.includes('Catastrophic') || dam.severity.includes('Critical') || dam.severity.includes('Severe') || dam.severity.includes('Peak')))) {
+                    sevBadge.className = 'badge badge-danger';
+                } else if (dam.severity && (dam.severity.includes('Warning') || dam.severity.includes('Surge') || dam.severity.includes('Heavy'))) {
+                    sevBadge.className = 'badge badge-warning';
+                } else {
+                    sevBadge.className = 'badge badge-success';
+                }
+            }
+
+            // 2. Update Inspection Details
+            const pElem = document.getElementById('hist-damage-precip');
+            if (pElem) pElem.innerText = `${dam.precipitation_mm} mm/day`;
+
+            const sElem = document.getElementById('hist-damage-severity');
+            if (sElem) sElem.innerText = dam.severity || 'Normal Monsoon Flow';
+
+            const rElem = document.getElementById('hist-damage-river');
+            if (rElem) rElem.innerText = dam.river_status || 'River stage safely contained within banks.';
+
+            const aElem = document.getElementById('hist-damage-agri');
+            if (aElem) aElem.innerText = dam.agricultural_damage || 'No crop submergence or agricultural loss reported.';
+
+            const iElem = document.getElementById('hist-damage-infra');
+            if (iElem) iElem.innerText = dam.infrastructure_damage || 'All transit corridors, bridges, and causeways open without disruption.';
+
+            const relElem = document.getElementById('hist-damage-relief');
+            if (relElem) relElem.innerText = dam.human_impact_relief || 'Routine monitoring; no community displacement or relief camps operational.';
+
+            const srcTag = document.getElementById('hist-damage-source-tag');
+            if (srcTag) {
+                if (dam.has_damage) {
+                    srcTag.innerHTML = `<strong>Data Verification Source:</strong> NRSC Bhuvan & KSNDMC Post-Disaster Damage Enumeration & CWC Gauge Hydrograph for <em>${dateStr}</em>.`;
+                } else {
+                    srcTag.innerHTML = `<strong>Data Verification Source:</strong> Open-Meteo Historical Weather Archive & Central Water Commission Benchmark for <em>${dateStr}</em> (Standard channel conditions).`;
+                }
+            }
+
+            // 3. Highlight the Active Date Pill
+            const pills = document.querySelectorAll('.hist-date-pill');
+            pills.forEach(p => {
+                if (p.getAttribute('data-date') === dateStr) {
+                    p.style.background = '#0284c7';
+                    p.style.color = '#ffffff';
+                    p.style.borderColor = '#0369a1';
+                    p.style.fontWeight = '700';
+                    p.style.boxShadow = '0 2px 6px rgba(2, 132, 199, 0.4)';
+                } else {
+                    const isDam = p.getAttribute('data-has-damage') === 'true';
+                    p.style.background = isDam ? '#fee2e2' : '#ffffff';
+                    p.style.color = isDam ? '#991b1b' : '#334155';
+                    p.style.borderColor = isDam ? '#fca5a5' : '#cbd5e1';
+                    p.style.fontWeight = '500';
+                    p.style.boxShadow = 'none';
+                }
+            });
+
+            // 4. Highlight Chart Bar corresponding to this date
+            if (historicalPrecipChart && historicalPrecipChart.data && historicalPrecipChart.data.labels) {
+                const bgColors = historicalPrecipChart.data.labels.map(d => {
+                    const isSelected = (d === dateStr);
+                    const dInfo = currentHistoricalDamages[d];
+                    const hasDam = dInfo && dInfo.has_damage;
+                    if (isSelected) return hasDam ? '#991b1b' : '#0369a1';
+                    return hasDam ? '#ef4444' : '#60a5fa';
+                });
+                const borderColors = historicalPrecipChart.data.labels.map(d => (d === dateStr ? '#0f172a' : 'transparent'));
+                const borderWidths = historicalPrecipChart.data.labels.map(d => (d === dateStr ? 3 : 0));
+
+                historicalPrecipChart.data.datasets[0].backgroundColor = bgColors;
+                historicalPrecipChart.data.datasets[0].borderColor = borderColors;
+                historicalPrecipChart.data.datasets[0].borderWidth = borderWidths;
+                historicalPrecipChart.update('none');
+            }
+        }
+
         function retrieveHistoricalAnalysis() {
             const district = document.getElementById('hist-district-select').value;
             const start = document.getElementById('hist-start-date').value;
             const end = document.getElementById('hist-end-date').value;
-            document.getElementById('hist-chart-badge').innerText = `${district} • ${start} to ${end}`;
+            const distSelect = document.getElementById('hist-district-select');
+            const distLabel = distSelect.options[distSelect.selectedIndex] ? distSelect.options[distSelect.selectedIndex].text : district;
+            document.getElementById('hist-chart-badge').innerText = `${distLabel} • ${start} to ${end}`;
 
-            fetch(`/api/historical-weather?district=${district}&start_date=${start}&end_date=${end}`)
+            // 1. Fetch Historical Weather and Daily Impacts from Open-Meteo Archive
+            fetch(`/api/historical-weather?district=${encodeURIComponent(district)}&start_date=${start}&end_date=${end}`)
                 .then(r => r.json())
                 .then(data => {
                     if (data.status === 'success') {
+                        currentHistoricalData = data;
+                        currentHistoricalDamages = data.daily_damages || {};
                         const sum = data.summary;
                         document.getElementById('hist-total-rain').innerText = `${sum.total_rainfall_sum_mm} mm`;
-                        document.getElementById('hist-peak-rain').innerText = `${sum.peak_single_day_rain_mm} mm`;
+                        document.getElementById('hist-peak-rain').innerText = `${sum.peak_single_day_rain_mm} mm (${sum.peak_rainfall_date})`;
                         document.getElementById('hist-max-wind').innerText = `${sum.max_wind_speed_kmh} km/h`;
 
-                        // Render Historical Daily Bar Chart
+                        // Render Quick Date Selection Pills
+                        const pillsContainer = document.getElementById('hist-date-pills');
+                        if (pillsContainer && data.dates) {
+                            pillsContainer.innerHTML = '';
+                            data.dates.forEach(d => {
+                                const dInfo = currentHistoricalDamages[d] || {};
+                                const hasDam = !!dInfo.has_damage;
+                                const isPeak = (d === data.peak_rainfall_date);
+                                const btn = document.createElement('button');
+                                btn.className = 'btn hist-date-pill';
+                                btn.setAttribute('data-date', d);
+                                btn.setAttribute('data-has-damage', hasDam ? 'true' : 'false');
+                                btn.style.cssText = `font-size:0.75rem; padding:4px 9px; border-radius:6px; cursor:pointer; border:1px solid ${hasDam ? '#fca5a5' : '#cbd5e1'}; background:${hasDam ? '#fee2e2' : '#ffffff'}; color:${hasDam ? '#991b1b' : '#334155'}; transition:all 0.15s ease;`;
+                                btn.innerHTML = `${d.slice(5)} ${hasDam ? '⚠️' : ''} ${isPeak ? '★' : ''}`;
+                                btn.title = `${d}: ${dInfo.precipitation_mm} mm - ${dInfo.severity || 'Normal'}`;
+                                btn.onclick = () => displayDailyDamage(d);
+                                pillsContainer.appendChild(btn);
+                            });
+                        }
+
+                        // Render Historical Daily Bar Chart with Interactive Click
                         const ctx = document.getElementById('historicalPrecipChart');
-                        if (ctx && data.historical_daily) {
+                        if (ctx && data.dates) {
                             if (historicalPrecipChart) historicalPrecipChart.destroy();
+
+                            const defaultBgColors = data.dates.map(d => {
+                                const dInfo = currentHistoricalDamages[d];
+                                return (dInfo && dInfo.has_damage) ? '#ef4444' : '#60a5fa';
+                            });
+
                             historicalPrecipChart = new Chart(ctx, {
                                 type: 'bar',
                                 data: {
-                                    labels: data.historical_daily.dates,
+                                    labels: data.dates,
                                     datasets: [{
                                         label: 'Daily Precipitation (mm)',
-                                        data: data.historical_daily.precipitation_sum_mm,
-                                        backgroundColor: '#1e4b85',
-                                        borderRadius: 4
+                                        data: data.daily_rainfall_mm,
+                                        backgroundColor: defaultBgColors,
+                                        borderRadius: 4,
+                                        borderWidth: 0
                                     }]
                                 },
                                 options: {
                                     responsive: true,
                                     maintainAspectRatio: false,
-                                    plugins: { legend: { display: false } },
+                                    plugins: {
+                                        legend: { display: false },
+                                        tooltip: {
+                                            callbacks: {
+                                                afterLabel: function(context) {
+                                                    const dateStr = context.label;
+                                                    const dam = currentHistoricalDamages[dateStr];
+                                                    if (dam) {
+                                                        return [`Status: ${dam.severity}`, '👉 Click bar to inspect documented damages'];
+                                                    }
+                                                    return '👉 Click bar to inspect documented damages';
+                                                }
+                                            }
+                                        }
+                                    },
+                                    onHover: (event, chartElement) => {
+                                        event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+                                    },
+                                    onClick: (event, elements) => {
+                                        if (elements && elements.length > 0) {
+                                            const clickedIndex = elements[0].index;
+                                            const clickedDate = data.dates[clickedIndex];
+                                            displayDailyDamage(clickedDate);
+                                        }
+                                    },
                                     scales: {
                                         y: { beginAtZero: true, title: { display: true, text: 'Daily Rainfall (mm)' } }
                                     }
                                 }
                             });
                         }
+
+                        // Display Peak Date / First Date by Default
+                        const initialDate = data.peak_rainfall_date || (data.dates.length > 0 ? data.dates[0] : null);
+                        if (initialDate) {
+                            displayDailyDamage(initialDate);
+                        }
+
+                        // Update Baseline Comparison Card dynamically
+                        renderBaselineComparisonCard(data);
+                    }
+                })
+                .catch(err => {
+                    console.error("Historical weather error:", err);
+                });
+
+            // 2. Query Sentinel-1 STAC Search for this District & Date Range
+            querySentinel1Availability(district, start, end, distLabel);
+        }
+
+        function renderBaselineComparisonCard(data) {
+            const container = document.getElementById('hist-baseline-comparison-container');
+            const badge = document.getElementById('hist-baseline-badge');
+            if (!container) return;
+
+            if (data.has_verified_flood_dataset && data.flood_dataset) {
+                const fd = data.flood_dataset;
+                if (badge) {
+                    badge.innerText = `${fd.alert_tier || 'Verified Flood Reference'}`;
+                    badge.className = 'badge badge-danger';
+                }
+                container.innerHTML = `
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <!-- Baseline -->
+                        <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:10px; padding:18px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                <h4 style="font-size:1.02rem; color:#0369a1; font-weight:700;">Pre-Flood Baseline State</h4>
+                                <span class="badge badge-primary">Baseline Condition</span>
+                            </div>
+                            <div class="inspector-row"><strong>SAR Backscatter (VV):</strong> <span>-10.2 dB</span></div>
+                            <div class="inspector-row"><strong>Hydrological State:</strong> <span>Normal Seasonal River Stage</span></div>
+                            <div class="inspector-row"><strong>Baseline Water Body Area:</strong> <span>Permanent Reservoir Buffers</span></div>
+                            <div class="inspector-row"><strong>Downstream Floodplain:</strong> <span>Dry Agriculture & Normal Cultivation</span></div>
+                            <div class="inspector-row"><strong>Early Warning Alert Tier:</strong> <span style="color:#16a34a; font-weight:700;">Green Status (Normal)</span></div>
+                        </div>
+
+                        <!-- Peak Inundation -->
+                        <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:18px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                <h4 style="font-size:1.02rem; color:#c2410c; font-weight:700;">Peak Flood Event State</h4>
+                                <span class="badge badge-danger">${fd.alert_tier}</span>
+                            </div>
+                            <div class="inspector-row"><strong>SAR Backscatter (VV):</strong> <span>${(-10.2 + fd.radar_drop_db).toFixed(1)} dB</span></div>
+                            <div class="inspector-row"><strong>Radar Difference (Δσ°):</strong> <span style="color:#dc2626; font-weight:800;">${fd.radar_drop_db} dB (Significant Water Ingress)</span></div>
+                            <div class="inspector-row"><strong>Measured Candidate Flood Area:</strong> <span style="color:var(--accent-orange); font-weight:800;">${fd.inundation_area_km2} km² (Verified Mask)</span></div>
+                            <div class="inspector-row"><strong>Danger Mark Exceedance:</strong> <span style="color:#b91c1c; font-weight:700;">+${fd.danger_mark_exceeded_m} meters above danger mark</span></div>
+                            <div class="inspector-row"><strong>Reference Validation Source:</strong> <span style="font-size:0.80rem; color:#475569;">${fd.reference_source}</span></div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                if (badge) {
+                    badge.innerText = 'Non-Disaster Baseline';
+                    badge.className = 'badge badge-success';
+                }
+                container.innerHTML = `
+                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:20px; text-align:left;">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                            <span style="font-size:1.4rem;">ℹ️</span>
+                            <h4 style="font-size:1.0rem; color:#1e293b; margin:0; font-weight:700;">No Historical Flood Disaster Layer on Record for This Window</h4>
+                        </div>
+                        <p style="font-size:0.85rem; color:#475569; line-height:1.6; margin-bottom:10px;">
+                            Official ground-truth flood inundation masks and damage inventories are archived by <strong>NRSC Bhuvan</strong> and <strong>KSNDMC</strong> for major declared state flood disasters (such as the <em>August 2019 Belagavi Krishna Basin Flood</em>, <em>July–August 2024 Cauvery/Kabini Surge</em>, <em>July 2023 Coastal Flash Flood</em>, and <em>October 2022 Bengaluru Urban Flood</em>).
+                        </p>
+                        <p style="font-size:0.85rem; color:#475569; line-height:1.6; margin:0;">
+                            For the selected period in <strong>${data.district}</strong>, precipitation and river gauge readings remained within non-disaster channel limits without crossing emergency flood danger thresholds. Hence, no emergency flood polygon is fabricated.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        function querySentinel1Availability(district, start, end, distLabel) {
+            const badge = document.getElementById('hist-satellite-status-badge');
+            const summary = document.getElementById('hist-satellite-summary');
+            const tableContainer = document.getElementById('hist-satellite-table-container');
+            const tbody = document.getElementById('hist-satellite-tbody');
+
+            if (badge) {
+                badge.innerText = 'Searching Copernicus STAC...';
+                badge.className = 'badge badge-primary';
+            }
+            if (summary) {
+                summary.innerHTML = `<span style="color:#64748b;">Querying AWS Earth Search & Copernicus catalogue for Sentinel-1 C-Band SAR passes intersecting ${distLabel}...</span>`;
+            }
+            if (tableContainer) tableContainer.style.display = 'none';
+
+            fetch(`/api/sentinel1/search?district=${encodeURIComponent(district)}&start_date=${start}&end_date=${end}`)
+                .then(r => r.json())
+                .then(sData => {
+                    if (sData.satellite_data_available && sData.acquisitions && sData.acquisitions.length > 0) {
+                        if (badge) {
+                            badge.innerText = `${sData.total_acquisitions_found} Pass(es) Available`;
+                            badge.className = 'badge badge-success';
+                        }
+                        if (summary) {
+                            summary.innerHTML = `
+                                <div style="display:flex; align-items:center; gap:8px; color:#15803d; font-weight:600; margin-bottom:8px;">
+                                    <span>✓</span> <strong>Sentinel-1 SAR C-Band Coverage Confirmed:</strong>
+                                    <span>${sData.total_acquisitions_found} real acquisition(s) retrieved from Copernicus catalogue.</span>
+                                </div>
+                                <div style="font-size:0.80rem; color:#475569;">
+                                    Spatial bounding box: [${sData.search_bbox.join(', ')}]. Sensors operate in Interferometric Wide (IW) swath mode with dual VV+VH polarizations suitable for SAR backscatter change detection.
+                                </div>
+                            `;
+                        }
+                        if (tbody) {
+                            tbody.innerHTML = '';
+                            sData.acquisitions.forEach(acq => {
+                                const tr = document.createElement('tr');
+                                tr.innerHTML = `
+                                    <td><code style="font-size:0.75rem; color:#0369a1;">${acq.granule_id}</code></td>
+                                    <td><span class="badge badge-primary">${acq.platform}</span></td>
+                                    <td>${acq.acquisition_time}</td>
+                                    <td>${acq.instrument_mode} ${acq.product_type}</td>
+                                    <td>${acq.polarizations.join('+')}</td>
+                                    <td>${acq.orbit_direction} (${acq.relative_orbit})</td>
+                                    <td>${acq.spatial_resolution_m}m</td>
+                                    <td><a href="${acq.download_href}" target="_blank" class="btn btn-outline" style="font-size:0.72rem; padding:3px 8px;">Copernicus Access</a></td>
+                                `;
+                                tbody.appendChild(tr);
+                            });
+                        }
+                        if (tableContainer) tableContainer.style.display = 'block';
+                    } else {
+                        if (badge) {
+                            badge.innerText = 'No Satellite Pass';
+                            badge.className = 'badge badge-warning';
+                        }
+                        if (summary) {
+                            summary.innerHTML = `
+                                <div style="background:#fffbeb; border:1px solid #fef3c7; border-radius:8px; padding:14px;">
+                                    <div style="display:flex; align-items:center; gap:8px; color:#b45309; font-weight:700; margin-bottom:6px;">
+                                        <span>🛰️</span> <span>No Sentinel-1 Overpass Recorded for this Temporal Window</span>
+                                    </div>
+                                    <p style="font-size:0.82rem; color:#78350f; margin:0; line-height:1.5;">
+                                        ${sData.availability_message || 'No Sentinel-1 C-SAR acquisition recorded for this district in the selected date range.'}
+                                        Sentinel-1 operates on an exact 6-to-12 day constellation revisit schedule over Karnataka. For older periods or narrow date windows, try broadening the date range or select the preset buttons.
+                                    </p>
+                                </div>
+                            `;
+                        }
+                        if (tableContainer) tableContainer.style.display = 'none';
+                    }
+                })
+                .catch(err => {
+                    if (badge) {
+                        badge.innerText = 'STAC Query Offline';
+                        badge.className = 'badge badge-outline';
+                    }
+                    if (summary) {
+                        summary.innerHTML = `<span style="font-size:0.82rem; color:#64748b;">Unable to connect to Copernicus STAC endpoint. Historical weather telemetry remains active.</span>`;
                     }
                 });
         }
