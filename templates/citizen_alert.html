@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Citizen Emergency Alert Receiver — KS-FEWS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --accent-red: #ef4444;
+            --accent-green: #22c55e;
+            --accent-blue: #38bdf8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 16px;
+        }
+        .header {
+            text-align: center;
+            padding: 12px;
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 12px;
+            border: 1px solid #334155;
+            backdrop-filter: blur(8px);
+        }
+        .header h1 { font-size: 1.05rem; font-weight: 800; letter-spacing: 0.5px; color: #e2e8f0; }
+        .header p { font-size: 0.75rem; color: #94a3b8; margin-top: 2px; }
+        .standby-card {
+            background: var(--card-bg);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 24px 18px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .status-pulse {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            color: var(--accent-green);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.80rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .pulse-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--accent-green);
+            box-shadow: 0 0 10px var(--accent-green);
+            animation: pulseAnim 1.5s infinite;
+        }
+        @keyframes pulseAnim {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+        .select-district {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #475569;
+            color: #f8fafc;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 0.90rem;
+            font-weight: 600;
+            margin: 12px 0;
+            outline: none;
+        }
+        .btn-test {
+            width: 100%;
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            text-align: left;
+            margin-top: 16px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+        .spec-item {
+            background: #0f172a;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid #1e293b;
+        }
+        .spec-item strong { color: #cbd5e1; display: block; font-size: 0.72rem; }
+
+        /* FULL SCREEN EMERGENCY TAKEOVER MODAL */
+        #alert-takeover {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(185, 28, 28, 0.98);
+            z-index: 99999;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px 18px;
+            color: #ffffff;
+            animation: strobeFlash 0.8s infinite alternate;
+        }
+        @keyframes strobeFlash {
+            from { background: rgba(185, 28, 28, 0.98); }
+            to { background: rgba(220, 38, 38, 1); }
+        }
+        .takeover-header {
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+            padding-bottom: 12px;
+        }
+        .takeover-header h2 {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+        .takeover-body {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 14px;
+            padding: 20px 16px;
+            margin: auto 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            backdrop-filter: blur(4px);
+        }
+        .btn-mute {
+            background: #ffffff;
+            color: #b91c1c;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 900;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>GOVERNMENT OF KARNATAKA &bull; KSNDMC</h1>
+        <p>National Disaster Cell Broadcast &bull; 3GPP TS 23.041 (SACHET Architecture)</p>
+    </div>
+
+    <div class="standby-card">
+        <div class="status-pulse">
+            <span class="pulse-dot"></span>
+            <span>CELL BROADCAST STANDBY ACTIVE</span>
+        </div>
+
+        <h2 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 6px;">
+            Citizen Mobile Device Receiver
+        </h2>
+        <p style="font-size: 0.80rem; color: #94a3b8; line-height: 1.4;">
+            Simulating citizen handset behavior in the target disaster zone. Listening to cellular telecom tower emergency channel <strong>CB-4370</strong>. When the control room triggers a regional flood SOS, this phone will immediately <strong>sound a loud emergency siren, vibrate, and take over the screen</strong>.
+        </p>
+
+        <div style="margin-top: 16px; text-align: left;">
+            <label style="font-size: 0.75rem; font-weight: 700; color: #cbd5e1;">Your Simulated Location / District:</label>
+            <select id="user-district-select" class="select-district">
+                <option value="ALL">🌐 All Districts (Statewide Monitoring Mode)</option>
+                <option value="Belagavi" selected>Belagavi (Krishna Basin)</option>
+                <option value="Bagalkot">Bagalkot (Ghataprabha / Krishna)</option>
+                <option value="Ballari">Ballari (Tungabhadra)</option>
+                <option value="Bengaluru Urban">Bengaluru Urban</option>
+                <option value="Bengaluru Rural">Bengaluru Rural</option>
+                <option value="Bidar">Bidar (Karanja / Manjra)</option>
+                <option value="Chamarajanagar">Chamarajanagar</option>
+                <option value="Chikkaballapura">Chikkaballapura</option>
+                <option value="Chikkamagaluru">Chikkamagaluru</option>
+                <option value="Chitradurga">Chitradurga</option>
+                <option value="Dakshina Kannada">Dakshina Kannada (Netravathi / Coastal)</option>
+                <option value="Davanagere">Davanagere</option>
+                <option value="Dharwad">Dharwad</option>
+                <option value="Gadag">Gadag</option>
+                <option value="Hassan">Hassan</option>
+                <option value="Haveri">Haveri</option>
+                <option value="Kalaburagi">Kalaburagi (Bhima Basin)</option>
+                <option value="Kodagu">Kodagu (Cauvery Headwaters)</option>
+                <option value="Kolar">Kolar</option>
+                <option value="Koppal">Koppal</option>
+                <option value="Mandya">Mandya (Cauvery Basin)</option>
+                <option value="Mysuru">Mysuru (Cauvery / Kabini)</option>
+                <option value="Raichur">Raichur (Krishna / Tungabhadra)</option>
+                <option value="Ramanagara">Ramanagara</option>
+                <option value="Shivamogga">Shivamogga (Tunga / Bhadra)</option>
+                <option value="Tumakuru">Tumakuru</option>
+                <option value="Udupi">Udupi (Coastal Basin)</option>
+                <option value="Uttara Kannada">Uttara Kannada (Kali Basin)</option>
+                <option value="Vijayapura">Vijayapura (Krishna / Doni)</option>
+                <option value="Vijayanagara">Vijayanagara (Tungabhadra Dam)</option>
+                <option value="Yadgir">Yadgir (Krishna Confluence)</option>
+            </select>
+        </div>
+
+        <button class="btn-test" onclick="testReceiverSiren()">
+            🔊 Test Device Siren & Strobe
+        </button>
+
+        <div class="specs-grid">
+            <div class="spec-item">
+                <strong>Broadcast Protocol</strong>
+                <span>DoT/CDAC SACHET (CAP 1.2)</span>
+            </div>
+            <div class="spec-item">
+                <strong>Tower Frequency</strong>
+                <span>CB-4370 (Class 1 Extreme)</span>
+            </div>
+            <div class="spec-item">
+                <strong>Device Override</strong>
+                <span>Bypasses Silent / DND</span>
+            </div>
+            <div class="spec-item">
+                <strong>Telecom Grid</strong>
+                <span>BSNL, Jio, Airtel, Vi BTS</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; font-size: 0.72rem; color: #64748b; padding: 8px;">
+        Karnataka Satellite-Based Flood Prediction & Early Warning System (KS-FEWS)<br>
+        <a href="/" style="color: var(--accent-blue); text-decoration: none; font-weight: 600;">← Return to Main Command Dashboard</a>
+    </div>
+
+    <!-- FULL SCREEN DEVICE TAKEOVER -->
+    <div id="alert-takeover">
+        <div class="takeover-header">
+            <div style="font-size: 2.2rem; margin-bottom: 4px;">🚨</div>
+            <h2>EMERGENCY FLOOD EVACUATION ALERT</h2>
+            <div style="font-size: 0.75rem; opacity: 0.9; margin-top: 4px; font-weight: 700;">
+                GEO-FENCED REGIONAL CELL BROADCAST &bull; LIFE-SAFETY THREAT
+            </div>
+        </div>
+
+        <div class="takeover-body">
+            <div style="display:flex; justify-content:space-between; margin-bottom: 10px; font-size: 0.80rem; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 6px;">
+                <span id="tk-district">Target: Belagavi District</span>
+                <span id="tk-time">Time: Now</span>
+            </div>
+            <p id="tk-message" style="font-weight: 700; font-size: 1.05rem; line-height: 1.4; margin-bottom: 12px;">
+                CRITICAL INUNDATION: Krishna River water level 3.4m ABOVE DANGER MARK. Discharge exceeding 3.5 lakh cusecs. Immediate evacuation enforced for all riverine taluks.
+            </p>
+            <div style="background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; font-size: 0.80rem;">
+                <strong>MANDATORY ACTION:</strong> Move away from rivers and floodplains to designated government relief shelters. Do not attempt crossing submerged bridges.<br>
+                <strong>EMERGENCY HELPLINES:</strong> 1070 (SEOC) &bull; 1077 (District Control) &bull; 112
+            </div>
+        </div>
+
+        <div>
+            <button class="btn-mute" onclick="muteTakeoverSiren()">
+                Mute Siren & Acknowledge Alert
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let lastReceivedSosId = null;
+        let sirenOscillator = null;
+        let sirenGain = null;
+        let sirenCtx = null;
+        let sirenInterval = null;
+
+        // Sound the authentic national disaster siren
+        function startEmergencySiren() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                if (!sirenCtx) sirenCtx = new AudioContext();
+                if (sirenCtx.state === 'suspended') sirenCtx.resume();
+
+                // Trigger vibration
+                if (navigator.vibrate) {
+                    navigator.vibrate([600, 200, 600, 200, 600, 200, 1000]);
+                }
+
+                sirenOscillator = sirenCtx.createOscillator();
+                sirenGain = sirenCtx.createGain();
+
+                sirenOscillator.type = 'sawtooth';
+                const now = sirenCtx.currentTime;
+                sirenOscillator.frequency.setValueAtTime(460, now);
+
+                for (let i = 0; i < 20; i++) {
+                    sirenOscillator.frequency.exponentialRampToValueAtTime(920, now + i * 0.4 + 0.2);
+                    sirenOscillator.frequency.exponentialRampToValueAtTime(460, now + (i + 1) * 0.4);
+                }
+
+                sirenGain.gain.setValueAtTime(0.5, now);
+                sirenOscillator.connect(sirenGain);
+                sirenGain.connect(sirenCtx.destination);
+                sirenOscillator.start(now);
+            } catch(e) {
+                console.warn("Audio Context autoplay blocked or unavailable:", e);
+            }
+        }
+
+        function stopEmergencySiren() {
+            if (sirenOscillator) {
+                try {
+                    sirenOscillator.stop();
+                    sirenOscillator.disconnect();
+                } catch(e) {}
+                sirenOscillator = null;
+            }
+            if (navigator.vibrate) {
+                navigator.vibrate(0);
+            }
+        }
+
+        function triggerDeviceTakeover(data) {
+            document.getElementById('tk-district').innerText = `Target: ${data.district} District`;
+            document.getElementById('tk-time').innerText = `Broadcast Time: ${data.timestamp}`;
+            document.getElementById('tk-message').innerText = data.message_body || "CRITICAL FLOOD ALERT: Immediate evacuation ordered.";
+
+            const modal = document.getElementById('alert-takeover');
+            modal.style.display = 'flex';
+
+            startEmergencySiren();
+        }
+
+        function muteTakeoverSiren() {
+            stopEmergencySiren();
+            document.getElementById('alert-takeover').style.display = 'none';
+        }
+
+        function testReceiverSiren() {
+            const dist = document.getElementById('user-district-select').value;
+            triggerDeviceTakeover({
+                district: dist,
+                timestamp: new Date().toLocaleTimeString(),
+                message_body: `TEST BROADCAST: Critical Flood Warning for ${dist}. Krishna / Cauvery River in severe spate. Immediate evacuation advised.`
+            });
+        }
+
+        // Poll backend for live regional broadcast alerts every 2 seconds
+        function pollRegionalBroadcast() {
+            fetch('/api/early-warning/latest-regional-sos')
+                .then(r => r.json())
+                .then(sos => {
+                    if (sos && sos.sos_id) {
+                        const myDist = document.getElementById('user-district-select').value.toLowerCase();
+                        const alertDist = (sos.district || '').toLowerCase();
+
+                        // Check if alert matches selected district or statewide monitoring mode and is fresh
+                        if (myDist === 'all' || alertDist.includes(myDist) || myDist.includes(alertDist)) {
+                            if (lastReceivedSosId !== sos.sos_id) {
+                                lastReceivedSosId = sos.sos_id;
+                                triggerDeviceTakeover(sos);
+                            }
+                        }
+                    }
+                })
+                .catch(err => {});
+        }
+
+        setInterval(pollRegionalBroadcast, 2500);
+    </script>
+</body>
+</html>

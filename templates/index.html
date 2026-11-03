@@ -776,6 +776,12 @@
             flex-wrap: wrap;
             gap: 12px;
         }
+
+        @keyframes strobeFlash {
+            0% { background: rgba(153, 27, 27, 0.96); }
+            50% { background: rgba(185, 28, 28, 0.98); }
+            100% { background: rgba(127, 29, 29, 0.96); }
+        }
     </style>
 </head>
 <body>
@@ -2014,7 +2020,7 @@
                     <div style="margin-top:14px;">
                         <div class="slider-group">
                             <label class="slider-label">Target Karnataka District (All 31 Districts):</label>
-                            <select id="sos-district-select" class="select-input" onchange="updateDefaultSosMessage()">
+                            <select id="sos-district-select" class="select-input" onchange="onSosDistrictChanged()">
                                 <option value="Belagavi" selected>Belagavi (Krishna Basin)</option>
                                 <option value="Bagalkot">Bagalkot (Ghataprabha / Krishna)</option>
                                 <option value="Ballari">Ballari (Tungabhadra)</option>
@@ -2052,15 +2058,25 @@
                         <div class="slider-group">
                             <label class="slider-label">Emergency Alert Priority Tier:</label>
                             <select id="sos-alert-tier" class="select-input" onchange="updateDefaultSosMessage()">
-                                <option value="Red Alert — Severe Flood Warning (Critical Life Threat)" selected>🔴 Red Alert — Emergency Evacuation SOS (Critical Life Threat)</option>
+                                <option value="Red Alert — Severe Flood Warning (Critical Life Threat)" selected>🔴 Red Alert — Immediate Evacuation SOS (Critical Life Threat)</option>
                                 <option value="Orange Alert — Flood Watch & Evacuation Standby">🟠 Orange Alert — Flood Watch & Evacuation Standby</option>
                                 <option value="Yellow Alert — Hydrological Advisory">🟡 Yellow Alert — Hydrological Advisory (Precautionary)</option>
                             </select>
                         </div>
 
+                        <!-- Regional Footprint & Mass Target Indicator -->
+                        <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:10px 14px; margin-bottom:12px;">
+                            <span style="font-size:0.75rem; font-weight:700; color:#1e40af; text-transform:uppercase; letter-spacing:0.5px; display:block; margin-bottom:4px;">
+                                📡 Regional Cell Broadcast Footprint (No Contacts Needed):
+                            </span>
+                            <div id="lbl-sos-target-desc" style="font-size:0.80rem; color:#1e3a8a; line-height:1.4;">
+                                Broadcasts via <strong>485 Cellular BTS Towers</strong> directly to <strong>ALL ~1,450,000 mobile subscribers & visitors</strong> in Belagavi District simultaneously. Forces device hardware siren and full-screen emergency takeover.
+                            </div>
+                        </div>
+
                         <div class="slider-group">
-                            <label class="slider-label">Recipient Mobile / Community Target:</label>
-                            <input type="text" id="inp-sos-recipient" class="text-input" value="Cell Broadcast (All Mobile Phones in Threatened Taluks)" placeholder="+91-98XXXXXXXX or Citizen Broadcast">
+                            <label class="slider-label">Target Broadcast Network Scope:</label>
+                            <input type="text" id="inp-sos-recipient" class="text-input" value="ALL Mobile Devices & Citizens Connected to Regional Towers" readonly style="background:#f1f5f9; cursor:not-allowed;">
                         </div>
 
                         <!-- Multi-Channel Delivery Options -->
@@ -2070,16 +2086,16 @@
                             </span>
                             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; font-size:0.80rem;">
                                 <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
-                                    <input type="checkbox" id="chk-chan-sms" checked> <span>📱 SMS Cell Broadcast</span>
+                                    <input type="checkbox" id="chk-chan-sms" checked> <span>📡 Regional Cell Broadcast (CBS 4370)</span>
                                 </label>
                                 <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
-                                    <input type="checkbox" id="chk-chan-push" checked> <span>🔊 SOS Audio Siren & Push</span>
+                                    <input type="checkbox" id="chk-chan-push" checked> <span>🔊 Forced Emergency Device Siren</span>
                                 </label>
                                 <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
-                                    <input type="checkbox" id="chk-chan-seoc" checked> <span>🏛️ SEOC 1070 Control Wire</span>
+                                    <input type="checkbox" id="chk-chan-seoc" checked> <span>🏛️ SEOC 1070 Karnataka Wire</span>
                                 </label>
                                 <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
-                                    <input type="checkbox" id="chk-chan-wa" checked> <span>💬 WhatsApp Field Net</span>
+                                    <input type="checkbox" id="chk-chan-wa" checked> <span>💬 WhatsApp Disaster Net</span>
                                 </label>
                             </div>
                         </div>
@@ -2096,7 +2112,7 @@
                         <!-- Dispatch Buttons -->
                         <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;">
                             <button class="btn btn-danger" style="flex:2; min-width:200px; justify-content:center; background:#dc2626; border-color:#b91c1c; font-weight:700; font-size:0.85rem;" onclick="transmitEmergencySos()">
-                                🚨 TRANSMIT EMERGENCY SOS & SMS
+                                🚨 TRIGGER REGIONAL MASS EMERGENCY SOS & SIREN
                             </button>
                             <button class="btn btn-outline" style="flex:1; min-width:120px; justify-content:center; color:#15803d; border-color:#86efac; font-size:0.80rem;" onclick="shareSosToWhatsApp()">
                                 💬 WhatsApp Alert
@@ -2104,6 +2120,13 @@
                             <button class="btn btn-outline" style="justify-content:center; font-size:0.80rem;" onclick="playSosSirenAudio()" title="Sound Emergency Siren">
                                 🔊 Test Siren
                             </button>
+                        </div>
+
+                        <!-- Standalone Citizen Standby Link Button -->
+                        <div style="margin-top:10px;">
+                            <a href="/citizen-alert" target="_blank" class="btn btn-outline" style="width:100%; justify-content:center; font-size:0.80rem; color:#2563eb; border-color:#93c5fd; background:#f0f9ff;">
+                                📱 Open Live Citizen Phone Standby Mode (/citizen-alert) ↗
+                            </a>
                         </div>
 
                         <!-- Dynamic Transmission Confirmation Box -->
@@ -2275,7 +2298,7 @@
             initStatewideChart();
             loadAlertsFeed();
             fetchLiveWeather('Belgaum');
-            updateDefaultSosMessage();
+            onSosDistrictChanged();
             loadSosLogTable();
         });
 
@@ -3521,6 +3544,52 @@
         }
 
         // ==================== 7. EARLY WARNING DISPATCH & FEED ====================
+        const REGIONAL_TOWER_STATS = {
+            "Belagavi": { towers: 485, pop: "1,450,000" },
+            "Bagalkot": { towers: 290, pop: "890,000" },
+            "Ballari": { towers: 310, pop: "950,000" },
+            "Bengaluru Urban": { towers: 980, pop: "3,500,000" },
+            "Bengaluru Rural": { towers: 220, pop: "480,000" },
+            "Bidar": { towers: 260, pop: "720,000" },
+            "Chamarajanagar": { towers: 190, pop: "460,000" },
+            "Chikkaballapura": { towers: 210, pop: "510,000" },
+            "Chikkamagaluru": { towers: 280, pop: "590,000" },
+            "Chitradurga": { towers: 270, pop: "740,000" },
+            "Dakshina Kannada": { towers: 420, pop: "1,120,000" },
+            "Davanagere": { towers: 290, pop: "820,000" },
+            "Dharwad": { towers: 360, pop: "980,000" },
+            "Gadag": { towers: 210, pop: "520,000" },
+            "Hassan": { towers: 310, pop: "790,000" },
+            "Haveri": { towers: 260, pop: "680,000" },
+            "Kalaburagi": { towers: 380, pop: "1,180,000" },
+            "Kodagu": { towers: 160, pop: "290,000" },
+            "Kolar": { towers: 240, pop: "640,000" },
+            "Koppal": { towers: 230, pop: "620,000" },
+            "Mandya": { towers: 300, pop: "820,000" },
+            "Mysuru": { towers: 490, pop: "1,390,000" },
+            "Raichur": { towers: 310, pop: "870,000" },
+            "Ramanagara": { towers: 220, pop: "510,000" },
+            "Shivamogga": { towers: 340, pop: "840,000" },
+            "Tumakuru": { towers: 390, pop: "1,040,000" },
+            "Udupi": { towers: 330, pop: "680,000" },
+            "Uttara Kannada": { towers: 310, pop: "640,000" },
+            "Vijayapura": { towers: 330, pop: "950,000" },
+            "Vijayanagara": { towers: 240, pop: "610,000" },
+            "Yadgir": { towers: 210, pop: "530,000" }
+        };
+
+        function onSosDistrictChanged() {
+            const select = document.getElementById('sos-district-select');
+            const dist = select ? select.value : 'Belagavi';
+            updateDefaultSosMessage();
+
+            const desc = document.getElementById('lbl-sos-target-desc');
+            if (desc) {
+                const stats = REGIONAL_TOWER_STATS[dist] || { towers: 300, pop: "750,000" };
+                desc.innerHTML = `Broadcasts via <strong>${stats.towers} Cellular BTS Towers</strong> directly to <strong>ALL ~${stats.pop} mobile subscribers & visitors</strong> in ${dist} District simultaneously. Forces device hardware siren and full-screen emergency takeover.`;
+            }
+        }
+
         function updateDefaultSosMessage(force) {
             const dist = document.getElementById('sos-district-select') ? document.getElementById('sos-district-select').value : 'Belagavi';
             const tier = document.getElementById('sos-alert-tier') ? document.getElementById('sos-alert-tier').value : 'Red Alert';
@@ -3547,10 +3616,107 @@
             txtArea.removeAttribute('data-user-modified');
         }
 
+        // Audio Siren Engine for Operator Takeover Modal
+        let operatorAudioCtx = null;
+        let operatorOsc = null;
+        let operatorGain = null;
+        let operatorSirenTimer = null;
+
+        function startContinuousOperatorSiren() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                if (!operatorAudioCtx) {
+                    operatorAudioCtx = new AudioContext();
+                }
+                if (operatorAudioCtx.state === 'suspended') {
+                    operatorAudioCtx.resume();
+                }
+
+                stopOperatorSirenAudio();
+
+                operatorOsc = operatorAudioCtx.createOscillator();
+                operatorGain = operatorAudioCtx.createGain();
+
+                operatorOsc.type = 'sawtooth';
+                operatorGain.gain.setValueAtTime(0.4, operatorAudioCtx.currentTime);
+
+                operatorOsc.connect(operatorGain);
+                operatorGain.connect(operatorAudioCtx.destination);
+                operatorOsc.start();
+
+                let high = false;
+                operatorOsc.frequency.setValueAtTime(460, operatorAudioCtx.currentTime);
+
+                operatorSirenTimer = setInterval(() => {
+                    if (!operatorOsc || !operatorAudioCtx) return;
+                    const t = operatorAudioCtx.currentTime;
+                    if (high) {
+                        operatorOsc.frequency.cancelScheduledValues(t);
+                        operatorOsc.frequency.linearRampToValueAtTime(460, t + 0.35);
+                        high = false;
+                    } else {
+                        operatorOsc.frequency.cancelScheduledValues(t);
+                        operatorOsc.frequency.linearRampToValueAtTime(920, t + 0.35);
+                        high = true;
+                    }
+                }, 400);
+            } catch(e) {
+                console.warn("Operator siren audio error:", e);
+            }
+        }
+
+        function stopOperatorSirenAudio() {
+            if (operatorSirenTimer) {
+                clearInterval(operatorSirenTimer);
+                operatorSirenTimer = null;
+            }
+            if (operatorOsc) {
+                try {
+                    operatorOsc.stop();
+                    operatorOsc.disconnect();
+                } catch(e) {}
+                operatorOsc = null;
+            }
+            if (operatorGain) {
+                try {
+                    operatorGain.disconnect();
+                } catch(e) {}
+                operatorGain = null;
+            }
+        }
+
+        function showOperatorAlertTakeover(entry) {
+            const modal = document.getElementById('operator-alert-takeover');
+            if (!modal) return;
+            const distSpan = document.getElementById('op-tk-district');
+            if (distSpan) distSpan.innerText = (entry.district || 'KARNATAKA REGION').toUpperCase();
+
+            const towersSpan = document.getElementById('op-tk-towers');
+            if (towersSpan) towersSpan.innerText = (entry.towers_alerted || 485) + ' Towers';
+
+            const reachSpan = document.getElementById('op-tk-reach');
+            if (reachSpan) reachSpan.innerText = '~' + (entry.population_reached ? entry.population_reached.toLocaleString() : '1,450,000') + ' Citizens & Visitors';
+
+            const msgDiv = document.getElementById('op-tk-message');
+            if (msgDiv) msgDiv.innerHTML = (entry.message_body || '').replace(/\n/g, '<br>');
+
+            modal.style.display = 'flex';
+            startContinuousOperatorSiren();
+        }
+
+        function dismissOperatorTakeover() {
+            const modal = document.getElementById('operator-alert-takeover');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+            stopOperatorSirenAudio();
+        }
+
         function transmitEmergencySos() {
             const district = document.getElementById('sos-district-select').value;
             const alertTier = document.getElementById('sos-alert-tier').value;
-            const recipient = document.getElementById('inp-sos-recipient').value || "Cell Broadcast (Threatened Taluks)";
+            const recipient = document.getElementById('inp-sos-recipient').value || "ALL Mobile Devices & Citizens Connected to Regional Towers";
             const message = document.getElementById('inp-sos-message').value;
 
             const channels = [];
@@ -3563,9 +3729,6 @@
                 alert("Please select at least one delivery channel for the SOS broadcast.");
                 return;
             }
-
-            // Sound the emergency audio siren
-            playSosSirenAudio();
 
             fetch('/api/early-warning/send-sos', {
                 method: 'POST',
@@ -3587,17 +3750,22 @@
                     box.style.display = 'block';
                     box.innerHTML = `
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                            <strong style="color:#15803d; font-size:0.90rem;">✓ Emergency SOS Transmitted Successfully</strong>
+                            <strong style="color:#15803d; font-size:0.90rem;">✓ Regional Mass SOS Transmitted via Cell Broadcast</strong>
                             <span class="badge badge-danger">${entry.sos_id}</span>
                         </div>
                         <div class="inspector-row"><strong>Carrier Receipt:</strong> <span style="font-family:monospace; color:#0369a1;">${entry.carrier_receipt}</span></div>
+                        <div class="inspector-row"><strong>Target Geo-Fence:</strong> <strong>${entry.district}</strong> (${entry.towers_alerted || 485} Cellular Towers Active)</div>
+                        <div class="inspector-row"><strong>Total Population Reached:</strong> <span style="color:#15803d; font-weight:700;">~${(entry.population_reached || 1450000).toLocaleString()} Citizens</span></div>
                         <div class="inspector-row"><strong>Dispatched Channels:</strong> <span>${entry.channels.join(', ')}</span></div>
-                        <div class="inspector-row"><strong>Target Recipient:</strong> <span>${entry.recipient_target}</span></div>
                         <div class="inspector-row"><strong>Timestamp:</strong> <span>${entry.timestamp}</span></div>
                         <div style="margin-top:8px; padding:6px 10px; background:#ffffff; border-radius:6px; border:1px solid #cbd5e1; font-family:monospace; font-size:0.75rem;">
                             ${entry.message_body.replace(/\n/g, '<br>')}
                         </div>
                     `;
+
+                    // Trigger Full-Screen Emergency Takeover and Siren Alert
+                    showOperatorAlertTakeover(entry);
+
                     loadAlertsFeed();
                     loadSosLogTable();
                 } else {
@@ -3800,5 +3968,42 @@
             });
         }
     </script>
+
+    <!-- Full-Screen Operator Alert Takeover Modal -->
+    <div id="operator-alert-takeover" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(153, 27, 27, 0.96); z-index:999999; flex-direction:column; align-items:center; justify-content:center; color:white; text-align:center; padding:24px; animation: strobeFlash 1s infinite alternate; box-sizing:border-box;">
+        <div style="background:#7f1d1d; border:3px solid #fecaca; border-radius:16px; max-width:680px; width:92%; padding:28px 24px; box-shadow:0 20px 50px rgba(0,0,0,0.8); text-align:center;">
+            <div style="font-size:3.5rem; line-height:1; margin-bottom:8px;">🚨</div>
+            <div style="font-size:0.90rem; font-weight:800; letter-spacing:2px; color:#fecaca; text-transform:uppercase;">
+                GOVERNMENT OF KARNATAKA &bull; STATE EMERGENCY CELL BROADCAST
+            </div>
+            <h2 style="font-size:1.8rem; font-weight:900; color:#ffffff; margin:10px 0 6px 0; letter-spacing:0.5px;">
+                MASS EMERGENCY FLOOD ALERT TRANSMITTED
+            </h2>
+            <div style="display:inline-block; background:#dc2626; color:#ffffff; font-weight:800; padding:6px 14px; border-radius:20px; font-size:0.85rem; border:1px solid #fee2e2; margin-bottom:14px;">
+                TARGET DISTRICT: <span id="op-tk-district">BELAGAVI</span>
+            </div>
+
+            <!-- Broadcast Specs -->
+            <div style="background:rgba(0,0,0,0.35); border:1px solid rgba(254, 202, 202, 0.4); border-radius:10px; padding:12px; margin-bottom:14px; text-align:left; font-size:0.82rem; line-height:1.6;">
+                <div>📡 <strong>Transmission Protocol:</strong> 3GPP TS 23.041 Cell Broadcast (DoT / CDAC SACHET CBS Ch 4370)</div>
+                <div>🗼 <strong>Cellular BTS Towers Active:</strong> <span id="op-tk-towers" style="color:#fef08a; font-weight:700;">485 Towers</span> (Full District Coverage)</div>
+                <div>👥 <strong>Immediate Population Reach:</strong> <span id="op-tk-reach" style="color:#86efac; font-weight:700;">~1,450,000 Citizens & Visitors</span> (All Handsets In Geo-Fence)</div>
+                <div>⚠️ <strong>Action Forced:</strong> Audible Disaster Siren Tone & Lockscreen Alert on Every Device in Region</div>
+            </div>
+
+            <div style="background:#ffffff; color:#1e293b; border-radius:8px; padding:12px 14px; text-align:left; font-family:monospace; font-size:0.80rem; line-height:1.4; max-height:140px; overflow-y:auto; margin-bottom:18px;" id="op-tk-message">
+                <!-- Message -->
+            </div>
+
+            <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                <button type="button" class="btn btn-outline" style="background:#ffffff; color:#991b1b; font-weight:800; padding:10px 24px; font-size:0.95rem; border:none; border-radius:8px; cursor:pointer;" onclick="dismissOperatorTakeover()">
+                    🔇 MUTE SIREN & DISMISS TAKEOVER
+                </button>
+                <a href="/citizen-alert" target="_blank" class="btn" style="background:#1e3a8a; color:#ffffff; font-weight:700; padding:10px 18px; font-size:0.88rem; text-decoration:none; border-radius:8px; display:inline-flex; align-items:center;">
+                    📱 View Simulated Citizen Handset ↗
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
