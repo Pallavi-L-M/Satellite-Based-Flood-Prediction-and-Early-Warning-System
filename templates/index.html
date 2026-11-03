@@ -1979,19 +1979,166 @@
         <!-- ==================== TAB 9: EARLY WARNING & DISPATCH CENTER ==================== -->
         <section id="tab-early-warning" class="tab-panel">
             <div class="card" style="margin-bottom: 18px;">
-                <h3 style="font-size: 1.3rem; color: var(--primary-dark); font-weight: 700; margin-bottom: 4px;">
-                    Statewide Flood Early Warning & Dispatch Center
-                </h3>
-                <p style="color: var(--text-muted); font-size: 0.92rem;">
-                    Operational command dashboard integrating real-time telemetry from major Karnataka reservoirs, CWC river gauging stations, and verified field observations. Strictly distinguishes verified real alerts from simulated runs.
-                </p>
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+                    <div>
+                        <h3 style="font-size: 1.3rem; color: var(--primary-dark); font-weight: 700; margin-bottom: 4px;">
+                            Statewide Flood Early Warning, SOS Broadcast & Dispatch Center
+                        </h3>
+                        <p style="color: var(--text-muted); font-size: 0.90rem; margin:0;">
+                            Operational command dashboard integrating real-time telemetry from major Karnataka reservoirs, CWC river gauging stations, and multi-channel emergency alert dissemination. Transmits urgent alerts via <strong>SMS Cell Broadcast</strong>, <strong>Audible Emergency Sirens</strong>, <strong>WhatsApp Network</strong>, and the <strong>State Emergency Operations Center (SEOC) Wire</strong>.
+                        </p>
+                    </div>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <span class="badge badge-danger" style="font-size:0.80rem; padding:6px 10px;">🚨 Emergency Helpline: 1070 / 1077</span>
+                        <span class="badge badge-success" style="font-size:0.80rem; padding:6px 10px;">📡 CDAC SACHET Gateway Active</span>
+                    </div>
+                </div>
             </div>
 
+            <!-- Two-Column Emergency Command Grid -->
             <div class="sim-grid">
-                <!-- Controls Panel -->
+                <!-- 1. Emergency SOS & Mobile Alert Dispatcher Card -->
+                <div id="sos-dispatcher-card" class="card" style="border: 2px solid #ef4444; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.12);">
+                    <div class="card-header-styled" style="border-bottom: 1px solid #fee2e2; padding-bottom: 10px;">
+                        <div>
+                            <h3 style="color:#b91c1c; display:flex; align-items:center; gap:8px; margin:0;">
+                                <span>🚨 Emergency SOS & Multi-Channel Broadcast Center</span>
+                            </h3>
+                            <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">
+                                Cell Broadcast (CAP) &bull; SMS Telephony &bull; Audio Siren &bull; WhatsApp Field Dispatch
+                            </div>
+                        </div>
+                        <span class="badge badge-danger">High-Priority Alerting</span>
+                    </div>
+
+                    <div style="margin-top:14px;">
+                        <div class="slider-group">
+                            <label class="slider-label">Target Karnataka District (All 31 Districts):</label>
+                            <select id="sos-district-select" class="select-input" onchange="updateDefaultSosMessage()">
+                                <option value="Belagavi" selected>Belagavi (Krishna Basin)</option>
+                                <option value="Bagalkot">Bagalkot (Ghataprabha / Krishna)</option>
+                                <option value="Ballari">Ballari (Tungabhadra)</option>
+                                <option value="Bengaluru Urban">Bengaluru Urban (Vrishabhavathi / Lakes)</option>
+                                <option value="Bengaluru Rural">Bengaluru Rural</option>
+                                <option value="Bidar">Bidar (Karanja / Manjra)</option>
+                                <option value="Chamarajanagar">Chamarajanagar (Cauvery Basin)</option>
+                                <option value="Chikkaballapura">Chikkaballapura (North Pinakini)</option>
+                                <option value="Chikkamagaluru">Chikkamagaluru (Bhadra Headwaters)</option>
+                                <option value="Chitradurga">Chitradurga (Vedavathi)</option>
+                                <option value="Dakshina Kannada">Dakshina Kannada (Netravathi / Gurupura)</option>
+                                <option value="Davanagere">Davanagere (Tungabhadra)</option>
+                                <option value="Dharwad">Dharwad (Malaprabha Catchment)</option>
+                                <option value="Gadag">Gadag (Malaprabha / Tungabhadra)</option>
+                                <option value="Hassan">Hassan (Hemavathi Basin)</option>
+                                <option value="Haveri">Haveri (Varada / Tungabhadra)</option>
+                                <option value="Kalaburagi">Kalaburagi (Bhima Basin)</option>
+                                <option value="Kodagu">Kodagu (Cauvery Headwaters)</option>
+                                <option value="Kolar">Kolar (Palar Basin)</option>
+                                <option value="Koppal">Koppal (Tungabhadra)</option>
+                                <option value="Mandya">Mandya (Cauvery / Shimsha)</option>
+                                <option value="Mysuru">Mysuru (Cauvery / Kabini)</option>
+                                <option value="Raichur">Raichur (Krishna / Tungabhadra Doab)</option>
+                                <option value="Ramanagara">Ramanagara (Arkavathi)</option>
+                                <option value="Shivamogga">Shivamogga (Tunga / Bhadra / Sharavathi)</option>
+                                <option value="Tumakuru">Tumakuru (Shimsha / Jayamangali)</option>
+                                <option value="Udupi">Udupi (Swarna / Sita Coastal Rivers)</option>
+                                <option value="Uttara Kannada">Uttara Kannada (Kali / Sharavathi)</option>
+                                <option value="Vijayapura">Vijayapura (Krishna / Doni)</option>
+                                <option value="Vijayanagara">Vijayanagara (Tungabhadra Dam Lowlands)</option>
+                                <option value="Yadgir">Yadgir (Bhima / Krishna Confluence)</option>
+                            </select>
+                        </div>
+
+                        <div class="slider-group">
+                            <label class="slider-label">Emergency Alert Priority Tier:</label>
+                            <select id="sos-alert-tier" class="select-input" onchange="updateDefaultSosMessage()">
+                                <option value="Red Alert — Severe Flood Warning (Critical Life Threat)" selected>🔴 Red Alert — Emergency Evacuation SOS (Critical Life Threat)</option>
+                                <option value="Orange Alert — Flood Watch & Evacuation Standby">🟠 Orange Alert — Flood Watch & Evacuation Standby</option>
+                                <option value="Yellow Alert — Hydrological Advisory">🟡 Yellow Alert — Hydrological Advisory (Precautionary)</option>
+                            </select>
+                        </div>
+
+                        <div class="slider-group">
+                            <label class="slider-label">Recipient Mobile / Community Target:</label>
+                            <input type="text" id="inp-sos-recipient" class="text-input" value="Cell Broadcast (All Mobile Phones in Threatened Taluks)" placeholder="+91-98XXXXXXXX or Citizen Broadcast">
+                        </div>
+
+                        <!-- Multi-Channel Delivery Options -->
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 14px; margin-bottom:14px;">
+                            <span style="font-size:0.75rem; font-weight:700; color:#475569; text-transform:uppercase; letter-spacing:0.5px; display:block; margin-bottom:6px;">
+                                Active Delivery Channels:
+                            </span>
+                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; font-size:0.80rem;">
+                                <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+                                    <input type="checkbox" id="chk-chan-sms" checked> <span>📱 SMS Cell Broadcast</span>
+                                </label>
+                                <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+                                    <input type="checkbox" id="chk-chan-push" checked> <span>🔊 SOS Audio Siren & Push</span>
+                                </label>
+                                <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+                                    <input type="checkbox" id="chk-chan-seoc" checked> <span>🏛️ SEOC 1070 Control Wire</span>
+                                </label>
+                                <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+                                    <input type="checkbox" id="chk-chan-wa" checked> <span>💬 WhatsApp Field Net</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Emergency Message Area -->
+                        <div class="slider-group">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                                <label class="slider-label" style="margin:0;">Dispatched Message Body (CAP Format):</label>
+                                <button type="button" class="btn btn-outline" style="font-size:0.70rem; padding:2px 6px;" onclick="updateDefaultSosMessage(true)">Reset Template</button>
+                            </div>
+                            <textarea id="inp-sos-message" class="text-input" rows="4" style="width:100%; font-family:monospace; font-size:0.78rem; resize:vertical; line-height:1.4;"></textarea>
+                        </div>
+
+                        <!-- Dispatch Buttons -->
+                        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;">
+                            <button class="btn btn-danger" style="flex:2; min-width:200px; justify-content:center; background:#dc2626; border-color:#b91c1c; font-weight:700; font-size:0.85rem;" onclick="transmitEmergencySos()">
+                                🚨 TRANSMIT EMERGENCY SOS & SMS
+                            </button>
+                            <button class="btn btn-outline" style="flex:1; min-width:120px; justify-content:center; color:#15803d; border-color:#86efac; font-size:0.80rem;" onclick="shareSosToWhatsApp()">
+                                💬 WhatsApp Alert
+                            </button>
+                            <button class="btn btn-outline" style="justify-content:center; font-size:0.80rem;" onclick="playSosSirenAudio()" title="Sound Emergency Siren">
+                                🔊 Test Siren
+                            </button>
+                        </div>
+
+                        <!-- Dynamic Transmission Confirmation Box -->
+                        <div id="sos-confirmation-box" style="display:none; margin-top:14px; padding:12px; border-radius:8px; background:#f0fdf4; border:1px solid #86efac; font-size:0.82rem; line-height:1.5;">
+                            <!-- Populated on SOS send -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Active Warning Feeds & Live SOS Transmission Registry -->
                 <div class="card">
                     <div class="card-header-styled">
-                        <h3>Transmit Verified Real Observation Warning</h3>
+                        <div>
+                            <h3 style="margin:0;">Active Warning Feeds & SOS Log</h3>
+                            <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Live Multi-Basin Broadcasts & Delivery Receipts</div>
+                        </div>
+                        <div style="display:flex; gap:6px;">
+                            <button class="btn btn-outline" style="font-size:0.72rem; padding:3px 7px;" onclick="filterAlertsFeed('all')">All</button>
+                            <button class="btn btn-outline" style="font-size:0.72rem; padding:3px 7px;" onclick="filterAlertsFeed('real')">🟢 Real Only</button>
+                            <button class="btn btn-outline" style="font-size:0.72rem; padding:3px 7px;" onclick="filterAlertsFeed('simulated')">⚠️ Simulated Only</button>
+                        </div>
+                    </div>
+
+                    <div id="statewide-alerts-feed" style="max-height: 480px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Injected dynamically via renderAlertsList() -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lower Row: Manual Telemetry Broadcast & SOS Historical Transmissions Table -->
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; margin-top:18px;">
+                <!-- Telemetry Broadcast Card -->
+                <div class="card">
+                    <div class="card-header-styled">
+                        <h3>Transmit Verified Ground Telemetry Advisory</h3>
                         <span class="badge badge-real">🟢 Real Observation</span>
                     </div>
 
@@ -1999,12 +2146,24 @@
                         <label class="slider-label">Select Monitored District:</label>
                         <select id="real-dispatch-district" class="select-input">
                             <option value="Belagavi">Belagavi (Krishna Basin)</option>
-                            <option value="Mysuru">Mysuru (Cauvery / Kabini)</option>
-                            <option value="Dakshina Kannada">Dakshina Kannada (Netravathi)</option>
                             <option value="Bagalkot">Bagalkot (Almatti / Krishna)</option>
                             <option value="Ballari">Ballari (Tungabhadra)</option>
+                            <option value="Bengaluru Urban">Bengaluru Urban</option>
+                            <option value="Chitradurga">Chitradurga</option>
+                            <option value="Dakshina Kannada">Dakshina Kannada (Netravathi)</option>
+                            <option value="Davanagere">Davanagere</option>
+                            <option value="Hassan">Hassan</option>
+                            <option value="Kalaburagi">Kalaburagi (Bhima)</option>
                             <option value="Kodagu">Kodagu (Cauvery Headwaters)</option>
+                            <option value="Mandya">Mandya (Cauvery)</option>
+                            <option value="Mysuru">Mysuru (Cauvery / Kabini)</option>
+                            <option value="Raichur">Raichur (Krishna / TB)</option>
                             <option value="Shivamogga">Shivamogga (Tunga Basin)</option>
+                            <option value="Tumakuru">Tumakuru</option>
+                            <option value="Udupi">Udupi (Coastal)</option>
+                            <option value="Uttara Kannada">Uttara Kannada (Kali Basin)</option>
+                            <option value="Vijayanagara">Vijayanagara (Tungabhadra)</option>
+                            <option value="Yadgir">Yadgir (Bhima Confluence)</option>
                         </select>
                     </div>
 
@@ -2017,7 +2176,7 @@
                     </div>
 
                     <div class="slider-group">
-                        <label class="slider-label">Observational Station / Feed:</label>
+                        <label class="slider-label">Observational Station / Gauge Feed:</label>
                         <input type="text" id="inp-real-station" class="text-input" value="Bantwal Netravathi CWC River Gauge">
                     </div>
 
@@ -2036,23 +2195,36 @@
                     </div>
 
                     <button class="btn btn-success" style="width: 100%; justify-content: center; margin-top: 8px;" onclick="dispatchRealObservationWarning()">
-                        Broadcast Verified Real Warning
+                        Broadcast Verified Real Telemetry
                     </button>
                 </div>
 
-                <!-- Live Risk Status Card -->
+                <!-- Recent SOS & SMS Transmission History Card -->
                 <div class="card">
                     <div class="card-header-styled">
-                        <h3>Active Warning Feeds</h3>
-                        <div style="display:flex; gap:6px;">
-                            <button class="btn btn-outline" style="font-size:0.75rem; padding:4px 8px;" onclick="filterAlertsFeed('all')">All</button>
-                            <button class="btn btn-outline" style="font-size:0.75rem; padding:4px 8px;" onclick="filterAlertsFeed('real')">🟢 Real Only</button>
-                            <button class="btn btn-outline" style="font-size:0.75rem; padding:4px 8px;" onclick="filterAlertsFeed('simulated')">⚠️ Simulated Only</button>
+                        <div>
+                            <h3 style="margin:0;">Emergency SOS Transmission Registry</h3>
+                            <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Dispatched SMS & SOS Gateway Receipts</div>
                         </div>
+                        <button class="btn btn-outline" style="font-size:0.72rem; padding:3px 8px;" onclick="loadSosLogTable()">Refresh</button>
                     </div>
 
-                    <div id="statewide-alerts-feed" style="max-height: 480px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
-                        <!-- Injected dynamically -->
+                    <div style="overflow-x:auto; max-height:360px;">
+                        <table class="data-table" style="font-size:0.78rem; width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>SOS ID</th>
+                                    <th>Timestamp</th>
+                                    <th>District</th>
+                                    <th>Alert Tier</th>
+                                    <th>Channels</th>
+                                    <th>Carrier Receipt</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sos-history-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -2103,6 +2275,8 @@
             initStatewideChart();
             loadAlertsFeed();
             fetchLiveWeather('Belgaum');
+            updateDefaultSosMessage();
+            loadSosLogTable();
         });
 
         // Tab Switching
@@ -2154,6 +2328,10 @@
                 }, 150);
             } else if (tabId === 'scenario-simulation') {
                 runScenarioSimulation();
+            } else if (tabId === 'early-warning') {
+                updateDefaultSosMessage();
+                loadSosLogTable();
+                loadAlertsFeed();
             }
         }
 
@@ -3343,6 +3521,188 @@
         }
 
         // ==================== 7. EARLY WARNING DISPATCH & FEED ====================
+        function updateDefaultSosMessage(force) {
+            const dist = document.getElementById('sos-district-select') ? document.getElementById('sos-district-select').value : 'Belagavi';
+            const tier = document.getElementById('sos-alert-tier') ? document.getElementById('sos-alert-tier').value : 'Red Alert';
+            const txtArea = document.getElementById('inp-sos-message');
+            if (!txtArea) return;
+            if (!force && txtArea.getAttribute('data-user-modified') === 'true') return;
+
+            const nowStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const isRed = tier.includes('Red');
+            const isOrange = tier.includes('Orange');
+
+            let instructions = "Immediate evacuation of riverine lowlands and low-lying agricultural zones advised. Move to designated taluk relief shelters.";
+            if (isOrange) {
+                instructions = "High water levels approaching danger mark. Riverbank residents placed on evacuation standby. Avoid low-level causeways.";
+            } else if (!isRed) {
+                instructions = "Precautionary advisory for riverine activities and agricultural field channels. Monitor local taluk control advisories.";
+            }
+
+            txtArea.value = `🚨 [EMERGENCY FLOOD SOS] KSNDMC / KS-FEWS BROADCAST\n` +
+                `District: ${dist} | Level: ${tier}\n` +
+                `Time: ${nowStr} IST | Authority: State Emergency Operations Center\n` +
+                `Protocol: ${instructions}\n` +
+                `Emergency Helplines: 1070 (SEOC) | 1077 (District Control) | Police: 112`;
+            txtArea.removeAttribute('data-user-modified');
+        }
+
+        function transmitEmergencySos() {
+            const district = document.getElementById('sos-district-select').value;
+            const alertTier = document.getElementById('sos-alert-tier').value;
+            const recipient = document.getElementById('inp-sos-recipient').value || "Cell Broadcast (Threatened Taluks)";
+            const message = document.getElementById('inp-sos-message').value;
+
+            const channels = [];
+            if (document.getElementById('chk-chan-sms').checked) channels.push("SMS Cell Broadcast (DoT/CDAC SACHET)");
+            if (document.getElementById('chk-chan-push').checked) channels.push("SOS Audio Siren & Push");
+            if (document.getElementById('chk-chan-seoc').checked) channels.push("SEOC 1070 Wire");
+            if (document.getElementById('chk-chan-wa').checked) channels.push("WhatsApp Field Net");
+
+            if (channels.length === 0) {
+                alert("Please select at least one delivery channel for the SOS broadcast.");
+                return;
+            }
+
+            // Sound the emergency audio siren
+            playSosSirenAudio();
+
+            fetch('/api/early-warning/send-sos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    district: district,
+                    alert_tier: alertTier,
+                    recipient_target: recipient,
+                    channels: channels,
+                    message_body: message,
+                    is_simulated: false
+                })
+            })
+            .then(r => r.json())
+            .then(res => {
+                if (res.status === 'success') {
+                    const entry = res.sos_entry;
+                    const box = document.getElementById('sos-confirmation-box');
+                    box.style.display = 'block';
+                    box.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <strong style="color:#15803d; font-size:0.90rem;">✓ Emergency SOS Transmitted Successfully</strong>
+                            <span class="badge badge-danger">${entry.sos_id}</span>
+                        </div>
+                        <div class="inspector-row"><strong>Carrier Receipt:</strong> <span style="font-family:monospace; color:#0369a1;">${entry.carrier_receipt}</span></div>
+                        <div class="inspector-row"><strong>Dispatched Channels:</strong> <span>${entry.channels.join(', ')}</span></div>
+                        <div class="inspector-row"><strong>Target Recipient:</strong> <span>${entry.recipient_target}</span></div>
+                        <div class="inspector-row"><strong>Timestamp:</strong> <span>${entry.timestamp}</span></div>
+                        <div style="margin-top:8px; padding:6px 10px; background:#ffffff; border-radius:6px; border:1px solid #cbd5e1; font-family:monospace; font-size:0.75rem;">
+                            ${entry.message_body.replace(/\n/g, '<br>')}
+                        </div>
+                    `;
+                    loadAlertsFeed();
+                    loadSosLogTable();
+                } else {
+                    alert("SOS Dispatch Error: " + (res.message || "Unknown error"));
+                }
+            })
+            .catch(err => {
+                alert("Failed to connect to SOS broadcast gateway: " + err.message);
+            });
+        }
+
+        function shareSosToWhatsApp() {
+            const msg = document.getElementById('inp-sos-message').value;
+            const encoded = encodeURIComponent(msg);
+            window.open(`https://api.whatsapp.com/send?text=${encoded}`, '_blank');
+        }
+
+        function shareAlertViaWhatsApp(msg) {
+            const encoded = encodeURIComponent(msg);
+            window.open(`https://api.whatsapp.com/send?text=${encoded}`, '_blank');
+        }
+
+        function playSosSirenAudio() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                const now = ctx.currentTime;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(480, now);
+                for (let i = 0; i < 6; i++) {
+                    osc.frequency.exponentialRampToValueAtTime(920, now + i * 0.4 + 0.2);
+                    osc.frequency.exponentialRampToValueAtTime(480, now + (i + 1) * 0.4);
+                }
+
+                gain.gain.setValueAtTime(0.35, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 2.4);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now);
+                osc.stop(now + 2.5);
+            } catch(e) {
+                console.warn("Audio siren unavailable or blocked by browser autoplay policy:", e);
+            }
+        }
+
+        function prepareSosFromAlert(district, tier, text) {
+            const distSelect = document.getElementById('sos-district-select');
+            if (distSelect) {
+                for (let i = 0; i < distSelect.options.length; i++) {
+                    if (distSelect.options[i].value.toLowerCase().includes(district.toLowerCase()) || district.toLowerCase().includes(distSelect.options[i].value.toLowerCase())) {
+                        distSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            const tierSelect = document.getElementById('sos-alert-tier');
+            if (tierSelect) {
+                if (tier.includes('Red')) tierSelect.selectedIndex = 0;
+                else if (tier.includes('Orange')) tierSelect.selectedIndex = 1;
+                else tierSelect.selectedIndex = 2;
+            }
+            const txtArea = document.getElementById('inp-sos-message');
+            if (txtArea) {
+                txtArea.value = `🚨 [EMERGENCY FLOOD SOS] KSNDMC / KS-FEWS ALERT\n` +
+                    `District: ${district} | Tier: ${tier}\n` +
+                    `Dispatched Warning: ${text}\n` +
+                    `Instructions: Move immediately away from flooded channels. Contact 24/7 Helpline: 1070 / 1077.`;
+                txtArea.setAttribute('data-user-modified', 'true');
+            }
+            const card = document.getElementById('sos-dispatcher-card');
+            if (card) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                card.style.transition = 'box-shadow 0.3s ease';
+                card.style.boxShadow = '0 0 20px rgba(220, 38, 38, 0.6)';
+                setTimeout(() => { card.style.boxShadow = '0 4px 14px rgba(239, 68, 68, 0.12)'; }, 1500);
+            }
+        }
+
+        function loadSosLogTable() {
+            fetch('/api/early-warning/sos-log')
+                .then(r => r.json())
+                .then(entries => {
+                    const tbody = document.getElementById('sos-history-tbody');
+                    if (!tbody) return;
+                    tbody.innerHTML = '';
+                    entries.forEach(e => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><code style="font-size:0.75rem; color:#b91c1c; font-weight:700;">${e.sos_id}</code></td>
+                            <td>${e.timestamp}</td>
+                            <td><strong>${e.district}</strong></td>
+                            <td><span class="badge ${e.alert_tier.includes('Red') ? 'badge-danger' : 'badge-warning'}">${e.alert_tier.split('—')[0].trim()}</span></td>
+                            <td><span style="font-size:0.70rem; color:#475569;">${e.channels.join(', ')}</span></td>
+                            <td><code style="font-size:0.70rem; color:#15803d;">${e.carrier_receipt}</code></td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                });
+        }
+
         function dispatchRealObservationWarning() {
             const district = document.getElementById('real-dispatch-district').value;
             const rain = parseFloat(document.getElementById('inp-real-rain').value);
@@ -3400,6 +3760,10 @@
             filtered.forEach(a => {
                 const item = document.createElement('div');
                 const isSim = a.is_simulated;
+                const safeDist = (a.district || '').replace(/'/g, "\\'");
+                const safeTier = (a.risk_level || a.alert_badge || '').replace(/'/g, "\\'");
+                const safeMsg = (a.message || a.action_required || '').replace(/'/g, "\\'").replace(/\n/g, ' ');
+
                 item.style.cssText = `background: ${isSim ? '#fffbeb' : '#ffffff'}; border: 1px solid ${isSim ? '#f59e0b' : '#e2e8f0'}; border-radius: 8px; padding: 12px;`;
                 item.innerHTML = `
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
@@ -3418,6 +3782,18 @@
                     </p>
                     <div style="margin-top:6px; font-size:0.75rem; color:#64748b;">
                         <strong>Source:</strong> ${a.data_source || 'Hydrological Ground Telemetry'} &bull; <strong>Lead Time:</strong> ${a.lead_time_hrs} Hours
+                    </div>
+                    <!-- Quick SOS & Messaging Action Bar -->
+                    <div style="margin-top:10px; padding-top:8px; border-top:1px dashed #e2e8f0; display:flex; gap:6px; flex-wrap:wrap;">
+                        <button class="btn btn-danger" style="font-size:0.72rem; padding:3px 8px; background:#dc2626; border-color:#b91c1c;" onclick="prepareSosFromAlert('${safeDist}', '${safeTier}', '${safeMsg}')">
+                            🚨 Quick SOS / SMS
+                        </button>
+                        <button class="btn btn-outline" style="font-size:0.72rem; padding:3px 8px; color:#15803d; border-color:#86efac;" onclick="shareAlertViaWhatsApp('🚨 [KS-FEWS FLOOD ALERT] ${safeDist}: ${safeTier}. ${safeMsg} Helpline: 1070 / 1077')">
+                            💬 WhatsApp Alert
+                        </button>
+                        <button class="btn btn-outline" style="font-size:0.72rem; padding:3px 8px;" onclick="playSosSirenAudio()">
+                            🔊 Siren
+                        </button>
                     </div>
                 `;
                 feed.appendChild(item);

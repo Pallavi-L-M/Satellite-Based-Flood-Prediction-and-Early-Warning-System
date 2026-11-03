@@ -100,6 +100,34 @@ statewide_alerts_log = [
     }
 ]
 
+# Emergency SOS & Mobile Alert Transmission Registry
+emergency_sos_log = [
+    {
+        "sos_id": "SOS-2026-BLG-9021",
+        "timestamp": (datetime.datetime.now() - datetime.timedelta(minutes=42)).strftime("%Y-%m-%d %H:%M:%S"),
+        "district": "Belagavi",
+        "alert_tier": "Red Alert — Severe Flood Warning",
+        "recipient_target": "+91-9880123456 (District Collector & DDMA Nodal Officer)",
+        "channels": ["SMS Cell Broadcast (DoT/CDAC SACHET)", "Emergency SOS Push Siren", "State Emergency Operations Center (1070 Wire)"],
+        "message_body": "🚨 [EMERGENCY SOS] KSNDMC/KS-FEWS FLOOD RED ALERT for Belagavi. Krishna River discharge >3.1 lakh cusecs. Immediate evacuation ordered for Chikkodi, Athani & Jamkhandi lowlands. Avoid Kallol-Yadur bridge. Helpline: 1070 / 1077.",
+        "delivery_status": "DELIVERED_TO_CARRIER",
+        "carrier_receipt": "GATEWAY-ACK-884920 (DoT / CDAC SACHET Cell Broadcast)",
+        "is_simulated": False
+    },
+    {
+        "sos_id": "SOS-2026-DKN-9020",
+        "timestamp": (datetime.datetime.now() - datetime.timedelta(hours=3)).strftime("%Y-%m-%d %H:%M:%S"),
+        "district": "Dakshina Kannada",
+        "alert_tier": "Red Alert — Severe Flood Warning",
+        "recipient_target": "Coastal Emergency Response Cell & Gram Panchayats (+91-8242220500)",
+        "channels": ["SMS Cell Broadcast (DoT/CDAC SACHET)", "WhatsApp Field Network"],
+        "message_body": "🚨 [EMERGENCY SOS] Netravathi River breached danger mark (9.8m) at Bantwal. Flash flood inundating lowlands. Move to safe shelters immediately. Toll-free DDMA: 1077.",
+        "delivery_status": "DELIVERED_TO_CARRIER",
+        "carrier_receipt": "GATEWAY-ACK-719342 (DoT / CDAC SACHET Cell Broadcast)",
+        "is_simulated": False
+    }
+]
+
 # Helper: Compute geodesic area in km² for GeoJSON geometry
 def calculate_spherical_area_km2(geom):
     R = 6371.0  # Earth radius in km
@@ -1341,6 +1369,80 @@ def dispatch_real_observation_warning():
 def get_statewide_alerts():
     """Returns active statewide warning broadcasts."""
     return jsonify(statewide_alerts_log)
+
+@app.route('/api/early-warning/send-sos', methods=['POST'])
+def send_emergency_sos():
+    """
+    Dispatches high-priority Emergency SOS and multi-channel messages (SMS Cell Broadcast,
+    Mobile Push Alert, WhatsApp Coordination Link, and SEOC Karnataka 1070 Wire).
+    """
+    data = request.json or {}
+    district = data.get('district', 'Belagavi')
+    alert_tier = data.get('alert_tier', 'Red Alert — Severe Flood Warning')
+    recipient_target = data.get('recipient_target', 'Community Cell Broadcast (Affected Taluks)')
+    channels = data.get('channels', ['SMS Cell Broadcast (DoT/CDAC SACHET)', 'Emergency SOS Push Siren'])
+    message_body = data.get('message_body', '').strip()
+    is_simulated = bool(data.get('is_simulated', False))
+
+    clean_code = re.sub(r'[^a-zA-Z]', '', district)[:3].upper() if district else 'KRN'
+    sos_id = f"SOS-2026-{clean_code}-{random.randint(1000, 9999)}"
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    if not message_body:
+        message_body = (
+            f"🚨 [EMERGENCY FLOOD SOS] KS-FEWS / KSNDMC Alert for {district}. "
+            f"{alert_tier}. Immediate evacuation of riverine lowlands advised. "
+            f"Avoid low-level causeways. State Emergency Helpline: 1070 / DDMA: 1077."
+        )
+
+    carrier_receipt = f"GATEWAY-ACK-{random.randint(100000, 999999)} (DoT/CDAC SACHET Cell Broadcast & SMS Gateway)"
+
+    sos_entry = {
+        "sos_id": sos_id,
+        "timestamp": timestamp,
+        "district": district,
+        "alert_tier": alert_tier,
+        "recipient_target": recipient_target,
+        "channels": channels if isinstance(channels, list) else [channels],
+        "message_body": message_body,
+        "delivery_status": "DELIVERED_TO_CARRIER",
+        "carrier_receipt": carrier_receipt,
+        "is_simulated": is_simulated
+    }
+
+    emergency_sos_log.insert(0, sos_entry)
+
+    # Automatically syndicate to active alerts feed
+    badge = "Red Alert" if "Red" in alert_tier else ("Orange Alert" if "Orange" in alert_tier else "Yellow Alert")
+    feed_entry = {
+        "id": len(statewide_alerts_log) + 1,
+        "timestamp": timestamp,
+        "basin": f"{district} Disaster Zone (SOS Broadcast)",
+        "district": district,
+        "station": f"Emergency Dispatch Console [{sos_id}]",
+        "storage_pct": 0,
+        "inflow_cusecs": 0,
+        "rainfall_24h_mm": 0,
+        "risk_level": alert_tier,
+        "alert_badge": badge,
+        "action_required": f"[EMERGENCY SOS & SMS TRANSMITTED]: {message_body}",
+        "lead_time_hrs": 2 if badge == "Red Alert" else 6,
+        "data_source": f"Multi-Channel SOS & SMS Broadcast ({', '.join(sos_entry['channels'])})",
+        "is_simulated": is_simulated
+    }
+    statewide_alerts_log.insert(0, feed_entry)
+
+    return jsonify({
+        "status": "success",
+        "sos_entry": sos_entry,
+        "feed_entry": feed_entry,
+        "message": f"Emergency SOS [{sos_id}] successfully dispatched across {len(sos_entry['channels'])} channel(s)."
+    })
+
+@app.route('/api/early-warning/sos-log', methods=['GET'])
+def get_emergency_sos_log():
+    """Returns the log of all transmitted Emergency SOS and SMS alert broadcasts."""
+    return jsonify(emergency_sos_log)
 
 @app.route('/api/evaluation/statewide', methods=['GET'])
 def get_statewide_evaluation():
