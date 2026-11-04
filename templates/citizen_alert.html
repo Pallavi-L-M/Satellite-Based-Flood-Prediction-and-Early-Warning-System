@@ -222,6 +222,17 @@
             </select>
         </div>
 
+        <div id="audio-arm-banner" onclick="armAudioReceiver()" style="background: rgba(37, 99, 235, 0.2); border: 1px solid #3b82f6; border-radius: 12px; padding: 12px; margin: 14px 0 8px 0; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:1.4rem;">🔔</span>
+                <div style="text-align:left;">
+                    <div id="audio-arm-title" style="font-size:0.85rem; font-weight:800; color:#93c5fd;">TAP TO UNMUTE / ARM AUDIO SIREN</div>
+                    <div id="audio-arm-sub" style="font-size:0.72rem; color:#cbd5e1;">Required by mobile browsers to enable high-decibel alarm</div>
+                </div>
+            </div>
+            <span id="audio-arm-badge" style="background:#2563eb; color:white; font-size:0.75rem; font-weight:700; padding:6px 10px; border-radius:8px;">ARM NOW</span>
+        </div>
+
         <button class="btn-test" onclick="testReceiverSiren()">
             🔊 Test Device Siren & Strobe
         </button>
@@ -252,7 +263,7 @@
     </div>
 
     <!-- FULL SCREEN DEVICE TAKEOVER -->
-    <div id="alert-takeover">
+    <div id="alert-takeover" onclick="if (!sirenEngine.isPlaying) sirenEngine.start(true)">
         <div class="takeover-header">
             <div style="font-size: 2.2rem; margin-bottom: 4px;">🚨</div>
             <h2>EMERGENCY FLOOD EVACUATION ALERT</h2>
@@ -275,66 +286,178 @@
             </div>
         </div>
 
-        <div>
-            <button class="btn-mute" onclick="muteTakeoverSiren()">
-                Mute Siren & Acknowledge Alert
+        <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
+            <button id="btn-force-siren" class="btn-mute" style="background:#fef08a; color:#854d0e; font-size:1.0rem;" onclick="event.stopPropagation(); sirenEngine.start(true)">
+                🔊 FORCE PLAY SIREN TONE
+            </button>
+            <button class="btn-mute" onclick="event.stopPropagation(); muteTakeoverSiren()">
+                🔇 MUTE SIREN & ACKNOWLEDGE ALERT
             </button>
         </div>
     </div>
 
     <script>
         let lastReceivedSosId = null;
-        let sirenOscillator = null;
-        let sirenGain = null;
-        let sirenCtx = null;
-        let sirenInterval = null;
 
-        // Sound the authentic national disaster siren
-        function startEmergencySiren() {
-            try {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                if (!AudioContext) return;
-                if (!sirenCtx) sirenCtx = new AudioContext();
-                if (sirenCtx.state === 'suspended') sirenCtx.resume();
+        // ==================== LOUD DUAL-TONE DISASTER SIREN ENGINE ====================
+        const sirenEngine = {
+            ctx: null,
+            carrier1: null,
+            carrier2: null,
+            lfo: null,
+            modGain: null,
+            masterGain: null,
+            isPlaying: false,
 
-                // Trigger vibration
-                if (navigator.vibrate) {
-                    navigator.vibrate([600, 200, 600, 200, 600, 200, 1000]);
-                }
-
-                sirenOscillator = sirenCtx.createOscillator();
-                sirenGain = sirenCtx.createGain();
-
-                sirenOscillator.type = 'sawtooth';
-                const now = sirenCtx.currentTime;
-                sirenOscillator.frequency.setValueAtTime(460, now);
-
-                for (let i = 0; i < 20; i++) {
-                    sirenOscillator.frequency.exponentialRampToValueAtTime(920, now + i * 0.4 + 0.2);
-                    sirenOscillator.frequency.exponentialRampToValueAtTime(460, now + (i + 1) * 0.4);
-                }
-
-                sirenGain.gain.setValueAtTime(0.5, now);
-                sirenOscillator.connect(sirenGain);
-                sirenGain.connect(sirenCtx.destination);
-                sirenOscillator.start(now);
-            } catch(e) {
-                console.warn("Audio Context autoplay blocked or unavailable:", e);
-            }
-        }
-
-        function stopEmergencySiren() {
-            if (sirenOscillator) {
+            initContext: function() {
                 try {
-                    sirenOscillator.stop();
-                    sirenOscillator.disconnect();
-                } catch(e) {}
-                sirenOscillator = null;
+                    const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioCtxClass) return null;
+                    if (!this.ctx) {
+                        this.ctx = new AudioCtxClass();
+                    }
+                    if (this.ctx.state === 'suspended') {
+                        this.ctx.resume();
+                    }
+                    return this.ctx;
+                } catch(e) {
+                    console.warn("AudioContext init error:", e);
+                    return null;
+                }
+            },
+
+            start: function(isContinuous = true) {
+                try {
+                    const ctx = this.initContext();
+                    if (!ctx) return false;
+
+                    if (ctx.state === 'suspended') {
+                        ctx.resume();
+                    }
+
+                    this.stop(); // Cleanly stop any existing nodes
+
+                    const now = ctx.currentTime;
+
+                    // 1. Primary Wailing Carrier (Sawtooth 650Hz)
+                    this.carrier1 = ctx.createOscillator();
+                    this.carrier1.type = 'sawtooth';
+                    this.carrier1.frequency.setValueAtTime(650, now);
+
+                    // 2. High Urgency Secondary Harmonic (853Hz EAS national emergency tone)
+                    this.carrier2 = ctx.createOscillator();
+                    this.carrier2.type = 'sine';
+                    this.carrier2.frequency.setValueAtTime(853, now);
+
+                    // 3. LFO Sweeper (2.2 Hz triangle oscillation between ~380Hz and 920Hz)
+                    this.lfo = ctx.createOscillator();
+                    this.lfo.type = 'triangle';
+                    this.lfo.frequency.setValueAtTime(2.2, now);
+
+                    // 4. Modulation Gain (Modulates carrier1 by +/- 270 Hz)
+                    this.modGain = ctx.createGain();
+                    this.modGain.gain.setValueAtTime(270, now);
+                    this.lfo.connect(this.modGain);
+                    this.modGain.connect(this.carrier1.frequency);
+
+                    // 5. Master Output Gain (Loud 0.85 volume)
+                    this.masterGain = ctx.createGain();
+                    this.masterGain.gain.setValueAtTime(0.85, now);
+
+                    this.carrier1.connect(this.masterGain);
+                    this.carrier2.connect(this.masterGain);
+                    this.masterGain.connect(ctx.destination);
+
+                    this.carrier1.start(now);
+                    this.carrier2.start(now);
+                    this.lfo.start(now);
+                    this.isPlaying = true;
+
+                    // If non-continuous test mode, play for 3.5 seconds with gentle fade-out
+                    if (!isContinuous) {
+                        this.masterGain.gain.setValueAtTime(0.85, now + 3.0);
+                        this.masterGain.gain.exponentialRampToValueAtTime(0.001, now + 3.5);
+                        setTimeout(() => {
+                            if (!isContinuous && this.isPlaying) {
+                                this.stop();
+                            }
+                        }, 3600);
+                    }
+
+                    // Mobile vibration pulse
+                    if (navigator.vibrate) {
+                        navigator.vibrate([800, 200, 800, 200, 800, 200, 1200]);
+                    }
+
+                    return true;
+                } catch(e) {
+                    console.warn("Error starting siren:", e);
+                    return false;
+                }
+            },
+
+            stop: function() {
+                try {
+                    if (this.carrier1) {
+                        this.carrier1.stop();
+                        this.carrier1.disconnect();
+                        this.carrier1 = null;
+                    }
+                    if (this.carrier2) {
+                        this.carrier2.stop();
+                        this.carrier2.disconnect();
+                        this.carrier2 = null;
+                    }
+                    if (this.lfo) {
+                        this.lfo.stop();
+                        this.lfo.disconnect();
+                        this.lfo = null;
+                    }
+                    if (this.modGain) {
+                        this.modGain.disconnect();
+                        this.modGain = null;
+                    }
+                    if (this.masterGain) {
+                        this.masterGain.disconnect();
+                        this.masterGain = null;
+                    }
+                    if (navigator.vibrate) {
+                        navigator.vibrate(0);
+                    }
+                    this.isPlaying = false;
+                } catch(e) {
+                    console.warn("Error stopping siren:", e);
+                }
             }
-            if (navigator.vibrate) {
-                navigator.vibrate(0);
+        };
+
+        function armAudioReceiver() {
+            sirenEngine.initContext();
+            const title = document.getElementById('audio-arm-title');
+            const sub = document.getElementById('audio-arm-sub');
+            const badge = document.getElementById('audio-arm-badge');
+            if (title) {
+                title.innerText = '✓ AUDIO SIREN ARMED & READY';
+                title.style.color = '#4ade80';
+            }
+            if (sub) {
+                sub.innerText = 'High-decibel emergency siren will sound instantly on cell broadcast';
+            }
+            if (badge) {
+                badge.innerText = 'ARMED 🔊';
+                badge.style.background = '#16a34a';
             }
         }
+
+        // Unlock audio context on any click or touch gesture
+        document.addEventListener('click', () => {
+            sirenEngine.initContext();
+            armAudioReceiver();
+        }, { passive: true });
+        document.addEventListener('touchstart', () => {
+            sirenEngine.initContext();
+            armAudioReceiver();
+        }, { passive: true });
 
         function triggerDeviceTakeover(data) {
             document.getElementById('tk-district').innerText = `Target: ${data.district} District`;
@@ -344,11 +467,11 @@
             const modal = document.getElementById('alert-takeover');
             modal.style.display = 'flex';
 
-            startEmergencySiren();
+            sirenEngine.start(true);
         }
 
         function muteTakeoverSiren() {
-            stopEmergencySiren();
+            sirenEngine.stop();
             document.getElementById('alert-takeover').style.display = 'none';
         }
 

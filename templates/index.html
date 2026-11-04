@@ -3616,75 +3616,141 @@
             txtArea.removeAttribute('data-user-modified');
         }
 
-        // Audio Siren Engine for Operator Takeover Modal
-        let operatorAudioCtx = null;
-        let operatorOsc = null;
-        let operatorGain = null;
-        let operatorSirenTimer = null;
+        // ==================== LOUD DUAL-TONE DISASTER SIREN ENGINE ====================
+        const sirenEngine = {
+            ctx: null,
+            carrier1: null,
+            carrier2: null,
+            lfo: null,
+            modGain: null,
+            masterGain: null,
+            isPlaying: false,
 
-        function startContinuousOperatorSiren() {
-            try {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                if (!AudioContext) return;
-                if (!operatorAudioCtx) {
-                    operatorAudioCtx = new AudioContext();
-                }
-                if (operatorAudioCtx.state === 'suspended') {
-                    operatorAudioCtx.resume();
-                }
-
-                stopOperatorSirenAudio();
-
-                operatorOsc = operatorAudioCtx.createOscillator();
-                operatorGain = operatorAudioCtx.createGain();
-
-                operatorOsc.type = 'sawtooth';
-                operatorGain.gain.setValueAtTime(0.4, operatorAudioCtx.currentTime);
-
-                operatorOsc.connect(operatorGain);
-                operatorGain.connect(operatorAudioCtx.destination);
-                operatorOsc.start();
-
-                let high = false;
-                operatorOsc.frequency.setValueAtTime(460, operatorAudioCtx.currentTime);
-
-                operatorSirenTimer = setInterval(() => {
-                    if (!operatorOsc || !operatorAudioCtx) return;
-                    const t = operatorAudioCtx.currentTime;
-                    if (high) {
-                        operatorOsc.frequency.cancelScheduledValues(t);
-                        operatorOsc.frequency.linearRampToValueAtTime(460, t + 0.35);
-                        high = false;
-                    } else {
-                        operatorOsc.frequency.cancelScheduledValues(t);
-                        operatorOsc.frequency.linearRampToValueAtTime(920, t + 0.35);
-                        high = true;
+            initContext: function() {
+                try {
+                    const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioCtxClass) return null;
+                    if (!this.ctx) {
+                        this.ctx = new AudioCtxClass();
                     }
-                }, 400);
-            } catch(e) {
-                console.warn("Operator siren audio error:", e);
-            }
-        }
+                    if (this.ctx.state === 'suspended') {
+                        this.ctx.resume();
+                    }
+                    return this.ctx;
+                } catch(e) {
+                    console.warn("AudioContext init error:", e);
+                    return null;
+                }
+            },
 
-        function stopOperatorSirenAudio() {
-            if (operatorSirenTimer) {
-                clearInterval(operatorSirenTimer);
-                operatorSirenTimer = null;
-            }
-            if (operatorOsc) {
+            start: function(isContinuous = true) {
                 try {
-                    operatorOsc.stop();
-                    operatorOsc.disconnect();
-                } catch(e) {}
-                operatorOsc = null;
-            }
-            if (operatorGain) {
+                    const ctx = this.initContext();
+                    if (!ctx) return false;
+
+                    if (ctx.state === 'suspended') {
+                        ctx.resume();
+                    }
+
+                    this.stop(); // Stop any currently playing nodes cleanly
+
+                    const now = ctx.currentTime;
+
+                    // 1. Primary Wailing Carrier (Sawtooth 650Hz)
+                    this.carrier1 = ctx.createOscillator();
+                    this.carrier1.type = 'sawtooth';
+                    this.carrier1.frequency.setValueAtTime(650, now);
+
+                    // 2. High Urgency Secondary Harmonic (853Hz EAS national emergency tone)
+                    this.carrier2 = ctx.createOscillator();
+                    this.carrier2.type = 'sine';
+                    this.carrier2.frequency.setValueAtTime(853, now);
+
+                    // 3. LFO Sweeper (2.2 Hz triangle oscillation between ~380Hz and 920Hz)
+                    this.lfo = ctx.createOscillator();
+                    this.lfo.type = 'triangle';
+                    this.lfo.frequency.setValueAtTime(2.2, now);
+
+                    // 4. Modulation Gain (Modulates carrier1 by +/- 270 Hz)
+                    this.modGain = ctx.createGain();
+                    this.modGain.gain.setValueAtTime(270, now);
+                    this.lfo.connect(this.modGain);
+                    this.modGain.connect(this.carrier1.frequency);
+
+                    // 5. Master Output Gain (Loud 0.85 volume)
+                    this.masterGain = ctx.createGain();
+                    this.masterGain.gain.setValueAtTime(0.85, now);
+
+                    this.carrier1.connect(this.masterGain);
+                    this.carrier2.connect(this.masterGain);
+                    this.masterGain.connect(ctx.destination);
+
+                    this.carrier1.start(now);
+                    this.carrier2.start(now);
+                    this.lfo.start(now);
+                    this.isPlaying = true;
+
+                    // If non-continuous test mode, play for 3.5 seconds with gentle fade-out
+                    if (!isContinuous) {
+                        this.masterGain.gain.setValueAtTime(0.85, now + 3.0);
+                        this.masterGain.gain.exponentialRampToValueAtTime(0.001, now + 3.5);
+                        setTimeout(() => {
+                            if (!isContinuous && this.isPlaying) {
+                                this.stop();
+                            }
+                        }, 3600);
+                    }
+
+                    // Mobile vibration pulse
+                    if (navigator.vibrate) {
+                        navigator.vibrate([800, 200, 800, 200, 800, 200, 1200]);
+                    }
+
+                    return true;
+                } catch(e) {
+                    console.warn("Error starting siren:", e);
+                    return false;
+                }
+            },
+
+            stop: function() {
                 try {
-                    operatorGain.disconnect();
-                } catch(e) {}
-                operatorGain = null;
+                    if (this.carrier1) {
+                        this.carrier1.stop();
+                        this.carrier1.disconnect();
+                        this.carrier1 = null;
+                    }
+                    if (this.carrier2) {
+                        this.carrier2.stop();
+                        this.carrier2.disconnect();
+                        this.carrier2 = null;
+                    }
+                    if (this.lfo) {
+                        this.lfo.stop();
+                        this.lfo.disconnect();
+                        this.lfo = null;
+                    }
+                    if (this.modGain) {
+                        this.modGain.disconnect();
+                        this.modGain = null;
+                    }
+                    if (this.masterGain) {
+                        this.masterGain.disconnect();
+                        this.masterGain = null;
+                    }
+                    if (navigator.vibrate) {
+                        navigator.vibrate(0);
+                    }
+                    this.isPlaying = false;
+                } catch(e) {
+                    console.warn("Error stopping siren:", e);
+                }
             }
-        }
+        };
+
+        // Unlock audio context on any click or touch gesture
+        document.addEventListener('click', () => sirenEngine.initContext(), { passive: true });
+        document.addEventListener('touchstart', () => sirenEngine.initContext(), { passive: true });
 
         function showOperatorAlertTakeover(entry) {
             const modal = document.getElementById('operator-alert-takeover');
@@ -3702,7 +3768,7 @@
             if (msgDiv) msgDiv.innerHTML = (entry.message_body || '').replace(/\n/g, '<br>');
 
             modal.style.display = 'flex';
-            startContinuousOperatorSiren();
+            sirenEngine.start(true);
         }
 
         function dismissOperatorTakeover() {
@@ -3710,10 +3776,13 @@
             if (modal) {
                 modal.style.display = 'none';
             }
-            stopOperatorSirenAudio();
+            sirenEngine.stop();
         }
 
         function transmitEmergencySos() {
+            // Unconditionally unlock AudioContext immediately on this direct user gesture
+            sirenEngine.initContext();
+
             const district = document.getElementById('sos-district-select').value;
             const alertTier = document.getElementById('sos-alert-tier').value;
             const recipient = document.getElementById('inp-sos-recipient').value || "ALL Mobile Devices & Citizens Connected to Regional Towers";
@@ -3789,30 +3858,17 @@
         }
 
         function playSosSirenAudio() {
-            try {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                if (!AudioContext) return;
-                const ctx = new AudioContext();
-                const now = ctx.currentTime;
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(480, now);
-                for (let i = 0; i < 6; i++) {
-                    osc.frequency.exponentialRampToValueAtTime(920, now + i * 0.4 + 0.2);
-                    osc.frequency.exponentialRampToValueAtTime(480, now + (i + 1) * 0.4);
-                }
-
-                gain.gain.setValueAtTime(0.35, now);
-                gain.gain.exponentialRampToValueAtTime(0.001, now + 2.4);
-
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start(now);
-                osc.stop(now + 2.5);
-            } catch(e) {
-                console.warn("Audio siren unavailable or blocked by browser autoplay policy:", e);
+            sirenEngine.initContext();
+            sirenEngine.start(false);
+            const activeEl = document.activeElement;
+            if (activeEl && activeEl.tagName === 'BUTTON') {
+                const origHtml = activeEl.innerHTML;
+                activeEl.innerHTML = '🔊 Siren Sounding...';
+                activeEl.style.color = '#dc2626';
+                setTimeout(() => {
+                    activeEl.innerHTML = origHtml;
+                    activeEl.style.color = '';
+                }, 3500);
             }
         }
 
@@ -3996,6 +4052,9 @@
             </div>
 
             <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                <button type="button" class="btn" style="background:#fef08a; color:#854d0e; font-weight:800; padding:10px 20px; font-size:0.92rem; border:none; border-radius:8px; cursor:pointer;" onclick="sirenEngine.start(true)">
+                    🔊 FORCE PLAY SIREN
+                </button>
                 <button type="button" class="btn btn-outline" style="background:#ffffff; color:#991b1b; font-weight:800; padding:10px 24px; font-size:0.95rem; border:none; border-radius:8px; cursor:pointer;" onclick="dismissOperatorTakeover()">
                     🔇 MUTE SIREN & DISMISS TAKEOVER
                 </button>
