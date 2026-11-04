@@ -757,6 +757,76 @@
             margin-top: 4px;
         }
 
+        /* 5-Step Emergency SOS Workflow & Modal Styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.70);
+            backdrop-filter: blur(4px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            max-width: 520px;
+            width: 100%;
+            padding: 24px;
+            border-top: 5px solid #dc2626;
+            animation: modalSlideIn 0.2s ease-out;
+        }
+        @keyframes modalSlideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .step-badge {
+            background: #0284c7;
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+        .contact-box {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .sev-pill {
+            flex: 1;
+            text-align: center;
+            padding: 7px 10px;
+            border-radius: 6px;
+            font-size: 0.80rem;
+            font-weight: 700;
+            border: 1px solid var(--border-color);
+            background: #f8fafc;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .sev-pill.active {
+            font-weight: 800;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+        .sev-pill#sev-badge-low.active { background: #dcfce7; border-color: #16a34a; color: #15803d; }
+        .sev-pill#sev-badge-moderate.active { background: #fef9c3; border-color: #ca8a04; color: #854d0e; }
+        .sev-pill#sev-badge-high.active { background: #ffedd5; border-color: #ea580c; color: #c2410c; }
+        .sev-pill#sev-badge-severe.active { background: #fee2e2; border-color: #dc2626; color: #b91c1c; }
+
         /* Footer */
         footer {
             background: #07223d;
@@ -871,6 +941,89 @@
                     <div class="metric-label">False-Positive Reduction</div>
                     <div class="metric-value">25.0%</div>
                     <div class="metric-sub">86.20 km² Screened (Speckle & Slope)</div>
+                </div>
+            </div>
+
+            <!-- DASHBOARD INTEGRATION: STATEWIDE EMERGENCY READINESS & SOS STATUS -->
+            <div class="card" style="margin-bottom: 24px; border: 1px solid #bfdbfe; background: linear-gradient(to right, #f8fafc, #eff6ff);">
+                <div class="card-header-styled" style="padding-bottom:8px; margin-bottom:12px; border-bottom:1px solid #dbeafe;">
+                    <div>
+                        <h3 style="margin:0; color:#1e3a8a; display:flex; align-items:center; gap:8px;">
+                            <span>🚨 Disaster Management & Emergency SOS Readiness</span>
+                        </h3>
+                        <p style="font-size:0.80rem; color:#475569; margin:2px 0 0 0;">
+                            Statewide disaster response monitoring, emergency contact directory, and live alert telemetry across all 31 Karnataka districts.
+                        </p>
+                    </div>
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        <span class="badge badge-primary">Statewide Coverage: 31 Districts</span>
+                        <span id="dash-live-gateway-badge" class="badge badge-warning">Gateway: Test Mode</span>
+                    </div>
+                </div>
+
+                <!-- 6 Metric Cards -->
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap:12px; margin-bottom:16px;">
+                    <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
+                        <div style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Districts Covered</div>
+                        <div id="dash-total-districts" style="font-size:1.5rem; font-weight:800; color:#0369a1; margin-top:2px;">31 / 31</div>
+                        <div style="font-size:0.72rem; color:#16a34a; font-weight:600;">100% Karnataka Coverage</div>
+                    </div>
+
+                    <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
+                        <div style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Selected District</div>
+                        <div id="dash-selected-district" style="font-size:1.25rem; font-weight:800; color:#0f172a; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Belagavi</div>
+                        <div style="font-size:0.72rem; color:#64748b;">Active Incident Focus</div>
+                    </div>
+
+                    <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
+                        <div style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Flood Severity</div>
+                        <div id="dash-flood-severity" style="font-size:1.20rem; font-weight:800; color:#dc2626; margin-top:2px;">Severe Warning</div>
+                        <div style="font-size:0.72rem; color:#dc2626; font-weight:600;">Red Alert Active</div>
+                    </div>
+
+                    <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
+                        <div style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Emergency Contacts</div>
+                        <div id="dash-total-contacts" style="font-size:1.5rem; font-weight:800; color:#0891b2; margin-top:2px;">217 Contacts</div>
+                        <div style="font-size:0.72rem; color:#64748b;">DDMA, SDRF & Incident Teams</div>
+                    </div>
+
+                    <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
+                        <div style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">SOS Alerts Triggered</div>
+                        <div id="dash-total-sos" style="font-size:1.5rem; font-weight:800; color:#ea580c; margin-top:2px;">1 Alert</div>
+                        <div style="font-size:0.72rem; color:#64748b;">Dispatched & Logged</div>
+                    </div>
+
+                    <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
+                        <div style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">SMS Delivery Status</div>
+                        <div id="dash-sms-status" style="font-size:1.10rem; font-weight:800; color:#16a34a; margin-top:2px;">Simulated (Test)</div>
+                        <div style="font-size:0.72rem; color:#64748b;">Twilio / Test Gateway</div>
+                    </div>
+                </div>
+
+                <!-- Recent Alert History Strip -->
+                <div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                        <span style="font-size:0.80rem; font-weight:700; color:#1e293b; text-transform:uppercase; letter-spacing:0.5px;">Recent Emergency Alert History</span>
+                        <button class="btn btn-outline" style="font-size:0.72rem; padding:2px 8px;" onclick="loadSosDashboardHistory()">Refresh History</button>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table class="modern-table" style="font-size:0.78rem; background:white;">
+                            <thead>
+                                <tr>
+                                    <th>Alert ID</th>
+                                    <th>Timestamp</th>
+                                    <th>District</th>
+                                    <th>Flood Severity</th>
+                                    <th>SMS Delivery Status</th>
+                                    <th>Notified Contacts</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dash-sos-history-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -1640,15 +1793,61 @@
                     </div>
 
                     <div class="slider-group">
-                        <label class="slider-label">Target Karnataka District:</label>
+                        <label class="slider-label">Target Karnataka District (All 31 Districts):</label>
                         <select id="scenario-district-select" class="select-input" onchange="onScenarioDistrictChange(this.value)">
-                            <option value="Belgaum">Belagavi (Krishna Basin)</option>
-                            <option value="Mysore">Mysuru (Cauvery / Kabini)</option>
-                            <option value="South Kanara">Dakshina Kannada (Netravathi)</option>
-                            <option value="Bellary">Ballari (Tungabhadra)</option>
-                            <option value="Shimoga">Shivamogga (Tunga / Bhadra)</option>
                             <option value="Bagalkot">Bagalkot (Ghataprabha / Krishna)</option>
+                            <option value="Bellary">Ballari (Tungabhadra)</option>
+                            <option value="Belgaum" selected>Belagavi (Krishna Basin)</option>
+                            <option value="Bangalore Rural">Bengaluru Rural</option>
+                            <option value="Bangalore Urban">Bengaluru Urban (Vrishabhavathi)</option>
+                            <option value="Bidar">Bidar (Karanja / Manjra)</option>
+                            <option value="Chamrajnagar">Chamarajanagar (Cauvery Basin)</option>
+                            <option value="Chikkaballapura">Chikkaballapura (North Pinakini)</option>
+                            <option value="Chikmagalur">Chikkamagaluru (Bhadra Catchment)</option>
+                            <option value="Chitradurga">Chitradurga (Vedavathi)</option>
+                            <option value="Dakshin Kannad">Dakshina Kannada (Netravathi / Gurupura)</option>
+                            <option value="Davanagere">Davanagere (Tungabhadra)</option>
+                            <option value="Dharwad">Dharwad (Malaprabha Catchment)</option>
+                            <option value="Gadag">Gadag (Malaprabha / Tungabhadra)</option>
+                            <option value="Hassan">Hassan (Hemavathi Basin)</option>
+                            <option value="Haveri">Haveri (Varada / Tungabhadra)</option>
+                            <option value="Gulbarga">Kalaburagi (Bhima Basin)</option>
+                            <option value="Kodagu">Kodagu (Cauvery Headwaters)</option>
+                            <option value="Kolar">Kolar (Palar Basin)</option>
+                            <option value="Koppal">Koppal (Tungabhadra)</option>
+                            <option value="Mandya">Mandya (Cauvery / Shimsha)</option>
+                            <option value="Mysore">Mysuru (Cauvery / Kabini)</option>
+                            <option value="Raichur">Raichur (Krishna / TB Doab)</option>
+                            <option value="Ramanagara">Ramanagara (Arkavathi)</option>
+                            <option value="Shimoga">Shivamogga (Tunga / Bhadra)</option>
+                            <option value="Tumkur">Tumakuru (Shimsha / Jayamangali)</option>
+                            <option value="Udupi">Udupi (Swarna / Sita Coastal Rivers)</option>
+                            <option value="Uttar Kannand">Uttara Kannada (Kali / Sharavathi)</option>
+                            <option value="Bijapur">Vijayapura (Krishna / Doni)</option>
+                            <option value="Vijayanagara">Vijayanagara (Tungabhadra Dam Lowlands)</option>
+                            <option value="Yadgir">Yadgir (Bhima / Krishna Confluence)</option>
                         </select>
+                    </div>
+
+                    <!-- Quick Severity Scenario Presets -->
+                    <div style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:8px; padding:10px 12px; margin-bottom:14px;">
+                        <span style="font-size:0.75rem; font-weight:700; color:#334155; text-transform:uppercase; letter-spacing:0.5px; display:block; margin-bottom:6px;">
+                            ⚡ Quick Severity Level Presets (Click to Simulate):
+                        </span>
+                        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                            <button type="button" class="btn btn-outline" style="font-size:0.75rem; padding:4px 9px; color:#15803d; border-color:#86efac; background:white;" onclick="applyScenarioPreset('Low')">
+                                🟢 Low (Normal Flow)
+                            </button>
+                            <button type="button" class="btn btn-outline" style="font-size:0.75rem; padding:4px 9px; color:#a16207; border-color:#fde047; background:white;" onclick="applyScenarioPreset('Moderate')">
+                                🟡 Moderate (Advisory)
+                            </button>
+                            <button type="button" class="btn btn-outline" style="font-size:0.75rem; padding:4px 9px; color:#c2410c; border-color:#fdba74; background:white;" onclick="applyScenarioPreset('High')">
+                                🟠 High (Flood Watch)
+                            </button>
+                            <button type="button" class="btn btn-outline" style="font-size:0.75rem; padding:4px 9px; color:#b91c1c; border-color:#fca5a5; background:white;" onclick="applyScenarioPreset('Severe')">
+                                🔴 Severe (Warning)
+                            </button>
+                        </div>
                     </div>
 
                     <div class="slider-group">
@@ -1666,7 +1865,7 @@
                         </div>
                         <input type="range" id="inp-scenario-stage" class="slider-control" min="510" max="540" step="0.2" value="527.5" oninput="runScenarioSimulation()">
                         <div style="font-size:0.75rem; color:#64748b; margin-top:3px;">
-                            Danger Mark: <span id="lbl-scenario-danger">525.0 m</span>
+                            Danger Mark: <span id="lbl-scenario-danger">525.0 m (Krishna Kudachi)</span>
                         </div>
                     </div>
 
@@ -1675,7 +1874,7 @@
                             <span>Reservoir Storage Capacity (%):</span>
                             <span id="lbl-scenario-storage" style="color:var(--primary); font-weight:700;">98.5%</span>
                         </div>
-                        <input type="range" id="inp-scenario-storage" class="slider-control" min="60" max="100" step="0.5" value="98.5" oninput="runScenarioSimulation()">
+                        <input type="range" id="inp-scenario-storage" class="slider-control" min="40" max="100" step="0.5" value="98.5" oninput="runScenarioSimulation()">
                     </div>
 
                     <div class="slider-group">
@@ -1683,7 +1882,7 @@
                             <span>Upstream Inflow Discharge (cusecs):</span>
                             <span id="lbl-scenario-inflow" style="color:var(--primary); font-weight:700;">280,000 cusecs</span>
                         </div>
-                        <input type="range" id="inp-scenario-inflow" class="slider-control" min="5000" max="400000" step="5000" value="280000" oninput="runScenarioSimulation()">
+                        <input type="range" id="inp-scenario-inflow" class="slider-control" min="5000" max="450000" step="5000" value="280000" oninput="runScenarioSimulation()">
                     </div>
 
                     <div style="margin-top:20px; display:flex; gap:10px;">
@@ -1705,47 +1904,90 @@
                         </div>
                     </div>
 
+                    <!-- 4 Severity Level Indicator Bar -->
+                    <div style="margin-bottom:12px;">
+                        <span style="font-size:0.75rem; font-weight:700; color:#475569; text-transform:uppercase; letter-spacing:0.5px; display:block; margin-bottom:4px;">
+                            Flood Severity Classification (Low, Moderate, High, Severe):
+                        </span>
+                        <div style="display:flex; gap:8px;">
+                            <div id="sev-badge-low" class="sev-pill">🟢 Low</div>
+                            <div id="sev-badge-moderate" class="sev-pill">🟡 Moderate</div>
+                            <div id="sev-badge-high" class="sev-pill">🟠 High</div>
+                            <div id="sev-badge-severe" class="sev-pill active">🔴 Severe</div>
+                        </div>
+                    </div>
+
                     <div id="scenario-alert-card" class="alert-box Warning">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                            <h4 id="scenario-risk-level-title" style="font-size:1.15rem; font-weight:800;">
+                            <h4 id="scenario-risk-level-title" style="font-size:1.15rem; font-weight:800; margin:0;">
                                 SIMULATED: Severe Flood Warning
                             </h4>
                             <span class="simulated-tag">SIMULATED RESULT</span>
                         </div>
-                        <p id="scenario-action-protocol" style="font-size:0.86rem; line-height:1.5;">
+                        <p id="scenario-action-protocol" style="font-size:0.86rem; line-height:1.5; margin:6px 0 0 0;">
                             SIMULATED ADVISORY: Complete spillway opening required. Immediate evacuation of low-lying floodplains. SDRF mobilization.
                         </p>
                     </div>
 
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px;">
-                        <div style="background:#f8fafc; padding:14px; border-radius:8px; border:1px solid var(--border-color);">
-                            <span style="font-size:0.75rem; color:#64748b; font-weight:600; text-transform:uppercase;">Composite Risk Score</span>
-                            <div id="scenario-risk-score" style="font-size:1.8rem; font-weight:800; color:var(--accent-red); margin-top:2px;">
+                    <!-- Granular Output Metrics Grid -->
+                    <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 14px;">
+                        <div style="background:#f8fafc; padding:12px; border-radius:8px; border:1px solid var(--border-color);">
+                            <span style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Simulated Affected Area</span>
+                            <div id="scenario-inundated-area" style="font-size:1.6rem; font-weight:800; color:var(--accent-orange); margin-top:2px;">
+                                27.56 km²
+                            </div>
+                            <span style="font-size:0.70rem; color:#94a3b8;">(SAR Synthetic Inundation)</span>
+                        </div>
+
+                        <div style="background:#f8fafc; padding:12px; border-radius:8px; border:1px solid var(--border-color);">
+                            <span style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Water Level vs Danger Mark</span>
+                            <div id="scenario-water-level" style="font-size:1.3rem; font-weight:800; color:#dc2626; margin-top:2px;">
+                                528.5 m (+3.5m)
+                            </div>
+                            <span id="scenario-stage-diff-label" style="font-size:0.70rem; color:#b91c1c; font-weight:600;">Danger Mark Exceeded</span>
+                        </div>
+
+                        <div style="background:#f8fafc; padding:12px; border-radius:8px; border:1px solid var(--border-color);">
+                            <span style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Rainfall Intensity</span>
+                            <div id="scenario-rain-intensity" style="font-size:1.5rem; font-weight:800; color:#0369a1; margin-top:2px;">
+                                140 mm / 24h
+                            </div>
+                            <span style="font-size:0.70rem; color:#64748b;">Catchment Runoff</span>
+                        </div>
+
+                        <div style="background:#f8fafc; padding:12px; border-radius:8px; border:1px solid var(--border-color);">
+                            <span style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Composite Risk Score</span>
+                            <div id="scenario-risk-score" style="font-size:1.5rem; font-weight:800; color:var(--accent-red); margin-top:2px;">
                                 90 / 100
                             </div>
+                            <span id="scenario-risk-status" style="font-size:0.70rem; color:#dc2626; font-weight:700;">Severe Risk</span>
                         </div>
 
-                        <div style="background:#f8fafc; padding:14px; border-radius:8px; border:1px solid var(--border-color);">
-                            <span style="font-size:0.75rem; color:#64748b; font-weight:600; text-transform:uppercase;">Estimated Inundated Area</span>
-                            <div id="scenario-inundated-area" style="font-size:1.8rem; font-weight:800; color:var(--accent-orange); margin-top:2px;">
-                                27.00 km²
-                            </div>
-                            <span style="font-size:0.70rem; color:#94a3b8;">(Simulated Expansion Factor)</span>
-                        </div>
-
-                        <div style="background:#f8fafc; padding:14px; border-radius:8px; border:1px solid var(--border-color);">
-                            <span style="font-size:0.75rem; color:#64748b; font-weight:600; text-transform:uppercase;">Estimated Lead Time</span>
-                            <div id="scenario-lead-time" style="font-size:1.4rem; font-weight:800; color:var(--primary); margin-top:2px;">
+                        <div style="background:#f8fafc; padding:12px; border-radius:8px; border:1px solid var(--border-color);">
+                            <span style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Estimated Lead Time</span>
+                            <div id="scenario-lead-time" style="font-size:1.3rem; font-weight:800; color:var(--primary); margin-top:2px;">
                                 3 Hours
                             </div>
+                            <span style="font-size:0.70rem; color:#64748b;">Evacuation Window</span>
                         </div>
 
-                        <div style="background:#f8fafc; padding:14px; border-radius:8px; border:1px solid var(--border-color);">
-                            <span style="font-size:0.75rem; color:#64748b; font-weight:600; text-transform:uppercase;">Vulnerable Taluks</span>
-                            <div id="scenario-taluks" style="font-size:0.85rem; font-weight:600; color:#334155; margin-top:4px;">
-                                Athani, Chikkodi, Jamkhandi
+                        <div style="background:#f8fafc; padding:12px; border-radius:8px; border:1px solid var(--border-color);">
+                            <span style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Vulnerable Taluks</span>
+                            <div id="scenario-taluks" style="font-size:0.80rem; font-weight:700; color:#334155; margin-top:4px; max-height:45px; overflow-y:auto;">
+                                Chikkodi, Athani, Raybag, Gokak
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Karnataka District Mini-Map with Visual Flood-Risk Indicators -->
+                    <div style="margin-top:14px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <span style="font-size:0.75rem; font-weight:700; color:#475569; text-transform:uppercase; letter-spacing:0.5px;">
+                                🗺️ District Visual Flood-Risk Map:
+                            </span>
+                            <span id="scenario-map-location-badge" class="badge badge-outline" style="font-size:0.70rem;">Belagavi (15.85°N, 74.50°E)</span>
+                        </div>
+                        <div id="scenario-district-map" style="height:210px; width:100%; border-radius:8px; border:1px solid var(--border-color); position:relative; z-index:1;"></div>
                     </div>
                 </div>
             </div>
@@ -1998,6 +2240,249 @@
                         <span class="badge badge-danger" style="font-size:0.80rem; padding:6px 10px;">🚨 Emergency Helpline: 1070 / 1077</span>
                         <span class="badge badge-success" style="font-size:0.80rem; padding:6px 10px;">📡 CDAC SACHET Gateway Active</span>
                     </div>
+                </div>
+            <!-- ==================== NEW SECTION: DISTRICT-BASED EMERGENCY SOS ALERT SYSTEM ==================== -->
+            <div id="district-sos-section" class="card" style="border: 2px solid #dc2626; box-shadow: 0 6px 20px rgba(220, 38, 38, 0.14); margin-bottom: 24px;">
+                <div class="card-header-styled" style="border-bottom: 1px solid #fee2e2; padding-bottom: 12px; background: linear-gradient(to right, #fef2f2, #fff);">
+                    <div>
+                        <h3 style="color:#b91c1c; display:flex; align-items:center; gap:8px; margin:0; font-size:1.25rem;">
+                            <span>🚨 Emergency SOS Alert System</span>
+                        </h3>
+                        <p style="font-size:0.82rem; color:#64748b; margin:3px 0 0 0;">
+                            5-Step Operational Command: Select Karnataka District &bull; Review Incident Contacts &bull; Verify Flood Threat &bull; Confirm & Dispatch Authoritative SMS SOS Alerts
+                        </p>
+                    </div>
+                    <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                        <span id="sos-step-badge" class="badge badge-danger">5-Step Workflow Active</span>
+                        <span id="sos-gateway-mode-badge" class="badge badge-warning">Gateway: Simulation / Test Mode</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 16px;">
+
+                    <!-- STEP 1: SELECT A KARNATAKA DISTRICT -->
+                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px; margin-bottom:14px;">
+                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                            <span class="step-badge">Step 1</span>
+                            <strong style="font-size:0.92rem; color:#0f172a;">Select a Karnataka District (All 31 Districts Available):</strong>
+                        </div>
+                        <div style="display:grid; grid-template-columns: 2fr 1fr; gap:12px; align-items:center;">
+                            <div>
+                                <select id="district-sos-select" class="select-input" onchange="onDistrictSosSelectChanged(this.value)">
+                                    <option value="Bagalkot">Bagalkot (Ghataprabha / Krishna)</option>
+                                    <option value="Bellary">Ballari (Tungabhadra)</option>
+                                    <option value="Belgaum" selected>Belagavi (Krishna Basin)</option>
+                                    <option value="Bangalore Rural">Bengaluru Rural</option>
+                                    <option value="Bangalore Urban">Bengaluru Urban (Vrishabhavathi)</option>
+                                    <option value="Bidar">Bidar (Karanja / Manjra)</option>
+                                    <option value="Chamrajnagar">Chamarajanagar (Cauvery Basin)</option>
+                                    <option value="Chikkaballapura">Chikkaballapura (North Pinakini)</option>
+                                    <option value="Chikmagalur">Chikkamagaluru (Bhadra Catchment)</option>
+                                    <option value="Chitradurga">Chitradurga (Vedavathi)</option>
+                                    <option value="Dakshin Kannad">Dakshina Kannada (Netravathi / Gurupura)</option>
+                                    <option value="Davanagere">Davanagere (Tungabhadra)</option>
+                                    <option value="Dharwad">Dharwad (Malaprabha Catchment)</option>
+                                    <option value="Gadag">Gadag (Malaprabha / Tungabhadra)</option>
+                                    <option value="Hassan">Hassan (Hemavathi Basin)</option>
+                                    <option value="Haveri">Haveri (Varada / Tungabhadra)</option>
+                                    <option value="Gulbarga">Kalaburagi (Bhima Basin)</option>
+                                    <option value="Kodagu">Kodagu (Cauvery Headwaters)</option>
+                                    <option value="Kolar">Kolar (Palar Basin)</option>
+                                    <option value="Koppal">Koppal (Tungabhadra)</option>
+                                    <option value="Mandya">Mandya (Cauvery / Shimsha)</option>
+                                    <option value="Mysore">Mysuru (Cauvery / Kabini)</option>
+                                    <option value="Raichur">Raichur (Krishna / TB Doab)</option>
+                                    <option value="Ramanagara">Ramanagara (Arkavathi)</option>
+                                    <option value="Shimoga">Shivamogga (Tunga / Bhadra)</option>
+                                    <option value="Tumkur">Tumakuru (Shimsha / Jayamangali)</option>
+                                    <option value="Udupi">Udupi (Swarna / Sita Coastal Rivers)</option>
+                                    <option value="Uttar Kannand">Uttara Kannada (Kali / Sharavathi)</option>
+                                    <option value="Bijapur">Vijayapura (Krishna / Doni)</option>
+                                    <option value="Vijayanagara">Vijayanagara (Tungabhadra Dam Lowlands)</option>
+                                    <option value="Yadgir">Yadgir (Bhima / Krishna Confluence)</option>
+                                </select>
+                            </div>
+                            <div style="font-size:0.80rem; color:#475569; background:white; padding:8px 12px; border-radius:6px; border:1px solid var(--border-color);">
+                                <strong>District HQ:</strong> <span id="lbl-sos-dist-hq">Belagavi</span> &bull; <strong>Basin:</strong> <span id="lbl-sos-dist-basin">Krishna Basin</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: DISPLAY DISTRICT EMERGENCY CONTACT INFORMATION -->
+                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px; margin-bottom:14px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span class="step-badge">Step 2</span>
+                                <strong style="font-size:0.92rem; color:#0f172a;">District Emergency Contact Information:</strong>
+                            </div>
+                            <span class="badge badge-primary">Official Registered Directory</span>
+                        </div>
+
+                        <!-- 4-Card Emergency Contacts Grid -->
+                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:12px;">
+                            <!-- 1. DDMA Authority -->
+                            <div class="contact-box" style="border-left:4px solid #0284c7;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                    <strong style="color:#0369a1; font-size:0.85rem;">🏛️ District Disaster Management Authority</strong>
+                                    <span class="badge badge-outline" style="font-size:0.68rem;">DDMA</span>
+                                </div>
+                                <div style="font-size:0.80rem; line-height:1.6;">
+                                    <div><strong>Authority:</strong> <span id="c-ddma-name">Shri Nitesh Patil, IAS</span></div>
+                                    <div><strong>Title:</strong> Deputy Commissioner & Chairman, DDMA</div>
+                                    <div><strong>Official Phone:</strong> <span id="c-ddma-phone">+91-0831-221100</span></div>
+                                    <div><strong>Emergency Mobile:</strong> <span id="c-ddma-mobile" style="color:#0284c7; font-weight:700;">+91-94480-11001</span></div>
+                                    <div><strong>Control Room Hotline:</strong> <span style="color:#dc2626; font-weight:700;">1077 (District Toll-Free)</span></div>
+                                </div>
+                            </div>
+
+                            <!-- 2. District Emergency Incident Response Team -->
+                            <div class="contact-box" style="border-left:4px solid #ea580c;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                    <strong style="color:#c2410c; font-size:0.85rem;">🛡️ District Emergency Incident Response Team</strong>
+                                    <span class="badge badge-outline" style="font-size:0.68rem;">Incident Command</span>
+                                </div>
+                                <div style="font-size:0.80rem; line-height:1.6;">
+                                    <div><strong>Incident Commander:</strong> <span id="c-adc-name">ADC Belagavi Disaster Wing</span></div>
+                                    <div><strong>ADC Mobile:</strong> <span id="c-adc-phone" style="color:#c2410c; font-weight:700;">+91-94480-11002</span></div>
+                                    <div><strong>Superintendent of Police:</strong> <span id="c-sp-name">Dr. Sanjeev M. Patil, IPS</span></div>
+                                    <div><strong>SP Control / Mobile:</strong> <span id="c-sp-phone" style="color:#c2410c; font-weight:700;">+91-94480-11003</span></div>
+                                    <div><strong>Role:</strong> Law & Order, Mass Evacuation & Route Securing</div>
+                                </div>
+                            </div>
+
+                            <!-- 3. Local Emergency Services -->
+                            <div class="contact-box" style="border-left:4px solid #16a34a;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                    <strong style="color:#15803d; font-size:0.85rem;">📞 Local Emergency Services (Universal)</strong>
+                                    <span class="badge badge-success" style="font-size:0.68rem;">24x7 Grid</span>
+                                </div>
+                                <div style="font-size:0.80rem; line-height:1.6;">
+                                    <div><strong>Unified Emergency:</strong> <span style="font-weight:700; color:#15803d;">112</span> (Universal Police/Disaster)</div>
+                                    <div><strong>Fire & Rescue:</strong> <span style="font-weight:700; color:#15803d;">101</span> (Water Rescue & Boats)</div>
+                                    <div><strong>District Control Room:</strong> <span style="font-weight:700; color:#15803d;">1077</span> (District Disaster Control)</div>
+                                    <div><strong>State Emergency Operations:</strong> <span style="font-weight:700; color:#15803d;">1070</span> (SEOC Karnataka Wire)</div>
+                                    <div><strong>Emergency Ambulance:</strong> <span style="font-weight:700; color:#15803d;">108</span> (Medical Emergency Dispatch)</div>
+                                </div>
+                            </div>
+
+                            <!-- 4. Registered Rescue and Relief Contacts -->
+                            <div class="contact-box" style="border-left:4px solid #7c3aed;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                    <strong style="color:#6d28d9; font-size:0.85rem;">🧑‍🚒 Registered Rescue and Relief Contacts</strong>
+                                    <span class="badge badge-outline" style="font-size:0.68rem;">Field Units</span>
+                                </div>
+                                <div id="c-rescue-list" style="font-size:0.78rem; line-height:1.5;">
+                                    <!-- Dynamic rescue contacts -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: DISPLAY CURRENT FLOOD SEVERITY AND WARNING INFORMATION -->
+                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px; margin-bottom:14px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span class="step-badge">Step 3</span>
+                                <strong style="font-size:0.92rem; color:#0f172a;">Current Flood Severity & Warning Information:</strong>
+                            </div>
+                            <span id="sos-severity-tier-badge" class="badge badge-danger">Severe Warning (Red Alert)</span>
+                        </div>
+
+                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap:10px; font-size:0.82rem;">
+                            <div style="background:white; border:1px solid var(--border-color); border-radius:6px; padding:10px;">
+                                <strong>Flood Severity Level:</strong>
+                                <div id="sos-severity-display" style="font-size:1.15rem; font-weight:800; color:#dc2626; margin-top:2px;">Severe</div>
+                            </div>
+                            <div style="background:white; border:1px solid var(--border-color); border-radius:6px; padding:10px;">
+                                <strong>Key Rivers & Station:</strong>
+                                <div id="sos-river-station" style="font-size:0.85rem; font-weight:700; color:#0f172a; margin-top:2px;">Krishna, Ghataprabha, Malaprabha</div>
+                            </div>
+                            <div style="background:white; border:1px solid var(--border-color); border-radius:6px; padding:10px;">
+                                <strong>River Stage vs Danger Mark:</strong>
+                                <div id="sos-stage-display" style="font-size:0.85rem; font-weight:700; color:#ea580c; margin-top:2px;">528.4m (+3.4m over 525.0m danger mark)</div>
+                            </div>
+                            <div style="background:white; border:1px solid var(--border-color); border-radius:6px; padding:10px;">
+                                <strong>Vulnerable Taluks:</strong>
+                                <div id="sos-vulnerable-taluks" style="font-size:0.82rem; font-weight:600; color:#334155; margin-top:2px;">Chikkodi, Athani, Raybag, Gokak, Khanapur</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: PROMINENT BUTTON LABELLED "TRIGGER SOS ALERT" -->
+                    <div style="background:#fff1f2; border:2px dashed #f43f5e; border-radius:10px; padding:18px; margin-bottom:14px; text-align:center;">
+                        <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:6px;">
+                            <span class="step-badge" style="background:#e11d48;">Step 4</span>
+                            <strong style="font-size:1.0rem; color:#9f1239;">Authoritative Emergency Notification Workflow:</strong>
+                        </div>
+                        <p style="font-size:0.82rem; color:#881337; margin:0 0 14px 0;">
+                            Click below to initiate district-wide emergency SMS alerting. A confirmation prompt will appear before any alerts are dispatched.
+                        </p>
+
+                        <button id="btn-trigger-district-sos" class="btn btn-danger" style="font-size:1.05rem; padding:14px 32px; background:#dc2626; border-color:#b91c1c; box-shadow:0 6px 18px rgba(220, 38, 38, 0.35); text-transform:uppercase; letter-spacing:0.5px; font-weight:800; cursor:pointer;" onclick="openDistrictSosConfirmation()">
+                            🚨 TRIGGER SOS ALERT
+                        </button>
+                        <div id="lbl-sos-cooldown" style="font-size:0.75rem; color:#dc2626; margin-top:6px; font-weight:700; display:none;"></div>
+                    </div>
+
+                    <!-- STEP 5: NOTIFICATION DELIVERY STATUS, SMS MESSAGE PREVIEW & NOTIFIED CONTACTS LIST -->
+                    <div id="district-sos-result-panel" style="display:none; background:#f0fdf4; border:1px solid #86efac; border-radius:10px; padding:18px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span class="step-badge" style="background:#15803d;">Step 5</span>
+                                <strong style="font-size:0.95rem; color:#14532d;">Emergency SOS Notification Delivery Status & Telemetry:</strong>
+                            </div>
+                            <div style="display:flex; gap:6px;">
+                                <span id="res-delivery-status-badge" class="badge badge-success">Sent</span>
+                                <span id="res-alert-id-badge" class="badge badge-primary">SOS-2026-BEL-9120</span>
+                            </div>
+                        </div>
+
+                        <!-- SMS Message Format Display (Exact user requirement) -->
+                        <div style="background:white; border:1px solid #bbf7d0; border-radius:8px; padding:14px; margin-bottom:14px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                <span style="font-size:0.75rem; font-weight:700; color:#166534; text-transform:uppercase; letter-spacing:0.5px;">
+                                    📲 Dispatched SMS Alert Message (Exact Format)
+                                </span>
+                                <span style="font-size:0.72rem; color:#64748b;" id="res-sms-timestamp">2026-11-04 09:15:00</span>
+                            </div>
+                            <pre id="res-sms-message-text" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:12px; font-size:0.80rem; font-family:monospace; line-height:1.5; white-space:pre-wrap; margin:0; color:#0f172a;">EMERGENCY FLOOD SOS ALERT!
+
+District: Belgaum
+Alert Level: Severe
+Message: Severe flood risk detected. Immediate emergency response and rescue assistance may be required.
+
+Please take necessary safety measures and coordinate rescue operations.
+
+KS-FEWS – Karnataka Flood Early Warning System</pre>
+                        </div>
+
+                        <!-- List of Contacts Notified Table -->
+                        <div style="background:white; border:1px solid #bbf7d0; border-radius:8px; padding:14px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                <span style="font-size:0.78rem; font-weight:700; color:#166534; text-transform:uppercase; letter-spacing:0.5px;">
+                                    📋 Registered Contacts Notified (<span id="res-notified-count">7</span> Personnel Dispatched)
+                                </span>
+                                <span id="res-gateway-provider-label" style="font-size:0.72rem; color:#475569;">Gateway: Simulation / Test Mode</span>
+                            </div>
+                            <div style="overflow-x:auto;">
+                                <table class="modern-table" style="font-size:0.78rem;">
+                                    <thead>
+                                        <tr>
+                                            <th>Contact Role</th>
+                                            <th>Officer Name</th>
+                                            <th>Contact Number</th>
+                                            <th>Channel Type</th>
+                                            <th>Notification Delivery Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="res-contacts-tbody">
+                                        <!-- Populated on SOS trigger -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -2253,6 +2738,43 @@
             </div>
         </section>
 
+    <!-- District Emergency SOS Confirmation Modal Popup -->
+    <div id="sos-confirm-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-card">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+                <div style="width:48px; height:48px; border-radius:50%; background:#fee2e2; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:#dc2626; flex-shrink:0;">
+                    ⚠️
+                </div>
+                <div>
+                    <h4 style="margin:0; font-size:1.15rem; color:#991b1b; font-weight:800;">
+                        Emergency Flood SOS Confirmation
+                    </h4>
+                    <span id="modal-dist-badge" class="badge badge-danger" style="margin-top:2px;">District: Belagavi</span>
+                </div>
+            </div>
+
+            <p style="font-size:0.92rem; color:#1e293b; line-height:1.5; margin-bottom:14px; font-weight:600;">
+                Are you sure you want to send an emergency SOS alert for this district?
+            </p>
+
+            <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px 14px; font-size:0.80rem; color:#475569; margin-bottom:18px; line-height:1.6;">
+                <div>&bull; <strong>Flood Severity Level:</strong> <span id="modal-severity-level" style="font-weight:700; color:#dc2626;">Severe</span></div>
+                <div>&bull; <strong>SMS Notification Recipients:</strong> Deputy Commissioner, ADC, SP, SDRF Battalion, DHO, EE Irrigation, Nodal Tahsildar</div>
+                <div>&bull; <strong>Local Emergency Helplines:</strong> 112, 101, 1077, 1070, 108</div>
+                <div>&bull; <strong>Accidental Repeat Protection:</strong> 60-second cooldown per district enforced upon transmission.</div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" class="btn btn-outline" onclick="closeDistrictSosConfirmation()">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-danger" style="background:#dc2626; border-color:#b91c1c; font-weight:800;" onclick="confirmDistrictSosTrigger()">
+                    🚨 Confirm Trigger SOS
+                </button>
+            </div>
+        </div>
+    </div>
+
     </main>
 
     <!-- Project Footer -->
@@ -2300,6 +2822,8 @@
             fetchLiveWeather('Belgaum');
             onSosDistrictChanged();
             loadSosLogTable();
+            loadDistrictContactsData('Belgaum');
+            loadSosDashboardHistory();
         });
 
         // Tab Switching
@@ -2350,11 +2874,21 @@
                     }
                 }, 150);
             } else if (tabId === 'scenario-simulation') {
-                runScenarioSimulation();
+                setTimeout(() => {
+                    if (!scenarioDistrictMap) {
+                        initScenarioDistrictMap();
+                    } else {
+                        scenarioDistrictMap.invalidateSize();
+                    }
+                    runScenarioSimulation();
+                }, 150);
             } else if (tabId === 'early-warning') {
                 updateDefaultSosMessage();
                 loadSosLogTable();
                 loadAlertsFeed();
+                const curSosDist = document.getElementById('district-sos-select') ? document.getElementById('district-sos-select').value : 'Belgaum';
+                loadDistrictContactsData(curSosDist);
+                loadSosDashboardHistory();
             }
         }
 
@@ -3461,23 +3995,145 @@
         }
 
         // ==================== 6. SCENARIO SIMULATION SCRIPTS ====================
-        function onScenarioDistrictChange(dist) {
-            if (dist === 'Belgaum') {
-                document.getElementById('inp-scenario-stage').min = 510;
-                document.getElementById('inp-scenario-stage').max = 535;
-                document.getElementById('inp-scenario-stage').value = 527.5;
-                document.getElementById('lbl-scenario-danger').innerText = "525.0 m (Krishna Chikkodi)";
-            } else if (dist === 'Mysore') {
-                document.getElementById('inp-scenario-stage').min = 680;
-                document.getElementById('inp-scenario-stage').max = 705;
-                document.getElementById('inp-scenario-stage').value = 696.2;
-                document.getElementById('lbl-scenario-danger').innerText = "694.0 m (Kabini / KRS Spillway)";
-            } else if (dist === 'South Kanara') {
-                document.getElementById('inp-scenario-stage').min = 5;
-                document.getElementById('inp-scenario-stage').max = 15;
-                document.getElementById('inp-scenario-stage').value = 9.8;
-                document.getElementById('lbl-scenario-danger').innerText = "8.5 m (Bantwal Netravathi)";
+        let scenarioDistrictMap = null;
+        let scenarioRiskCircle = null;
+        let scenarioMarker = null;
+
+        function initScenarioDistrictMap() {
+            const container = document.getElementById('scenario-district-map');
+            if (!container) return;
+            if (!scenarioDistrictMap) {
+                scenarioDistrictMap = L.map('scenario-district-map', {
+                    center: [15.8497, 74.4977],
+                    zoom: 9
+                });
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 18,
+                    attribution: '&copy; OpenStreetMap'
+                }).addTo(scenarioDistrictMap);
+            } else {
+                scenarioDistrictMap.invalidateSize();
             }
+        }
+
+        function updateScenarioDistrictMap(center, severity, distName, affectedKm2) {
+            initScenarioDistrictMap();
+            if (!scenarioDistrictMap) return;
+
+            const lat = center && center[0] ? center[0] : 15.8497;
+            const lon = center && center[1] ? center[1] : 74.4977;
+            const latLng = [lat, lon];
+
+            scenarioDistrictMap.setView(latLng, 9);
+
+            if (scenarioRiskCircle) scenarioDistrictMap.removeLayer(scenarioRiskCircle);
+            if (scenarioMarker) scenarioDistrictMap.removeLayer(scenarioMarker);
+
+            let color = '#16a34a';
+            let radius = 7000;
+            if (severity === 'Severe') {
+                color = '#dc2626';
+                radius = 22000;
+            } else if (severity === 'High') {
+                color = '#ea580c';
+                radius = 16000;
+            } else if (severity === 'Moderate') {
+                color = '#ca8a04';
+                radius = 11000;
+            }
+
+            scenarioRiskCircle = L.circle(latLng, {
+                color: color,
+                fillColor: color,
+                fillOpacity: 0.35,
+                radius: radius,
+                weight: 2
+            }).addTo(scenarioDistrictMap);
+
+            scenarioMarker = L.marker(latLng).addTo(scenarioDistrictMap);
+            scenarioMarker.bindPopup(`
+                <div style="font-size:0.85rem; line-height:1.4;">
+                    <strong style="color:${color}; font-size:0.95rem;">${distName}</strong><br>
+                    Simulated Severity: <strong>${severity}</strong><br>
+                    Simulated Inundated Area: <strong>${affectedKm2} km²</strong><br>
+                    <span style="font-size:0.75rem; color:#64748b;">What-If Hydraulic Simulation</span>
+                </div>
+            `).openPopup();
+
+            const locBadge = document.getElementById('scenario-map-location-badge');
+            if (locBadge) {
+                locBadge.innerText = `${distName} (${lat.toFixed(2)}°N, ${lon.toFixed(2)}°E)`;
+            }
+        }
+
+        function onScenarioDistrictChange(dist) {
+            const d = districtsDatabase[dist];
+            const danger = d && d.gauge_danger_m ? d.gauge_danger_m : 525.0;
+            const river = d && d.key_river ? d.key_river : 'River Basin';
+            const station = d && d.gauge_station ? d.gauge_station : 'River Gauge';
+
+            const stageInput = document.getElementById('inp-scenario-stage');
+            if (stageInput) {
+                if (danger > 100) {
+                    stageInput.min = Math.floor(danger * 0.95);
+                    stageInput.max = Math.ceil(danger * 1.05);
+                    stageInput.step = 0.2;
+                    stageInput.value = (danger + 2.5).toFixed(1);
+                } else {
+                    stageInput.min = Math.max(0, Math.floor(danger * 0.6));
+                    stageInput.max = Math.ceil(danger * 1.6);
+                    stageInput.step = 0.1;
+                    stageInput.value = (danger + 1.4).toFixed(1);
+                }
+            }
+
+            const dangerLbl = document.getElementById('lbl-scenario-danger');
+            if (dangerLbl) {
+                dangerLbl.innerText = `${danger} m (${station})`;
+            }
+
+            // Sync with District SOS selection dropdown as well
+            const sosSelect = document.getElementById('district-sos-select');
+            if (sosSelect) {
+                sosSelect.value = dist;
+                loadDistrictContactsData(dist);
+            }
+
+            runScenarioSimulation();
+        }
+
+        function applyScenarioPreset(level) {
+            const dist = document.getElementById('scenario-district-select').value;
+            const d = districtsDatabase[dist];
+            const danger = d && d.gauge_danger_m ? d.gauge_danger_m : 525.0;
+
+            const rainInp = document.getElementById('inp-scenario-rain');
+            const stageInp = document.getElementById('inp-scenario-stage');
+            const storInp = document.getElementById('inp-scenario-storage');
+            const inflowInp = document.getElementById('inp-scenario-inflow');
+
+            if (level === 'Low') {
+                if (rainInp) rainInp.value = 15;
+                if (stageInp) stageInp.value = (danger - 3.5).toFixed(1);
+                if (storInp) storInp.value = 65;
+                if (inflowInp) inflowInp.value = 12000;
+            } else if (level === 'Moderate') {
+                if (rainInp) rainInp.value = 65;
+                if (stageInp) stageInp.value = (danger - 0.8).toFixed(1);
+                if (storInp) storInp.value = 85;
+                if (inflowInp) inflowInp.value = 45000;
+            } else if (level === 'High') {
+                if (rainInp) rainInp.value = 115;
+                if (stageInp) stageInp.value = (danger + 0.6).toFixed(1);
+                if (storInp) storInp.value = 94;
+                if (inflowInp) inflowInp.value = 95000;
+            } else if (level === 'Severe') {
+                if (rainInp) rainInp.value = 185;
+                if (stageInp) stageInp.value = (danger + 3.2).toFixed(1);
+                if (storInp) storInp.value = 99;
+                if (inflowInp) inflowInp.value = 310000;
+            }
+
             runScenarioSimulation();
         }
 
@@ -3487,6 +4143,9 @@
             const stage = parseFloat(document.getElementById('inp-scenario-stage').value);
             const storage = parseFloat(document.getElementById('inp-scenario-storage').value);
             const inflow = parseFloat(document.getElementById('inp-scenario-inflow').value);
+
+            const d = districtsDatabase[district];
+            const danger = d && d.gauge_danger_m ? d.gauge_danger_m : 525.0;
 
             document.getElementById('lbl-scenario-rain').innerText = `${rain} mm`;
             document.getElementById('lbl-scenario-stage').innerText = `${stage} m`;
@@ -3500,6 +4159,7 @@
                     district: district,
                     rainfall_24h_mm: rain,
                     river_stage_m: stage,
+                    danger_stage_m: danger,
                     reservoir_storage_pct: storage,
                     inflow_cusecs: inflow
                 })
@@ -3507,15 +4167,76 @@
             .then(r => r.json())
             .then(data => {
                 const out = data.simulation_output;
-                document.getElementById('scenario-alert-badge').innerText = `SIMULATED: ${out.alert_badge}`;
-                document.getElementById('scenario-alert-badge').className = `badge ${out.alert_badge === 'Red Alert' ? 'badge-danger' : (out.alert_badge === 'Orange Alert' ? 'badge-warning' : 'badge-success')}`;
-                document.getElementById('scenario-risk-level-title').innerText = `SIMULATED: ${out.risk_level}`;
-                document.getElementById('scenario-action-protocol').innerText = out.action_protocol;
-                document.getElementById('scenario-risk-score').innerText = `${out.composite_risk_score} / 100`;
-                document.getElementById('scenario-inundated-area').innerText = `${out.estimated_inundated_area_km2} km²`;
-                document.getElementById('scenario-lead-time').innerText = `${out.estimated_lead_time_hrs} Hours`;
-                document.getElementById('scenario-taluks').innerText = out.vulnerable_taluks.join(', ') || 'District Floodplains';
-            });
+                const sev = out.severity_level || 'Severe';
+
+                // Update 4-Pill active state
+                ['low', 'moderate', 'high', 'severe'].forEach(s => {
+                    const el = document.getElementById(`sev-badge-${s}`);
+                    if (el) el.classList.toggle('active', sev.toLowerCase() === s);
+                });
+
+                const badge = document.getElementById('scenario-alert-badge');
+                if (badge) {
+                    badge.innerText = `SIMULATED: ${out.alert_badge}`;
+                    badge.className = `badge ${sev === 'Severe' ? 'badge-danger' : (sev === 'High' ? 'badge-warning' : (sev === 'Moderate' ? 'badge-primary' : 'badge-success'))}`;
+                }
+
+                const title = document.getElementById('scenario-risk-level-title');
+                if (title) title.innerText = `SIMULATED: ${out.risk_level}`;
+
+                const protocol = document.getElementById('scenario-action-protocol');
+                if (protocol) protocol.innerText = out.action_protocol;
+
+                const cardBox = document.getElementById('scenario-alert-card');
+                if (cardBox) {
+                    cardBox.className = `alert-box ${sev === 'Severe' ? 'Warning' : (sev === 'High' ? 'Watch' : (sev === 'Moderate' ? 'Advisory' : 'Normal'))}`;
+                }
+
+                // Update Metric values
+                const areaEl = document.getElementById('scenario-inundated-area');
+                if (areaEl) areaEl.innerText = `${out.simulated_affected_area_km2 || out.estimated_inundated_area_km2} km²`;
+
+                const waterEl = document.getElementById('scenario-water-level');
+                if (waterEl) waterEl.innerText = `${out.water_level_m} m`;
+
+                const diffLbl = document.getElementById('scenario-stage-diff-label');
+                if (diffLbl) {
+                    diffLbl.innerText = out.water_level_status;
+                    diffLbl.style.color = out.water_level_difference_m >= 0 ? '#b91c1c' : '#15803d';
+                }
+
+                const rainEl = document.getElementById('scenario-rain-intensity');
+                if (rainEl) rainEl.innerText = `${out.rainfall_intensity_mm} mm / 24h`;
+
+                const scoreEl = document.getElementById('scenario-risk-score');
+                if (scoreEl) scoreEl.innerText = `${out.composite_risk_score} / 100`;
+
+                const statEl = document.getElementById('scenario-risk-status');
+                if (statEl) {
+                    statEl.innerText = out.risk_status;
+                    statEl.style.color = sev === 'Severe' ? '#dc2626' : (sev === 'High' ? '#ea580c' : '#15803d');
+                }
+
+                const leadEl = document.getElementById('scenario-lead-time');
+                if (leadEl) leadEl.innerText = `${out.estimated_lead_time_hrs} Hours`;
+
+                const taluksEl = document.getElementById('scenario-taluks');
+                if (taluksEl) taluksEl.innerText = out.vulnerable_taluks.join(', ') || 'District Riparian Floodplains';
+
+                // Update Visual Mini-Map
+                updateScenarioDistrictMap(out.center, sev, data.district, out.simulated_affected_area_km2);
+
+                // Update Dashboard Overview integration metrics
+                const dashDist = document.getElementById('dash-selected-district');
+                if (dashDist) dashDist.innerText = data.district;
+
+                const dashSev = document.getElementById('dash-flood-severity');
+                if (dashSev) {
+                    dashSev.innerText = `${sev} Warning`;
+                    dashSev.style.color = sev === 'Severe' ? '#dc2626' : (sev === 'High' ? '#ea580c' : (sev === 'Moderate' ? '#ca8a04' : '#16a34a'));
+                }
+            })
+            .catch(err => console.error("Scenario simulate error:", err));
         }
 
         function pushScenarioToWarningCenter() {
@@ -3541,6 +4262,339 @@
                 loadAlertsFeed();
                 switchTab('early-warning');
             });
+        }
+
+        // ==================== DISTRICT-BASED EMERGENCY SOS SYSTEM JS ====================
+        let districtContactsDataCache = {};
+        let sosCooldownSecondsRemaining = 0;
+        let sosCooldownInterval = null;
+
+        function onDistrictSosSelectChanged(dist) {
+            loadDistrictContactsData(dist);
+        }
+
+        function loadDistrictContactsData(dist) {
+            if (!dist) dist = 'Belgaum';
+            fetch(`/api/district-contacts/${encodeURIComponent(dist)}`)
+                .then(r => r.json())
+                .then(res => {
+                    if (res.status === 'success') {
+                        const d = res.contacts;
+                        districtContactsDataCache[dist] = d;
+
+                        // Step 1 Labels
+                        const hqEl = document.getElementById('lbl-sos-dist-hq');
+                        if (hqEl) hqEl.innerText = d.headquarters || d.district_name;
+                        const basinEl = document.getElementById('lbl-sos-dist-basin');
+                        if (basinEl) basinEl.innerText = d.basin || 'Karnataka River Basin';
+
+                        // Step 2 Contacts
+                        const ddma = d.ddma_authority || {};
+                        const irt = d.incident_response_team || {};
+                        const incCmd = irt.incident_commander || {};
+                        const polHead = irt.police_head || {};
+
+                        const ddmaName = document.getElementById('c-ddma-name');
+                        if (ddmaName) ddmaName.innerText = ddma.officer_name || 'Deputy Commissioner';
+                        const ddmaPhone = document.getElementById('c-ddma-phone');
+                        if (ddmaPhone) ddmaPhone.innerText = ddma.official_phone || '+91-080-221100';
+                        const ddmaMobile = document.getElementById('c-ddma-mobile');
+                        if (ddmaMobile) ddmaMobile.innerText = ddma.emergency_mobile || '+91-94480-11001';
+
+                        const adcName = document.getElementById('c-adc-name');
+                        if (adcName) adcName.innerText = incCmd.officer_name || 'ADC Disaster Wing';
+                        const adcPhone = document.getElementById('c-adc-phone');
+                        if (adcPhone) adcPhone.innerText = incCmd.phone || '+91-94480-11002';
+
+                        const spName = document.getElementById('c-sp-name');
+                        if (spName) spName.innerText = polHead.officer_name || 'Superintendent of Police';
+                        const spPhone = document.getElementById('c-sp-phone');
+                        if (spPhone) spPhone.innerText = polHead.phone || '+91-94480-11003';
+
+                        const rescueList = document.getElementById('c-rescue-list');
+                        if (rescueList && d.registered_rescue_contacts) {
+                            rescueList.innerHTML = d.registered_rescue_contacts.map(rc => `
+                                <div style="margin-bottom:5px; padding-bottom:5px; border-bottom:1px dashed #e2e8f0;">
+                                    <strong>${rc.role}:</strong><br>
+                                    <span>${rc.name}</span> &bull; <span style="color:#7c3aed; font-weight:700;">${rc.phone}</span>
+                                </div>
+                            `).join('');
+                        }
+
+                        // Step 3 Current Severity and Telemetry
+                        const rawRisk = d.current_risk_level || 'Severe Warning';
+                        const sevLevel = rawRisk.includes('Severe') ? 'Severe' : (rawRisk.includes('Watch') ? 'High' : (rawRisk.includes('Advisory') ? 'Moderate' : 'Low'));
+
+                        const sevBadge = document.getElementById('sos-severity-tier-badge');
+                        if (sevBadge) {
+                            sevBadge.innerText = `${rawRisk} (${d.current_alert_badge || 'Red Alert'})`;
+                            sevBadge.className = `badge ${sevLevel === 'Severe' ? 'badge-danger' : (sevLevel === 'High' ? 'badge-warning' : 'badge-success')}`;
+                        }
+
+                        const sevDisplay = document.getElementById('sos-severity-display');
+                        if (sevDisplay) {
+                            sevDisplay.innerText = sevLevel;
+                            sevDisplay.style.color = sevLevel === 'Severe' ? '#dc2626' : (sevLevel === 'High' ? '#ea580c' : '#16a34a');
+                        }
+
+                        const riverEl = document.getElementById('sos-river-station');
+                        if (riverEl) riverEl.innerText = `${d.primary_rivers} (${d.gauge_station})`;
+
+                        const stageEl = document.getElementById('sos-stage-display');
+                        if (stageEl) {
+                            const danger = d.gauge_danger_m || 10.0;
+                            const stage = (danger + (sevLevel === 'Severe' ? 3.4 : (sevLevel === 'High' ? 0.8 : -1.2))).toFixed(1);
+                            const diff = (stage - danger).toFixed(1);
+                            stageEl.innerText = `${stage}m (${diff >= 0 ? '+' : ''}${diff}m vs danger mark ${danger}m)`;
+                        }
+
+                        const taluksEl = document.getElementById('sos-vulnerable-taluks');
+                        if (taluksEl && d.vulnerable_taluks) {
+                            taluksEl.innerText = d.vulnerable_taluks.join(', ');
+                        }
+
+                        // Confirmation modal preview info
+                        const modalBadge = document.getElementById('modal-dist-badge');
+                        if (modalBadge) modalBadge.innerText = `District: ${d.district_name}`;
+                        const modalSev = document.getElementById('modal-severity-level');
+                        if (modalSev) modalSev.innerText = `${sevLevel} Warning (${d.current_alert_badge || 'Red Alert'})`;
+
+                        // Update dashboard selected district
+                        const dashDist = document.getElementById('dash-selected-district');
+                        if (dashDist) dashDist.innerText = d.district_name;
+                        const dashSev = document.getElementById('dash-flood-severity');
+                        if (dashSev) dashSev.innerText = `${sevLevel} Warning`;
+                    }
+                })
+                .catch(err => console.error("Error loading district contacts:", err));
+        }
+
+        function openDistrictSosConfirmation() {
+            if (sosCooldownSecondsRemaining > 0) {
+                alert(`Accidental repeated SOS safeguard active: Please wait ${sosCooldownSecondsRemaining} seconds before re-triggering.`);
+                return;
+            }
+            const modal = document.getElementById('sos-confirm-modal');
+            if (modal) modal.style.display = 'flex';
+        }
+
+        function closeDistrictSosConfirmation() {
+            const modal = document.getElementById('sos-confirm-modal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        function confirmDistrictSosTrigger() {
+            closeDistrictSosConfirmation();
+
+            const distSelect = document.getElementById('district-sos-select');
+            const dist = distSelect ? distSelect.value : 'Belgaum';
+            const sevEl = document.getElementById('sos-severity-display');
+            const severity = sevEl ? sevEl.innerText : 'Severe';
+
+            // Sound Emergency Siren & Vibration
+            sirenEngine.initContext();
+            sirenEngine.start(false);
+
+            const triggerBtn = document.getElementById('btn-trigger-district-sos');
+            if (triggerBtn) {
+                triggerBtn.disabled = true;
+                triggerBtn.innerHTML = '🚨 TRANSMITTING EMERGENCY SOS...';
+            }
+
+            fetch('/api/early-warning/trigger-district-sos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    district: dist,
+                    severity: severity
+                })
+            })
+            .then(r => r.json().then(data => ({ status: r.status, data: data })))
+            .then(({ status, data }) => {
+                if (status === 200 && data.status === 'success') {
+                    // Display Step 5 Results Panel
+                    const resultPanel = document.getElementById('district-sos-result-panel');
+                    if (resultPanel) resultPanel.style.display = 'block';
+
+                    const statusBadge = document.getElementById('res-delivery-status-badge');
+                    if (statusBadge) {
+                        statusBadge.innerText = data.delivery_status;
+                        statusBadge.className = `badge ${data.is_simulated ? 'badge-warning' : 'badge-success'}`;
+                    }
+
+                    const idBadge = document.getElementById('res-alert-id-badge');
+                    if (idBadge) idBadge.innerText = data.alert_id;
+
+                    const tsEl = document.getElementById('res-sms-timestamp');
+                    if (tsEl) tsEl.innerText = data.timestamp;
+
+                    const msgText = document.getElementById('res-sms-message-text');
+                    if (msgText) msgText.innerText = data.sms_message;
+
+                    const countEl = document.getElementById('res-notified-count');
+                    if (countEl) countEl.innerText = data.total_contacts_notified;
+
+                    const provEl = document.getElementById('res-gateway-provider-label');
+                    if (provEl) provEl.innerText = `Gateway: ${data.gateway_provider}`;
+
+                    const tbody = document.getElementById('res-contacts-tbody');
+                    if (tbody && data.contacts_notified) {
+                        tbody.innerHTML = data.contacts_notified.map(c => `
+                            <tr>
+                                <td><strong>${c.role}</strong></td>
+                                <td>${c.name}</td>
+                                <td><code style="color:#0284c7; font-weight:700;">${c.phone}</code></td>
+                                <td><span style="font-size:0.75rem; color:#64748b;">${c.type || 'Emergency Official'}</span></td>
+                                <td><span class="badge ${c.status && c.status.includes('Sent') ? 'badge-success' : 'badge-warning'}">${c.status || 'Delivered'}</span></td>
+                            </tr>
+                        `).join('');
+                    }
+
+                    // Start 60-Second Anti-Spam / Accidental Repeat Cooldown
+                    startSosCooldown(60);
+
+                    // Update Dashboard Metrics and Alert History
+                    loadSosDashboardHistory();
+                    loadAlertsFeed();
+                    loadSosLogTable();
+
+                    // Scroll Step 5 into view smoothly
+                    resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else if (status === 429) {
+                    alert(data.message || "Accidental repeat protection: Please wait before sending another SOS.");
+                    startSosCooldown(data.cooldown_remaining_seconds || 60);
+                } else {
+                    alert("SOS Dispatch Failed: " + (data.message || "Unknown error"));
+                    if (triggerBtn) {
+                        triggerBtn.disabled = false;
+                        triggerBtn.innerHTML = '🚨 TRIGGER SOS ALERT';
+                    }
+                }
+            })
+            .catch(err => {
+                alert("Failed to communicate with SOS Gateway: " + err.message);
+                if (triggerBtn) {
+                    triggerBtn.disabled = false;
+                    triggerBtn.innerHTML = '🚨 TRIGGER SOS ALERT';
+                }
+            });
+        }
+
+        function startSosCooldown(seconds) {
+            sosCooldownSecondsRemaining = seconds;
+            const btn = document.getElementById('btn-trigger-district-sos');
+            const lbl = document.getElementById('lbl-sos-cooldown');
+            if (btn) btn.disabled = true;
+            if (lbl) lbl.style.display = 'block';
+
+            if (sosCooldownInterval) clearInterval(sosCooldownInterval);
+            sosCooldownInterval = setInterval(() => {
+                sosCooldownSecondsRemaining--;
+                if (lbl) {
+                    lbl.innerText = `Accidental repeat protection active: Please wait ${sosCooldownSecondsRemaining}s before re-triggering.`;
+                }
+                if (btn) {
+                    btn.innerHTML = `🚨 TRIGGER SOS ALERT (${sosCooldownSecondsRemaining}s Cooldown)`;
+                }
+                if (sosCooldownSecondsRemaining <= 0) {
+                    clearInterval(sosCooldownInterval);
+                    sosCooldownInterval = null;
+                    if (btn) {
+                        btn.disabled = false;
+                        btn.innerHTML = '🚨 TRIGGER SOS ALERT';
+                    }
+                    if (lbl) lbl.style.display = 'none';
+                }
+            }, 1000);
+        }
+
+        function loadSosDashboardHistory() {
+            fetch('/api/early-warning/district-sos-log')
+                .then(r => r.json())
+                .then(data => {
+                    const contactsEl = document.getElementById('dash-total-contacts');
+                    if (contactsEl) contactsEl.innerText = `${data.total_emergency_contacts_registered} Contacts`;
+
+                    const sosEl = document.getElementById('dash-total-sos');
+                    if (sosEl) sosEl.innerText = `${data.total_sos_alerts_triggered} Alert${data.total_sos_alerts_triggered === 1 ? '' : 's'}`;
+
+                    const smsEl = document.getElementById('dash-sms-status');
+                    if (smsEl) smsEl.innerText = data.latest_sms_delivery_status;
+
+                    const gwBadge = document.getElementById('dash-live-gateway-badge');
+                    if (gwBadge) {
+                        gwBadge.innerText = `Gateway: ${data.latest_sms_delivery_status}`;
+                        gwBadge.className = `badge ${data.latest_sms_delivery_status.includes('Sent') ? 'badge-success' : 'badge-warning'}`;
+                    }
+
+                    const tbody = document.getElementById('dash-sos-history-tbody');
+                    if (tbody && data.alerts_history) {
+                        tbody.innerHTML = '';
+                        data.alerts_history.forEach(item => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td><code style="font-size:0.75rem; color:#b91c1c; font-weight:700;">${item.alert_id}</code></td>
+                                <td>${item.timestamp}</td>
+                                <td><strong>${item.district}</strong></td>
+                                <td><span class="badge ${item.severity === 'Severe' ? 'badge-danger' : 'badge-warning'}">${item.severity} Warning</span></td>
+                                <td><span class="badge ${item.delivery_status.includes('Sent') ? 'badge-success' : 'badge-warning'}">${item.delivery_status}</span></td>
+                                <td><span style="font-size:0.75rem; color:#1e293b; font-weight:600;">${item.total_contacts_notified} Registered Contacts</span></td>
+                                <td><button class="btn btn-outline" style="font-size:0.70rem; padding:2px 6px;" onclick="inspectHistoricalSos('${item.alert_id}')">Inspect</button></td>
+                            `;
+                            tbody.appendChild(tr);
+                        });
+                    }
+                })
+                .catch(err => console.error("Error loading SOS dashboard history:", err));
+        }
+
+        function inspectHistoricalSos(alertId) {
+            fetch('/api/early-warning/district-sos-log')
+                .then(r => r.json())
+                .then(data => {
+                    const match = data.alerts_history.find(a => a.alert_id === alertId);
+                    if (match) {
+                        const panel = document.getElementById('district-sos-result-panel');
+                        if (panel) panel.style.display = 'block';
+
+                        const idBadge = document.getElementById('res-alert-id-badge');
+                        if (idBadge) idBadge.innerText = match.alert_id;
+
+                        const statusBadge = document.getElementById('res-delivery-status-badge');
+                        if (statusBadge) {
+                            statusBadge.innerText = match.delivery_status;
+                            statusBadge.className = `badge ${match.is_simulated ? 'badge-warning' : 'badge-success'}`;
+                        }
+
+                        const tsEl = document.getElementById('res-sms-timestamp');
+                        if (tsEl) tsEl.innerText = match.timestamp;
+
+                        const msgText = document.getElementById('res-sms-message-text');
+                        if (msgText) msgText.innerText = match.sms_message;
+
+                        const countEl = document.getElementById('res-notified-count');
+                        if (countEl) countEl.innerText = match.total_contacts_notified;
+
+                        const provEl = document.getElementById('res-gateway-provider-label');
+                        if (provEl) provEl.innerText = `Gateway: ${match.gateway_provider}`;
+
+                        const tbody = document.getElementById('res-contacts-tbody');
+                        if (tbody && match.contacts_notified) {
+                            tbody.innerHTML = match.contacts_notified.map(c => `
+                                <tr>
+                                    <td><strong>${c.role}</strong></td>
+                                    <td>${c.name}</td>
+                                    <td><code style="color:#0284c7; font-weight:700;">${c.phone}</code></td>
+                                    <td><span style="font-size:0.75rem; color:#64748b;">${c.type || 'Emergency Official'}</span></td>
+                                    <td><span class="badge ${c.status && c.status.includes('Sent') ? 'badge-success' : 'badge-warning'}">${c.status || 'Delivered'}</span></td>
+                                </tr>
+                            `).join('');
+                        }
+
+                        switchTab('early-warning');
+                        panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
         }
 
         // ==================== 7. EARLY WARNING DISPATCH & FEED ====================

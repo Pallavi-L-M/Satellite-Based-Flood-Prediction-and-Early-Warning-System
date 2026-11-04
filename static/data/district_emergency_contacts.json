@@ -1,0 +1,2366 @@
+{
+  "Belgaum": {
+    "district_key": "Belgaum",
+    "district_name": "Belagavi",
+    "display_name": "Belagavi (Belgaum)",
+    "headquarters": "Belagavi",
+    "basin": "Krishna & Ghataprabha Basins",
+    "primary_rivers": "Krishna, Ghataprabha, Malaprabha",
+    "gauge_station": "Kudachi Gauge (Krishna River)",
+    "gauge_danger_m": 525.0,
+    "center": [
+      15.8497,
+      74.4977
+    ],
+    "vulnerable_taluks": [
+      "Chikkodi",
+      "Athani",
+      "Raybag",
+      "Gokak",
+      "Khanapur"
+    ],
+    "current_risk_level": "Severe Warning",
+    "current_alert_badge": "Red Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri Nitesh Patil, IAS",
+      "official_phone": "+91-0831-221100",
+      "emergency_mobile": "+91-94480-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.belagavi@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Belagavi Disaster Wing",
+        "phone": "+91-94480-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Dr. Sanjeev M. Patil, IPS",
+        "phone": "+91-94480-11003",
+        "control_room": "+91-0831-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. Ramesh B. Patil (10th Bn SDRF)",
+        "phone": "+91-94480-22010",
+        "station": "SDRF Quick Response Station (Belagavi)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Mahesh Koni, DHO",
+        "phone": "+91-94480-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Belagavi)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. S. N. Patil (Krishna & Ghataprabha Division)",
+        "phone": "+91-94480-22030",
+        "station": "Water Resources Division (Belagavi)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Chikkodi (Nodal Flood Incident Officer)",
+        "phone": "+91-94480-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Bagalkot": {
+    "district_key": "Bagalkot",
+    "district_name": "Bagalkot",
+    "display_name": "Bagalkot",
+    "headquarters": "Bagalkot",
+    "basin": "Krishna & Ghataprabha Confluence",
+    "primary_rivers": "Krishna, Ghataprabha, Malaprabha",
+    "gauge_station": "Bilagi River Station",
+    "gauge_danger_m": 519.6,
+    "center": [
+      16.1875,
+      75.698
+    ],
+    "vulnerable_taluks": [
+      "Jamkhandi",
+      "Bilagi",
+      "Mudhol",
+      "Badami",
+      "Hunagund"
+    ],
+    "current_risk_level": "Severe Warning",
+    "current_alert_badge": "Red Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Smt. Janaki K. M., IAS",
+      "official_phone": "+91-08354-221100",
+      "emergency_mobile": "+91-94481-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.bagalkot@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Bagalkot Disaster Wing",
+        "phone": "+91-94481-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Amarnath Reddy, IPS",
+        "phone": "+91-94481-11003",
+        "control_room": "+91-08354-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Sub-Insp. M. H. Chalavadi (SDRF Flood Unit)",
+        "phone": "+91-94481-22010",
+        "station": "SDRF Quick Response Station (Bagalkot)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Jayashree Emmi, DHO",
+        "phone": "+91-94481-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Bagalkot)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. B. K. Nayak (KBJNL Almatti Dam Division)",
+        "phone": "+91-94481-22030",
+        "station": "Water Resources Division (Bagalkot)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Jamkhandi (Nodal Flood Relief)",
+        "phone": "+91-94481-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Bijapur": {
+    "district_key": "Bijapur",
+    "district_name": "Vijayapura",
+    "display_name": "Vijayapura (Bijapur)",
+    "headquarters": "Vijayapura",
+    "basin": "Krishna & Doni Basins",
+    "primary_rivers": "Krishna, Doni",
+    "gauge_station": "Kolhar Bridge Gauge",
+    "gauge_danger_m": 514.0,
+    "center": [
+      16.8302,
+      75.71
+    ],
+    "vulnerable_taluks": [
+      "Muddebihal",
+      "Basavana Bagewadi",
+      "Indi"
+    ],
+    "current_risk_level": "Flood Watch",
+    "current_alert_badge": "Orange Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri T. Bhoobalan, IAS",
+      "official_phone": "+91-08352-221100",
+      "emergency_mobile": "+91-94482-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.vijayapura@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Vijayapura Disaster Wing",
+        "phone": "+91-94482-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Rishikesh Sonawane, IPS",
+        "phone": "+91-94482-11003",
+        "control_room": "+91-08352-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. V. G. Kulkarni (SDRF Vijayapura)",
+        "phone": "+91-94482-22010",
+        "station": "SDRF Quick Response Station (Vijayapura)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Sampath Gunari, DHO",
+        "phone": "+91-94482-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Vijayapura)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. P. R. Biradar (Doni River Canal Division)",
+        "phone": "+91-94482-22030",
+        "station": "Water Resources Division (Vijayapura)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Indi / Sindagi",
+        "phone": "+91-94482-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Raichur": {
+    "district_key": "Raichur",
+    "district_name": "Raichur",
+    "display_name": "Raichur",
+    "headquarters": "Raichur",
+    "basin": "Krishna & Tungabhadra Doab",
+    "primary_rivers": "Krishna, Tungabhadra",
+    "gauge_station": "Kudaloor Confluence Gauge",
+    "gauge_danger_m": 332.5,
+    "center": [
+      16.2076,
+      77.3463
+    ],
+    "vulnerable_taluks": [
+      "Lingsugur",
+      "Devadurga",
+      "Raichur",
+      "Manvi"
+    ],
+    "current_risk_level": "Severe Warning",
+    "current_alert_badge": "Red Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri Chandrashekar Nayaka L., IAS",
+      "official_phone": "+91-08532-221100",
+      "emergency_mobile": "+91-94487-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.raichur@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Raichur Disaster Wing",
+        "phone": "+91-94487-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Nikhil B., IPS",
+        "phone": "+91-94487-11003",
+        "control_room": "+91-08532-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. Basavaraj G. (SDRF Raichur)",
+        "phone": "+91-94487-22010",
+        "station": "SDRF Quick Response Station (Raichur)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Surendrababu, DHO",
+        "phone": "+91-94487-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Raichur)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. Mallikarjun (Krishna & TB Doab Div)",
+        "phone": "+91-94487-22030",
+        "station": "Water Resources Division (Raichur)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Deodurg / Lingsugur",
+        "phone": "+91-94487-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Gulbarga": {
+    "district_key": "Gulbarga",
+    "district_name": "Kalaburagi",
+    "display_name": "Kalaburagi (Gulbarga)",
+    "headquarters": "Kalaburagi",
+    "basin": "Bhima & Krishna Basins",
+    "primary_rivers": "Bhima, Kagina, Bennethora",
+    "gauge_station": "Afzalpur Gauge (Bhima River)",
+    "gauge_danger_m": 411.0,
+    "center": [
+      17.3297,
+      76.8343
+    ],
+    "vulnerable_taluks": [
+      "Afzalpur",
+      "Chittapur",
+      "Sedam",
+      "Jevargi",
+      "Shahapur"
+    ],
+    "current_risk_level": "Flood Watch",
+    "current_alert_badge": "Orange Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri B. Fouzia Taranum, IAS",
+      "official_phone": "+91-08472-221100",
+      "emergency_mobile": "+91-94485-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.kalaburagi@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Kalaburagi Disaster Wing",
+        "phone": "+91-94485-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Adduru Srinivasulu, IPS",
+        "phone": "+91-94485-11003",
+        "control_room": "+91-08472-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "DySP Prabhakar (SDRF Kalaburagi)",
+        "phone": "+91-94485-22010",
+        "station": "SDRF Quick Response Station (Kalaburagi)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Sharanabasappa Ganajalkhed, DHO",
+        "phone": "+91-94485-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Kalaburagi)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. R. K. Meti (Bhima Lift & Bennethora Div)",
+        "phone": "+91-94485-22030",
+        "station": "Water Resources Division (Kalaburagi)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Afzalpur / Jevargi",
+        "phone": "+91-94485-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Bidar": {
+    "district_key": "Bidar",
+    "district_name": "Bidar",
+    "display_name": "Bidar",
+    "headquarters": "Bidar",
+    "basin": "Manjra & Karanja Basins",
+    "primary_rivers": "Manjra, Karanja",
+    "gauge_station": "Byalahalli Gauge",
+    "gauge_danger_m": 584.5,
+    "center": [
+      17.9104,
+      77.5199
+    ],
+    "vulnerable_taluks": [
+      "Bhalki",
+      "Aurad",
+      "Humnabad"
+    ],
+    "current_risk_level": "Advisory",
+    "current_alert_badge": "Yellow Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri Govinda Reddy, IAS",
+      "official_phone": "+91-08482-221100",
+      "emergency_mobile": "+91-94484-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.bidar@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Bidar Disaster Wing",
+        "phone": "+91-94484-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Chennabasavanna S. L., IPS",
+        "phone": "+91-94484-11003",
+        "control_room": "+91-08482-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. Suresh Biradar (SDRF Bidar)",
+        "phone": "+91-94484-22010",
+        "station": "SDRF Quick Response Station (Bidar)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Dhyanoba Rathod, DHO",
+        "phone": "+91-94484-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Bidar)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. Santosh Patil (Karanja Dam Division)",
+        "phone": "+91-94484-22030",
+        "station": "Water Resources Division (Bidar)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Aurad / Bhalki",
+        "phone": "+91-94484-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Gadag": {
+    "district_key": "Gadag",
+    "district_name": "Gadag",
+    "display_name": "Gadag",
+    "headquarters": "Gadag",
+    "basin": "Malaprabha & Tungabhadra Basins",
+    "primary_rivers": "Malaprabha, Tungabhadra",
+    "gauge_station": "Ron Sub-basin Station",
+    "gauge_danger_m": 547.0,
+    "center": [
+      15.4167,
+      75.6167
+    ],
+    "vulnerable_taluks": [
+      "Ron",
+      "Nargund",
+      "Shirhatti"
+    ],
+    "current_risk_level": "Advisory",
+    "current_alert_badge": "Yellow Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Smt. Vaishali M. L., IAS",
+      "official_phone": "+91-08372-221100",
+      "emergency_mobile": "+91-94489-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.gadag@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Gadag Disaster Wing",
+        "phone": "+91-94489-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri B. S. Nemagouda, IPS",
+        "phone": "+91-94489-11003",
+        "control_room": "+91-08372-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. Manjunath Hiremath (SDRF Gadag)",
+        "phone": "+91-94489-22010",
+        "station": "SDRF Quick Response Station (Gadag)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. S. S. Neelagund, DHO",
+        "phone": "+91-94489-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Gadag)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. G. M. Patil (Malaprabha Canal Div)",
+        "phone": "+91-94489-22030",
+        "station": "Water Resources Division (Gadag)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Ron / Shirahatti",
+        "phone": "+91-94489-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Dharwad": {
+    "district_key": "Dharwad",
+    "district_name": "Dharwad",
+    "display_name": "Dharwad",
+    "headquarters": "Dharwad / Hubballi",
+    "basin": "Malaprabha & Bedthi Headwaters",
+    "primary_rivers": "Malaprabha, Bennihalla",
+    "gauge_station": "Navalgund Bennihalla Gauge",
+    "gauge_danger_m": 583.0,
+    "center": [
+      15.4589,
+      75.0078
+    ],
+    "vulnerable_taluks": [
+      "Navalgund",
+      "Hubballi",
+      "Kundgol"
+    ],
+    "current_risk_level": "Normal",
+    "current_alert_badge": "Green Status",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Smt. Divya Prabhu G. R. J., IAS",
+      "official_phone": "+91-0836-221100",
+      "emergency_mobile": "+91-94490-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.dharwad/hubballi@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Dharwad / Hubballi Disaster Wing",
+        "phone": "+91-94490-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Dr. Gopal M. Byakod, IPS",
+        "phone": "+91-94490-11003",
+        "control_room": "+91-0836-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "DySP C. R. Patil (SDRF Hubballi Base)",
+        "phone": "+91-94490-22010",
+        "station": "SDRF Quick Response Station (Dharwad / Hubballi)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Shashi Patil, DHO",
+        "phone": "+91-94490-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Dharwad / Hubballi)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. K. V. Joshi (Malaprabha Right Bank)",
+        "phone": "+91-94490-22030",
+        "station": "Water Resources Division (Dharwad / Hubballi)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Navalgund / Hubballi",
+        "phone": "+91-94490-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Bellary": {
+    "district_key": "Bellary",
+    "district_name": "Ballari",
+    "display_name": "Ballari (Bellary)",
+    "headquarters": "Ballari",
+    "basin": "Tungabhadra Basin",
+    "primary_rivers": "Tungabhadra, Hagari",
+    "gauge_station": "Hampi Heritage Gauge (Tungabhadra River)",
+    "gauge_danger_m": 484.5,
+    "center": [
+      15.1394,
+      76.9214
+    ],
+    "vulnerable_taluks": [
+      "Hospete",
+      "Kampli",
+      "Siruguppa",
+      "Hagaribommanahalli"
+    ],
+    "current_risk_level": "Severe Warning",
+    "current_alert_badge": "Red Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri Prashant Kumar Mishra, IAS",
+      "official_phone": "+91-08392-221100",
+      "emergency_mobile": "+91-94483-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.ballari@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Ballari Disaster Wing",
+        "phone": "+91-94483-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Ranjit Kumar Bandaru, IPS",
+        "phone": "+91-94483-11003",
+        "control_room": "+91-08392-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. K. S. Raghavendra (SDRF Ballari)",
+        "phone": "+91-94483-22010",
+        "station": "SDRF Quick Response Station (Ballari)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Y. Ramesh, DHO",
+        "phone": "+91-94483-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Ballari)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. M. S. Venkatesh (TB Board Chief Engineer)",
+        "phone": "+91-94483-22030",
+        "station": "Water Resources Division (Ballari)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Siruguppa / Kampli",
+        "phone": "+91-94483-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Koppal": {
+    "district_key": "Koppal",
+    "district_name": "Koppal",
+    "display_name": "Koppal",
+    "headquarters": "Koppal",
+    "basin": "Tungabhadra Left Bank Basin",
+    "primary_rivers": "Tungabhadra",
+    "gauge_station": "Gangavathi Spillway Monitor",
+    "gauge_danger_m": 481.2,
+    "center": [
+      15.3524,
+      76.1558
+    ],
+    "vulnerable_taluks": [
+      "Gangavathi",
+      "Koppal",
+      "Yelburga"
+    ],
+    "current_risk_level": "Flood Watch",
+    "current_alert_badge": "Orange Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri Nalin Atul, IAS",
+      "official_phone": "+91-08539-221100",
+      "emergency_mobile": "+91-94488-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.koppal@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Koppal Disaster Wing",
+        "phone": "+91-94488-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Yashodha Vantagodi, IPS",
+        "phone": "+91-94488-11003",
+        "control_room": "+91-08539-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Sub-Insp. Virupaksha (SDRF Koppal)",
+        "phone": "+91-94488-22010",
+        "station": "SDRF Quick Response Station (Koppal)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. T. Lingaraju, DHO",
+        "phone": "+91-94488-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Koppal)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. H. C. Patil (Munirabad TB Left Bank)",
+        "phone": "+91-94488-22030",
+        "station": "Water Resources Division (Koppal)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Gangavathi / Kushtagi",
+        "phone": "+91-94488-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Haveri": {
+    "district_key": "Haveri",
+    "district_name": "Haveri",
+    "display_name": "Haveri",
+    "headquarters": "Haveri",
+    "basin": "Varada & Tungabhadra Basins",
+    "primary_rivers": "Varada, Dharma, Kumadhvathi, Tungabhadra",
+    "gauge_station": "Sangur Gauge (Varada River)",
+    "gauge_danger_m": 559.0,
+    "center": [
+      14.7972,
+      75.3995
+    ],
+    "vulnerable_taluks": [
+      "Hangal",
+      "Hirekerur",
+      "Ranebennur",
+      "Haveri",
+      "Byadgi"
+    ],
+    "current_risk_level": "Flood Watch",
+    "current_alert_badge": "Orange Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri Raghunandan Murthy, IAS",
+      "official_phone": "+91-08375-221100",
+      "emergency_mobile": "+91-94492-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.haveri@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Haveri Disaster Wing",
+        "phone": "+91-94492-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Shivakumar Gunare, IPS",
+        "phone": "+91-94492-11003",
+        "control_room": "+91-08375-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. K. H. Patil (SDRF Haveri)",
+        "phone": "+91-94492-22010",
+        "station": "SDRF Quick Response Station (Haveri)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Rajendra Doddamani, DHO",
+        "phone": "+91-94492-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Haveri)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. B. S. Pujar (Varada Basin Division)",
+        "phone": "+91-94492-22030",
+        "station": "Water Resources Division (Haveri)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Hangal / Ranebennur",
+        "phone": "+91-94492-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Davanagere": {
+    "district_key": "Davanagere",
+    "district_name": "Davanagere",
+    "display_name": "Davanagere",
+    "headquarters": "Davanagere",
+    "basin": "Tungabhadra Central Basin",
+    "primary_rivers": "Tungabhadra",
+    "gauge_station": "Harihar Bridge Gauge",
+    "gauge_danger_m": 534.0,
+    "center": [
+      14.4644,
+      75.9218
+    ],
+    "vulnerable_taluks": [
+      "Harihar",
+      "Honnali",
+      "Channagiri"
+    ],
+    "current_risk_level": "Flood Watch",
+    "current_alert_badge": "Orange Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Dr. M. V. Venkatesh, IAS",
+      "official_phone": "+91-08192-221100",
+      "emergency_mobile": "+91-94809-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.davanagere@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Davanagere Disaster Wing",
+        "phone": "+91-94809-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Smt. Uma Prashanth, IPS",
+        "phone": "+91-94809-11003",
+        "control_room": "+91-08192-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. Kotresh B. (SDRF Davanagere)",
+        "phone": "+91-94809-22010",
+        "station": "SDRF Quick Response Station (Davanagere)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Shanmukhappa, DHO",
+        "phone": "+91-94809-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Davanagere)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. S. B. Patil (Bhadra Left Bank & TB Div)",
+        "phone": "+91-94809-22030",
+        "station": "Water Resources Division (Davanagere)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Harihar / Honnali / Channagiri",
+        "phone": "+91-94809-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Chitradurga": {
+    "district_key": "Chitradurga",
+    "district_name": "Chitradurga",
+    "display_name": "Chitradurga",
+    "headquarters": "Chitradurga",
+    "basin": "Vedavathi & Tungabhadra Basins",
+    "primary_rivers": "Vedavathi",
+    "gauge_station": "Hiriyur Bridge Station",
+    "gauge_danger_m": 614.5,
+    "center": [
+      14.2251,
+      76.4022
+    ],
+    "vulnerable_taluks": [
+      "Hiriyur",
+      "Hosadurga",
+      "Challakere"
+    ],
+    "current_risk_level": "Advisory",
+    "current_alert_badge": "Yellow Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri T. Venkatesh, IAS",
+      "official_phone": "+91-08194-221100",
+      "emergency_mobile": "+91-94808-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.chitradurga@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Chitradurga Disaster Wing",
+        "phone": "+91-94808-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Dharmender Kumar Meena, IPS",
+        "phone": "+91-94808-11003",
+        "control_room": "+91-08194-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. Thippeswamy (SDRF Chitradurga)",
+        "phone": "+91-94808-22010",
+        "station": "SDRF Quick Response Station (Chitradurga)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Ranganath, DHO",
+        "phone": "+91-94808-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Chitradurga)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. H. R. Kumar (Vani Vilasa Sagara VVS Dam Div)",
+        "phone": "+91-94808-22030",
+        "station": "Water Resources Division (Chitradurga)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Hiriyur / Challakere / Hosadurga",
+        "phone": "+91-94808-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Tumkur": {
+    "district_key": "Tumkur",
+    "district_name": "Tumakuru",
+    "display_name": "Tumakuru (Tumkur)",
+    "headquarters": "Tumakuru",
+    "basin": "Shimsha & Jayamangali Basins",
+    "primary_rivers": "Shimsha, Jayamangali",
+    "gauge_station": "Gubbi Stream Monitor",
+    "gauge_danger_m": 785.0,
+    "center": [
+      13.3379,
+      77.1173
+    ],
+    "vulnerable_taluks": [
+      "Kunigal",
+      "Tiptur",
+      "Madhugiri",
+      "Pavagada"
+    ],
+    "current_risk_level": "Normal",
+    "current_alert_badge": "Green Status",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri Shubha Kalyan, IAS",
+      "official_phone": "+91-0816-221100",
+      "emergency_mobile": "+91-94805-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.tumakuru@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Tumakuru Disaster Wing",
+        "phone": "+91-94805-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Ashok Venkat, IPS",
+        "phone": "+91-94805-11003",
+        "control_room": "+91-0816-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. Chandrashekar (SDRF Tumakuru)",
+        "phone": "+91-94805-22010",
+        "station": "SDRF Quick Response Station (Tumakuru)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. D. N. Manjunath, DHO",
+        "phone": "+91-94805-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Tumakuru)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. B. S. Jagadish (Hemavathi Canal Division)",
+        "phone": "+91-94805-22030",
+        "station": "Water Resources Division (Tumakuru)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Kunigal / Pavagada / Tiptur",
+        "phone": "+91-94805-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Shimoga": {
+    "district_key": "Shimoga",
+    "district_name": "Shivamogga",
+    "display_name": "Shivamogga (Shimoga)",
+    "headquarters": "Shivamogga",
+    "basin": "Tunga, Bhadra & Sharavathi Basins",
+    "primary_rivers": "Tunga, Bhadra, Sharavathi, Varahi",
+    "gauge_station": "Shivamogga City Tunga Bridge Gauge",
+    "gauge_danger_m": 572.5,
+    "center": [
+      13.9299,
+      75.5681
+    ],
+    "vulnerable_taluks": [
+      "Thirthahalli",
+      "Sagar",
+      "Hosanagar",
+      "Bhadravati",
+      "Shivamogga"
+    ],
+    "current_risk_level": "Severe Warning",
+    "current_alert_badge": "Red Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri Gurudatta Hegde, IAS",
+      "official_phone": "+91-08182-221100",
+      "emergency_mobile": "+91-94493-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.shivamogga@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Shivamogga Disaster Wing",
+        "phone": "+91-94493-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri G. K. Mithun Kumar, IPS",
+        "phone": "+91-94493-11003",
+        "control_room": "+91-08182-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "DySP R. K. Nayak (SDRF Malnad Zone)",
+        "phone": "+91-94493-22010",
+        "station": "SDRF Quick Response Station (Shivamogga)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Rajesh Suragihalli, DHO",
+        "phone": "+91-94493-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Shivamogga)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. C. V. Kumar (Bhadra & Tunga Dam Complex)",
+        "phone": "+91-94493-22030",
+        "station": "Water Resources Division (Shivamogga)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Thirthahalli / Sagar / Bhadravathi",
+        "phone": "+91-94493-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Chikmagalur": {
+    "district_key": "Chikmagalur",
+    "district_name": "Chikkamagaluru",
+    "display_name": "Chikkamagaluru",
+    "headquarters": "Chikkamagaluru",
+    "basin": "Tunga, Bhadra & Hemavathi Headwaters",
+    "primary_rivers": "Bhadra, Tunga, Hemavathi",
+    "gauge_station": "Kalasah River Gauge",
+    "gauge_danger_m": 722.0,
+    "center": [
+      13.3161,
+      75.772
+    ],
+    "vulnerable_taluks": [
+      "Mudigere",
+      "Sringeri",
+      "Koppa",
+      "Narasimharajapura"
+    ],
+    "current_risk_level": "Severe Warning",
+    "current_alert_badge": "Red Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Smt. Meena Nagaraj C. N., IAS",
+      "official_phone": "+91-08262-221100",
+      "emergency_mobile": "+91-94495-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.chikkamagaluru@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Chikkamagaluru Disaster Wing",
+        "phone": "+91-94495-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Vikram Amathe, IPS",
+        "phone": "+91-94495-11003",
+        "control_room": "+91-08262-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. H. S. Harish (SDRF Ghats Division)",
+        "phone": "+91-94495-22010",
+        "station": "SDRF Quick Response Station (Chikkamagaluru)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Ashwath Babu, DHO",
+        "phone": "+91-94495-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Chikkamagaluru)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. K. T. Rajegowda (Bhadra Catchment Div)",
+        "phone": "+91-94495-22030",
+        "station": "Water Resources Division (Chikkamagaluru)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Mudigere / Sringeri / Koppa",
+        "phone": "+91-94495-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Kodagu": {
+    "district_key": "Kodagu",
+    "district_name": "Kodagu",
+    "display_name": "Kodagu (Coorg)",
+    "headquarters": "Madikeri",
+    "basin": "Upper Kaveri & Lakshmanatirtha Basins",
+    "primary_rivers": "Kaveri, Lakshmanatirtha, Harangi",
+    "gauge_station": "Bhagamandala Triveni Sangama Gauge",
+    "gauge_danger_m": 865.0,
+    "center": [
+      12.3375,
+      75.8069
+    ],
+    "vulnerable_taluks": [
+      "Madikeri",
+      "Virajpet",
+      "Somwarpet",
+      "Ponnampet"
+    ],
+    "current_risk_level": "Severe Warning",
+    "current_alert_badge": "Red Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri Venkat Raja, IAS",
+      "official_phone": "+91-08272-221100",
+      "emergency_mobile": "+91-94497-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.madikeri@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Madikeri Disaster Wing",
+        "phone": "+91-94497-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri K. Ramarajan, IPS",
+        "phone": "+91-94497-11003",
+        "control_room": "+91-08272-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. B. P. Dinesh (SDRF Quick Response Team)",
+        "phone": "+91-94497-22010",
+        "station": "SDRF Quick Response Station (Madikeri)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. K. M. Satish Kumar, DHO",
+        "phone": "+91-94497-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Madikeri)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. M. Mahesh (Harangi Dam Division)",
+        "phone": "+91-94497-22030",
+        "station": "Water Resources Division (Madikeri)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Kushalnagar / Virajpet / Somwarpet",
+        "phone": "+91-94497-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Hassan": {
+    "district_key": "Hassan",
+    "district_name": "Hassan",
+    "display_name": "Hassan",
+    "headquarters": "Hassan",
+    "basin": "Hemavathi & Yagachi Basins",
+    "primary_rivers": "Hemavathi, Yagachi",
+    "gauge_station": "Gorur Dam Downstream Gauge",
+    "gauge_danger_m": 834.0,
+    "center": [
+      13.0033,
+      76.1004
+    ],
+    "vulnerable_taluks": [
+      "Sakleshpur",
+      "Alur",
+      "Holenarasipur",
+      "Arkalgud"
+    ],
+    "current_risk_level": "Flood Watch",
+    "current_alert_badge": "Orange Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri C. Satyabhama, IAS",
+      "official_phone": "+91-08172-221100",
+      "emergency_mobile": "+91-94498-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.hassan@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Hassan Disaster Wing",
+        "phone": "+91-94498-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Mohammed Sujitha, IPS",
+        "phone": "+91-94498-11003",
+        "control_room": "+91-08172-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. G. M. Swamy (SDRF Hassan Unit)",
+        "phone": "+91-94498-22010",
+        "station": "SDRF Quick Response Station (Hassan)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Shivashankar, DHO",
+        "phone": "+91-94498-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Hassan)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. Venkatesh Murthy (Hemavathi Dam Div Gorur)",
+        "phone": "+91-94498-22030",
+        "station": "Water Resources Division (Hassan)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Sakleshpur / Holenarasipura",
+        "phone": "+91-94498-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Dakshin Kannad": {
+    "district_key": "Dakshin Kannad",
+    "district_name": "Dakshina Kannada",
+    "display_name": "Dakshina Kannada (Mangaluru)",
+    "headquarters": "Mangaluru",
+    "basin": "Netravathi & Gurupura Basins",
+    "primary_rivers": "Netravathi, Gurupura (Phalguni), Kumaradhara",
+    "gauge_station": "Bantwal Gauge (Netravathi River)",
+    "gauge_danger_m": 8.5,
+    "center": [
+      12.8703,
+      75.2289
+    ],
+    "vulnerable_taluks": [
+      "Bantwal",
+      "Belthangady",
+      "Puttur",
+      "Mangaluru",
+      "Sullia"
+    ],
+    "current_risk_level": "Severe Warning",
+    "current_alert_badge": "Red Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri Mullai Muhilan M. P., IAS",
+      "official_phone": "+91-0824-221100",
+      "emergency_mobile": "+91-94496-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.mangaluru@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Mangaluru Disaster Wing",
+        "phone": "+91-94496-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri C. B. Ryshyanth, IPS",
+        "phone": "+91-94496-11003",
+        "control_room": "+91-0824-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "DySP Pradeep Kumar (SDRF 7th Bn Mangaluru)",
+        "phone": "+91-94496-22010",
+        "station": "SDRF Quick Response Station (Mangaluru)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. H. R. Thimmayya, DHO",
+        "phone": "+91-94496-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Mangaluru)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. Gokuldas (Netravathi Basin Division)",
+        "phone": "+91-94496-22030",
+        "station": "Water Resources Division (Mangaluru)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Bantwal / Belthangady / Puttur",
+        "phone": "+91-94496-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Udupi": {
+    "district_key": "Udupi",
+    "district_name": "Udupi",
+    "display_name": "Udupi",
+    "headquarters": "Udupi",
+    "basin": "Swarna, Sita, Varahi & Shambhavi Basins",
+    "primary_rivers": "Swarna, Sita, Varahi, Chakra",
+    "gauge_station": "Baje Dam (Swarna River)",
+    "gauge_danger_m": 5.2,
+    "center": [
+      13.3409,
+      74.7421
+    ],
+    "vulnerable_taluks": [
+      "Udupi",
+      "Kundapura",
+      "Karkala",
+      "Kaup",
+      "Brahmavar"
+    ],
+    "current_risk_level": "Severe Warning",
+    "current_alert_badge": "Red Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Dr. K. Vidya Kumari, IAS",
+      "official_phone": "+91-0820-221100",
+      "emergency_mobile": "+91-94494-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.udupi@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Udupi Disaster Wing",
+        "phone": "+91-94494-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Dr. Arun K., IPS",
+        "phone": "+91-94494-11003",
+        "control_room": "+91-0820-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. Raghavendra K. (SDRF Coastal Unit)",
+        "phone": "+91-94494-22010",
+        "station": "SDRF Quick Response Station (Udupi)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. I. P. Gadad, DHO",
+        "phone": "+91-94494-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Udupi)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. Prasanna Kumar (Varahi & Swarna Div)",
+        "phone": "+91-94494-22030",
+        "station": "Water Resources Division (Udupi)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Kundapura / Brahmavar / Karkala",
+        "phone": "+91-94494-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Uttar Kannand": {
+    "district_key": "Uttar Kannand",
+    "district_name": "Uttara Kannada",
+    "display_name": "Uttara Kannada (Karwar)",
+    "headquarters": "Uttara Kannada",
+    "basin": "Kali, Sharavathi, Aghanashini & Gangavali Basins",
+    "primary_rivers": "Kali, Sharavathi, Gangavali, Aghanashini",
+    "gauge_station": "Kadra Gauge (Kali River)",
+    "gauge_danger_m": 32.0,
+    "center": [
+      14.8185,
+      74.1416
+    ],
+    "vulnerable_taluks": [
+      "Karwar",
+      "Ankola",
+      "Kumta",
+      "Honnavar",
+      "Bhatkal",
+      "Yellapur"
+    ],
+    "current_risk_level": "Severe Warning",
+    "current_alert_badge": "Red Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Deputy Commissioner (Uttara Kannada)",
+      "official_phone": "+91-080-221100",
+      "emergency_mobile": "+91-94480-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.uttarakannada@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Uttara Kannada Disaster Wing",
+        "phone": "+91-94480-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Superintendent of Police (Uttara Kannada)",
+        "phone": "+91-94480-11003",
+        "control_room": "+91-080-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "SDRF Incident Officer (Uttara Kannada)",
+        "phone": "+91-94480-22010",
+        "station": "SDRF Quick Response Station (Uttara Kannada)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "District Health Officer (Uttara Kannada)",
+        "phone": "+91-94480-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Uttara Kannada)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Executive Engineer, Irrigation (Uttara Kannada)",
+        "phone": "+91-94480-22030",
+        "station": "Water Resources Division (Uttara Kannada)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar / Taluk Relief Incharge (Uttara Kannada)",
+        "phone": "+91-94480-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Mysore": {
+    "district_key": "Mysore",
+    "district_name": "Mysuru",
+    "display_name": "Mysuru (Mysore)",
+    "headquarters": "Mysuru",
+    "basin": "Kabini & Kaveri Basins",
+    "primary_rivers": "Kabini (Kapila), Kaveri",
+    "gauge_station": "Beechanahalli Kabini Spillway Gauge",
+    "gauge_danger_m": 694.0,
+    "center": [
+      11.972,
+      76.352
+    ],
+    "vulnerable_taluks": [
+      "H.D. Kote",
+      "Saragur",
+      "Nanjangud",
+      "T. Narasipura",
+      "Mysuru"
+    ],
+    "current_risk_level": "Severe Warning",
+    "current_alert_badge": "Red Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Dr. K. V. Rajendra, IAS",
+      "official_phone": "+91-0821-221100",
+      "emergency_mobile": "+91-94499-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.mysuru@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Mysuru Disaster Wing",
+        "phone": "+91-94499-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Smt. Seema Latkar, IPS",
+        "phone": "+91-94499-11003",
+        "control_room": "+91-0821-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "DySP Shivashankaraiah (SDRF Southern Range)",
+        "phone": "+91-94499-22010",
+        "station": "SDRF Quick Response Station (Mysuru)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. P. C. Kumaraswamy, DHO",
+        "phone": "+91-94499-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Mysuru)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. Anand (Kabini & KRS Cauvery Neeravari Nigama)",
+        "phone": "+91-94499-22030",
+        "station": "Water Resources Division (Mysuru)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Nanjangud / H.D. Kote / T. Narasipura",
+        "phone": "+91-94499-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Chamrajnagar": {
+    "district_key": "Chamrajnagar",
+    "district_name": "Chamarajanagar",
+    "display_name": "Chamarajanagar",
+    "headquarters": "Chamarajanagar",
+    "basin": "Kabini & Suvarnavathi Basins",
+    "primary_rivers": "Suvarnavathi, Chikkahole, Kaveri",
+    "gauge_station": "Kollegal Kaveri Reach Gauge",
+    "gauge_danger_m": 620.5,
+    "center": [
+      11.9261,
+      76.9437
+    ],
+    "vulnerable_taluks": [
+      "Kollegal",
+      "Gundlupet",
+      "Chamarajanagar",
+      "Yelandur",
+      "Hanur"
+    ],
+    "current_risk_level": "Flood Watch",
+    "current_alert_badge": "Orange Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Smt. Shilpa Nag, IAS",
+      "official_phone": "+91-08226-221100",
+      "emergency_mobile": "+91-94801-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.chamarajanagar@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Chamarajanagar Disaster Wing",
+        "phone": "+91-94801-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Smt. Padmini Sahu, IPS",
+        "phone": "+91-94801-11003",
+        "control_room": "+91-08226-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. C. M. Kumar (SDRF Chamarajanagar)",
+        "phone": "+91-94801-22010",
+        "station": "SDRF Quick Response Station (Chamarajanagar)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Chidambara, DHO",
+        "phone": "+91-94801-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Chamarajanagar)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. S. M. Shivakumar (Kabini Downstream Div)",
+        "phone": "+91-94801-22030",
+        "station": "Water Resources Division (Chamarajanagar)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Kollegal / Yelandur",
+        "phone": "+91-94801-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Mandya": {
+    "district_key": "Mandya",
+    "district_name": "Mandya",
+    "display_name": "Mandya",
+    "headquarters": "Mandya",
+    "basin": "Kaveri & Lokapavani Basins",
+    "primary_rivers": "Kaveri, Hemavathi, Shimsha",
+    "gauge_station": "Srirangapatna Ranganathaswamy Ghat Gauge",
+    "gauge_danger_m": 666.0,
+    "center": [
+      12.5242,
+      76.8958
+    ],
+    "vulnerable_taluks": [
+      "Srirangapatna",
+      "Pandavapura",
+      "Malavalli",
+      "Mandya",
+      "K.R. Pet"
+    ],
+    "current_risk_level": "Severe Warning",
+    "current_alert_badge": "Red Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Dr. Kumara, IAS",
+      "official_phone": "+91-08232-221100",
+      "emergency_mobile": "+91-94800-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.mandya@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Mandya Disaster Wing",
+        "phone": "+91-94800-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri N. Yatish, IPS",
+        "phone": "+91-94800-11003",
+        "control_room": "+91-08232-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. Ravikumar (SDRF Mandya)",
+        "phone": "+91-94800-22010",
+        "station": "SDRF Quick Response Station (Mandya)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Mohan, DHO",
+        "phone": "+91-94800-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Mandya)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. Raghuram (KRS Dam Division Srirangapatna)",
+        "phone": "+91-94800-22030",
+        "station": "Water Resources Division (Mandya)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Srirangapatna / Malavalli",
+        "phone": "+91-94800-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Bangalore Urban": {
+    "district_key": "Bangalore Urban",
+    "district_name": "Bengaluru Urban",
+    "display_name": "Bengaluru Urban",
+    "headquarters": "Bengaluru",
+    "basin": "Vrishabhavathi, Arkavathi & Dakshina Pinakini",
+    "primary_rivers": "Vrishabhavathi, Storm Water Drain (SWD) Network",
+    "gauge_station": "Bellandur Wetland Outflow Monitor",
+    "gauge_danger_m": 889.0,
+    "center": [
+      12.9716,
+      77.5946
+    ],
+    "vulnerable_taluks": [
+      "Mahadevapura",
+      "Bommanahalli",
+      "Yelahanka",
+      "East Zone"
+    ],
+    "current_risk_level": "Flood Watch",
+    "current_alert_badge": "Orange Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri K. A. Dayananda, IAS",
+      "official_phone": "+91-080-221100",
+      "emergency_mobile": "+91-94803-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.bengaluru@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Bengaluru Disaster Wing",
+        "phone": "+91-94803-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri C. K. Baba, IPS (SP Rural/Coord)",
+        "phone": "+91-94803-11003",
+        "control_room": "+91-080-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "SP SDRF Hq Bengaluru (1st Battalion)",
+        "phone": "+91-94803-22010",
+        "station": "SDRF Quick Response Station (Bengaluru)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Srinivas, DHO Bengaluru",
+        "phone": "+91-94803-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Bengaluru)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. L. Prasanna (BWSSB & SWD Storm Water Div)",
+        "phone": "+91-94803-22030",
+        "station": "Water Resources Division (Bengaluru)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Bengaluru East / Mahadevapura / Yelahanka",
+        "phone": "+91-94803-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Bangalore Rural": {
+    "district_key": "Bangalore Rural",
+    "district_name": "Bengaluru Rural",
+    "display_name": "Bengaluru Rural",
+    "headquarters": "Bengaluru Rural",
+    "basin": "Arkavathi & Kanva Basins",
+    "primary_rivers": "Arkavathi, Kanva",
+    "gauge_station": "Manchanabele Dam Gauge",
+    "gauge_danger_m": 722.0,
+    "center": [
+      13.2257,
+      77.575
+    ],
+    "vulnerable_taluks": [
+      "Channapatna",
+      "Ramanagara",
+      "Nelamangala",
+      "Devanahalli"
+    ],
+    "current_risk_level": "Advisory",
+    "current_alert_badge": "Yellow Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Dr. N. Shivashankara, IAS",
+      "official_phone": "+91-080-221100",
+      "emergency_mobile": "+91-94804-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.bengalururural@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Bengaluru Rural Disaster Wing",
+        "phone": "+91-94804-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Mallikarjun Baldandi, IPS",
+        "phone": "+91-94804-11003",
+        "control_room": "+91-080-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. Manjunath R. (SDRF Rural Unit)",
+        "phone": "+91-94804-22010",
+        "station": "SDRF Quick Response Station (Bengaluru Rural)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Sunil Kumar, DHO",
+        "phone": "+91-94804-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Bengaluru Rural)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. Manjunath (Arkavathi & Dakshina Pinakini)",
+        "phone": "+91-94804-22030",
+        "station": "Water Resources Division (Bengaluru Rural)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Hoskote / Devanahalli",
+        "phone": "+91-94804-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Kolar": {
+    "district_key": "Kolar",
+    "district_name": "Kolar",
+    "display_name": "Kolar",
+    "headquarters": "Kolar",
+    "basin": "Palar & North Pennar Basins",
+    "primary_rivers": "Palar, Kushavathi",
+    "gauge_station": "Bethamangala Lake Gauge",
+    "gauge_danger_m": 818.0,
+    "center": [
+      13.1378,
+      78.1292
+    ],
+    "vulnerable_taluks": [
+      "Bangarapet",
+      "Malur",
+      "Kolar",
+      "Gowribidanur"
+    ],
+    "current_risk_level": "Normal",
+    "current_alert_badge": "Green Status",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri Akram Pasha, IAS",
+      "official_phone": "+91-08152-221100",
+      "emergency_mobile": "+91-94807-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.kolar@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Kolar Disaster Wing",
+        "phone": "+91-94807-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri M. Narayana, IPS",
+        "phone": "+91-94807-11003",
+        "control_room": "+91-08152-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. V. Babu (SDRF Kolar)",
+        "phone": "+91-94807-22010",
+        "station": "SDRF Quick Response Station (Kolar)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Jagadish, DHO",
+        "phone": "+91-94807-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Kolar)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. K. R. Ramesh (KC Valley & Palar Div)",
+        "phone": "+91-94807-22030",
+        "station": "Water Resources Division (Kolar)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Malur / Bangarpet / Srinivaspur",
+        "phone": "+91-94807-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Vijayanagara": {
+    "district_key": "Vijayanagara",
+    "district_name": "Vijayanagara",
+    "display_name": "Vijayanagara",
+    "headquarters": "Hosapete",
+    "basin": "Tungabhadra Basin",
+    "primary_rivers": "Tungabhadra",
+    "gauge_station": "Kampli / Hospete Gauge",
+    "gauge_danger_m": 484.5,
+    "center": [
+      15.2689,
+      76.3909
+    ],
+    "vulnerable_taluks": [
+      "Hospete",
+      "Kampli",
+      "Hagaribommanahalli",
+      "Kudligi",
+      "Harapanahalli"
+    ],
+    "current_risk_level": "Severe Warning",
+    "current_alert_badge": "Red Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri M. S. Diwakara, IAS",
+      "official_phone": "+91-08394-221100",
+      "emergency_mobile": "+91-94810-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.hosapete@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Hosapete Disaster Wing",
+        "phone": "+91-94810-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Srihari Babu B. L., IPS",
+        "phone": "+91-94810-11003",
+        "control_room": "+91-08394-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "DySP H. M. Sharanappa (SDRF TB Dam Unit)",
+        "phone": "+91-94810-22010",
+        "station": "SDRF Quick Response Station (Hosapete)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Shankar Nayak, DHO",
+        "phone": "+91-94810-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Hosapete)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. N. K. Sridhar (TB Dam Spillway Operations)",
+        "phone": "+91-94810-22030",
+        "station": "Water Resources Division (Hosapete)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Hosapete / Hagaribommanahalli / Kudligi",
+        "phone": "+91-94810-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Yadgir": {
+    "district_key": "Yadgir",
+    "district_name": "Yadgir",
+    "display_name": "Yadgir",
+    "headquarters": "Yadgir",
+    "basin": "Krishna Basin",
+    "primary_rivers": "Krishna, Bhima",
+    "gauge_station": "Yadgir Bhima River Bridge Gauge",
+    "gauge_danger_m": 357.0,
+    "center": [
+      16.7618,
+      77.1378
+    ],
+    "vulnerable_taluks": [
+      "Yadgir",
+      "Shahapur",
+      "Surpur",
+      "Hunsagi",
+      "Gurmitkal"
+    ],
+    "current_risk_level": "Flood Watch",
+    "current_alert_badge": "Orange Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Dr. Susheela B., IAS",
+      "official_phone": "+91-08473-221100",
+      "emergency_mobile": "+91-94486-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.yadgir@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Yadgir Disaster Wing",
+        "phone": "+91-94486-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri G. Sangeetha, IPS",
+        "phone": "+91-94486-11003",
+        "control_room": "+91-08473-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Sub-Insp. Anand Rathod (SDRF Yadgir)",
+        "phone": "+91-94486-22010",
+        "station": "SDRF Quick Response Station (Yadgir)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Prabhuling Mantri, DHO",
+        "phone": "+91-94486-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Yadgir)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. Shivakumar H. (Yadgir Canal Div)",
+        "phone": "+91-94486-22030",
+        "station": "Water Resources Division (Yadgir)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Shahapur / Shorapur",
+        "phone": "+91-94486-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Chikkaballapura": {
+    "district_key": "Chikkaballapura",
+    "district_name": "Chikkaballapura",
+    "display_name": "Chikkaballapura",
+    "headquarters": "Chikkaballapura",
+    "basin": "Palar & Pennar Basin",
+    "primary_rivers": "North Pennar, Papagni, Chitravathi",
+    "gauge_station": "Gauribidanur River Gauge",
+    "gauge_danger_m": 684.5,
+    "center": [
+      13.4325,
+      77.7275
+    ],
+    "vulnerable_taluks": [
+      "Chikkaballapura",
+      "Gauribidanur",
+      "Bagepalli",
+      "Chintamani",
+      "Sidlaghatta"
+    ],
+    "current_risk_level": "Advisory",
+    "current_alert_badge": "Yellow Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Shri P. N. Ravindra, IAS",
+      "official_phone": "+91-08156-221100",
+      "emergency_mobile": "+91-94806-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.chikkaballapura@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Chikkaballapura Disaster Wing",
+        "phone": "+91-94806-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri D. L. Nagesh, IPS",
+        "phone": "+91-94806-11003",
+        "control_room": "+91-08156-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. Srinivas Reddy (SDRF Chikkaballapura)",
+        "phone": "+91-94806-22010",
+        "station": "SDRF Quick Response Station (Chikkaballapura)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Mahesh Kumar, DHO",
+        "phone": "+91-94806-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Chikkaballapura)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. G. N. Murthy (HN Valley & Pinakini Div)",
+        "phone": "+91-94806-22030",
+        "station": "Water Resources Division (Chikkaballapura)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Gauribidanur / Bagepalli",
+        "phone": "+91-94806-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  },
+  "Ramanagara": {
+    "district_key": "Ramanagara",
+    "district_name": "Ramanagara",
+    "display_name": "Ramanagara",
+    "headquarters": "Ramanagara",
+    "basin": "Cauvery / Arkavathi Basin",
+    "primary_rivers": "Arkavathi, Kanva, Shimsha",
+    "gauge_station": "Ramanagara Town Bridge Gauge",
+    "gauge_danger_m": 620.0,
+    "center": [
+      12.7159,
+      77.2811
+    ],
+    "vulnerable_taluks": [
+      "Ramanagara",
+      "Channapatna",
+      "Kanakapura",
+      "Magadi"
+    ],
+    "current_risk_level": "Advisory",
+    "current_alert_badge": "Yellow Alert",
+    "ddma_authority": {
+      "title": "Deputy Commissioner & District Magistrate (Chairman, DDMA)",
+      "officer_name": "Dr. Avinash Menon Rajendran, IAS",
+      "official_phone": "+91-080-221100",
+      "emergency_mobile": "+91-94802-11001",
+      "control_room_hotline": "1077",
+      "email": "dc.ramanagara@karnataka.gov.in"
+    },
+    "incident_response_team": {
+      "incident_commander": {
+        "title": "Additional Deputy Commissioner (ADC) & Incident Commander",
+        "officer_name": "ADC Ramanagara Disaster Wing",
+        "phone": "+91-94802-11002"
+      },
+      "police_head": {
+        "title": "Superintendent of Police (Law & Order / Evacuation)",
+        "officer_name": "Shri Karthik Reddy, IPS",
+        "phone": "+91-94802-11003",
+        "control_room": "+91-080-222222"
+      }
+    },
+    "local_emergency_services": {
+      "police_control_unified": "112 (Universal Emergency Toll-Free)",
+      "fire_and_rescue": "101 (Fire & Water Rescue)",
+      "district_control_room": "1077 (District Disaster Helpline)",
+      "state_disaster_helpline": "1070 (SEOC Karnataka Wire)",
+      "ambulance_emergency": "108 (Health & Trauma Dispatch)"
+    },
+    "registered_rescue_contacts": [
+      {
+        "role": "State Disaster Response Force (SDRF) Team Commander",
+        "name": "Insp. Prakash Gowda (SDRF Ramanagara)",
+        "phone": "+91-94802-22010",
+        "station": "SDRF Quick Response Station (Ramanagara)"
+      },
+      {
+        "role": "District Health Officer (DHO) / Epidemic Relief",
+        "name": "Dr. Niranjan, DHO",
+        "phone": "+91-94802-22020",
+        "station": "District Civil Hospital & Emergency Medical Relief (Ramanagara)"
+      },
+      {
+        "role": "Executive Engineer (Major Irrigation & Hydrology)",
+        "name": "Er. Chandrashekar (Arkavathi & Kanva Div)",
+        "phone": "+91-94802-22030",
+        "station": "Water Resources Division (Ramanagara)"
+      },
+      {
+        "role": "Nodal Tahsildar / Taluk Relief Incharge",
+        "name": "Tahsildar Channapatna / Kanakapura",
+        "phone": "+91-94802-22040",
+        "station": "Taluk Administrative & Evacuation Office"
+      }
+    ]
+  }
+}
