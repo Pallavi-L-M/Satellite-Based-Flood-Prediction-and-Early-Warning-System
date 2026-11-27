@@ -897,6 +897,11 @@
         <button class="nav-tab-btn" onclick="switchTab('early-warning')">Early Warning & Dispatch Center</button>
     </nav>
 
+    <!-- Global District Sync Indicator -->
+    <div id="global-district-badge" style="display:none; align-items:center; gap:8px; padding:8px 18px; margin:0 20px 10px 20px; background:linear-gradient(90deg,#eef2ff,#e0f2fe); border:1px solid #93c5fd; border-radius:8px; font-size:0.85rem; color:#1e40af; transition:opacity 0.5s ease;">
+        🔗 <strong>No district selected</strong>
+    </div>
+
     <!-- Main Content Workspace -->
     <main class="content-container">
 
@@ -1232,7 +1237,7 @@
                         <p style="font-size:0.84rem; color:#64748b;">Live weather and rainfall forecast for major Karnataka districts.</p>
                     </div>
                     <div style="display:flex; gap:10px; align-items:center;">
-                        <select id="live-weather-district-select" class="select-input" style="width:200px;" onchange="fetchLiveWeather(this.value)">
+                        <select id="live-weather-district-select" class="select-input" style="width:200px;" onchange="fetchLiveWeather(this.value); syncWeatherToGlobal(this.value)">
                             <option value="Belgaum">Belagavi (Krishna Basin)</option>
                             <option value="Mysore">Mysuru (Cauvery Basin)</option>
                             <option value="South Kanara">Dakshina Kannada (Coastal)</option>
@@ -1417,7 +1422,7 @@
                 <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; background:#f8fafc; padding:12px 16px; border-radius:8px; border:1px solid var(--border-color);">
                     <div style="display:flex; align-items:center; gap:8px;">
                         <span style="font-size:0.85rem; font-weight:600;">District:</span>
-                        <select id="hist-district-select" class="select-input" style="min-width:210px;" onchange="retrieveHistoricalAnalysis()">
+                        <select id="hist-district-select" class="select-input" style="min-width:210px;" onchange="retrieveHistoricalAnalysis(); setGlobalDistrict(this.value)">
                             <option value="Bagalkot">Bagalkot</option>
                             <option value="Bellary">Ballari (Bellary)</option>
                             <option value="Belgaum" selected>Belagavi (Belgaum)</option>
@@ -1588,7 +1593,7 @@
                         </div>
                         <div style="display:grid; grid-template-columns: 2fr 1fr; gap:12px; align-items:center; margin-bottom:12px;">
                             <div>
-                                <select id="district-sos-select" class="select-input" onchange="onDistrictSosSelectChanged(this.value)">
+                                <select id="district-sos-select" class="select-input" onchange="onDistrictSosSelectChanged(this.value); setGlobalDistrict(this.value)">
                                     <option value="Bagalkot">Bagalkot (Ghataprabha / Krishna)</option>
                                     <option value="Bellary">Ballari (Tungabhadra)</option>
                                     <option value="Belgaum" selected>Belagavi (Krishna Basin)</option>
@@ -2122,6 +2127,134 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
             updatePublicSosBoundaryMap('Belgaum');
         });
 
+        // ==================== GLOBAL DISTRICT SYNC ====================
+        let currentGlobalDistrict = null; // DB key e.g. 'Belgaum', 'Mysore'
+        let _syncingDistrict = false; // guard against infinite loops
+
+        // Master mapping: DB key → closest option value in each tab's dropdown
+        const DISTRICT_TO_WEATHER_KEY = {
+            'Belgaum': 'Belgaum', 'Bagalkot': 'Belgaum', 'Bijapur': 'Belgaum',
+            'Dharwad': 'Belgaum', 'Gadag': 'Belgaum', 'Haveri': 'Belgaum',
+            'Raichur': 'Bellary', 'Gulbarga': 'Bellary', 'Bidar': 'Bellary',
+            'Bellary': 'Bellary', 'Koppal': 'Bellary', 'Davanagere': 'Bellary',
+            'Vijayanagara': 'Bellary', 'Yadgir': 'Bellary',
+            'Shimoga': 'Shimoga', 'Chikmagalur': 'Shimoga', 'Hassan': 'Shimoga',
+            'Chitradurga': 'Shimoga', 'Kodagu': 'Shimoga',
+            'Dakshin Kannad': 'South Kanara', 'Udupi': 'South Kanara',
+            'Uttar Kannand': 'South Kanara',
+            'Mysore': 'Mysore', 'Chamrajnagar': 'Mysore', 'Mandya': 'Mysore',
+            'Tumkur': 'Mysore', 'Ramanagara': 'Mysore',
+            'Bangalore Urban': 'Bangalore', 'Bangalore Rural': 'Bangalore',
+            'Kolar': 'Bangalore', 'Chikkaballapura': 'Bangalore'
+        };
+
+        // DB key → SAR basin region key
+        const DISTRICT_TO_SAR_BASIN = {
+            'Belgaum': 'krishna', 'Bagalkot': 'krishna', 'Bijapur': 'krishna', 'Raichur': 'krishna',
+            'Gulbarga': 'krishna', 'Bidar': 'krishna', 'Yadgir': 'krishna',
+            'Bellary': 'tungabhadra', 'Koppal': 'tungabhadra', 'Haveri': 'tungabhadra',
+            'Davanagere': 'tungabhadra', 'Gadag': 'tungabhadra', 'Vijayanagara': 'tungabhadra',
+            'Dharwad': 'krishna', 'Chitradurga': 'tungabhadra',
+            'Dakshin Kannad': 'coastal', 'Udupi': 'coastal', 'Uttar Kannand': 'coastal',
+            'Shimoga': 'malnad', 'Chikmagalur': 'malnad', 'Hassan': 'malnad', 'Kodagu': 'malnad',
+            'Mysore': 'kabini', 'Chamrajnagar': 'kabini', 'Mandya': 'kabini',
+            'Tumkur': 'kabini', 'Ramanagara': 'kabini',
+            'Bangalore Urban': 'kabini', 'Bangalore Rural': 'kabini',
+            'Kolar': 'kabini', 'Chikkaballapura': 'kabini'
+        };
+
+        function setGlobalDistrict(dbKey) {
+            if (_syncingDistrict || !dbKey) return;
+            _syncingDistrict = true;
+            currentGlobalDistrict = dbKey;
+
+            // 1. Sync Tab 2 dropdown (district-dropdown-select) — values are DB keys
+            const tab2Sel = document.getElementById('district-dropdown-select');
+            if (tab2Sel && tab2Sel.value !== dbKey) {
+                // The dropdown options are populated dynamically from districtsDatabase
+                // Try exact match first, then fuzzy
+                let found = false;
+                for (let i = 0; i < tab2Sel.options.length; i++) {
+                    if (tab2Sel.options[i].value === dbKey) {
+                        tab2Sel.selectedIndex = i;
+                        found = true;
+                        break;
+                    }
+                }
+            }
+
+            // 2. Sync Tab 3 SAR dropdown (sar-region-select)
+            const sarSel = document.getElementById('sar-region-select');
+            const sarBasin = DISTRICT_TO_SAR_BASIN[dbKey];
+            if (sarSel && sarBasin && sarSel.value !== sarBasin) {
+                sarSel.value = sarBasin;
+            }
+
+            // 3. Sync Tab 4 Live Weather dropdown (live-weather-district-select)
+            const weatherSel = document.getElementById('live-weather-district-select');
+            const weatherKey = DISTRICT_TO_WEATHER_KEY[dbKey];
+            if (weatherSel && weatherKey && weatherSel.value !== weatherKey) {
+                weatherSel.value = weatherKey;
+            }
+
+            // 4. Sync Tab 5 Historical dropdown (hist-district-select)
+            const histSel = document.getElementById('hist-district-select');
+            if (histSel) {
+                // Try exact match on value
+                let matched = false;
+                for (let i = 0; i < histSel.options.length; i++) {
+                    if (histSel.options[i].value === dbKey) {
+                        histSel.selectedIndex = i;
+                        matched = true;
+                        break;
+                    }
+                }
+            }
+
+            // 5. Sync Tab 6 SOS dropdown (district-sos-select)
+            const sosSel = document.getElementById('district-sos-select');
+            if (sosSel) {
+                let matched = false;
+                for (let i = 0; i < sosSel.options.length; i++) {
+                    if (sosSel.options[i].value === dbKey) {
+                        sosSel.selectedIndex = i;
+                        matched = true;
+                        break;
+                    }
+                }
+            }
+
+            // Show sync indicator
+            const syncBadge = document.getElementById('global-district-badge');
+            if (syncBadge) {
+                const data = findDistrictData(dbKey);
+                const displayName = data ? data.display_name : dbKey;
+                syncBadge.innerHTML = `🔗 <strong>${displayName}</strong> selected across all tabs`;
+                syncBadge.style.display = 'flex';
+                clearTimeout(syncBadge._hideTimer);
+                syncBadge._hideTimer = setTimeout(() => { syncBadge.style.opacity = '0.6'; }, 3000);
+                syncBadge.style.opacity = '1';
+            }
+
+            _syncingDistrict = false;
+        }
+
+        // Reverse mapping: when user changes the weather dropdown (which has limited keys),
+        // map it back to the closest DB key for global sync
+        function syncWeatherToGlobal(weatherVal) {
+            // Weather keys: Belgaum, Mysore, South Kanara, Bellary, Shimoga, Bangalore
+            const reverseMap = {
+                'Belgaum': 'Belgaum',
+                'Mysore': 'Mysore',
+                'South Kanara': 'Dakshin Kannad',
+                'Bellary': 'Bellary',
+                'Shimoga': 'Shimoga',
+                'Bangalore': 'Bangalore Urban'
+            };
+            const dbKey = reverseMap[weatherVal];
+            if (dbKey) setGlobalDistrict(dbKey);
+        }
+
         // Tab Switching
         function switchTab(tabId) {
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -2146,6 +2279,10 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                     } else {
                         districtMap.invalidateSize();
                     }
+                    // Sync: if global district is set, show its profile
+                    if (currentGlobalDistrict) {
+                        displayDistrictProfile(currentGlobalDistrict);
+                    }
                 }, 150);
             } else if (tabId === 'regional-analysis') {
                 setTimeout(() => {
@@ -2153,6 +2290,13 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                         initRegionalSarMap();
                     } else {
                         sarMap.invalidateSize();
+                    }
+                    // Sync: load the SAR basin for the global district
+                    if (currentGlobalDistrict) {
+                        const basin = DISTRICT_TO_SAR_BASIN[currentGlobalDistrict] || 'kabini';
+                        const sarSel = document.getElementById('sar-region-select');
+                        if (sarSel) sarSel.value = basin;
+                        loadRegionalSar(basin);
                     }
                 }, 150);
             } else if (tabId === 'realtime-data') {
@@ -2165,21 +2309,53 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                     if (liveHourlyWeatherChart) {
                         liveHourlyWeatherChart.resize();
                     }
-                    const tempEl = document.getElementById('w-temp');
-                    if (tempEl && tempEl.innerText.includes('--')) {
-                        const distSel = document.getElementById('live-weather-district-select');
-                        fetchLiveWeather(distSel ? distSel.value : 'Belgaum');
+                    // Sync: fetch weather for the global district's mapped weather key
+                    if (currentGlobalDistrict) {
+                        const wKey = DISTRICT_TO_WEATHER_KEY[currentGlobalDistrict] || 'Belgaum';
+                        const weatherSel = document.getElementById('live-weather-district-select');
+                        if (weatherSel) weatherSel.value = wKey;
+                        fetchLiveWeather(wKey);
+                    } else {
+                        const tempEl = document.getElementById('w-temp');
+                        if (tempEl && tempEl.innerText.includes('--')) {
+                            const distSel = document.getElementById('live-weather-district-select');
+                            fetchLiveWeather(distSel ? distSel.value : 'Belgaum');
+                        }
                     }
                 }, 150);
             } else if (tabId === 'historical-analysis') {
                 setTimeout(() => {
-                    if (!historicalPrecipChart) {
+                    // Sync: always reload for the current global district
+                    if (currentGlobalDistrict) {
+                        const histSel = document.getElementById('hist-district-select');
+                        if (histSel) {
+                            for (let i = 0; i < histSel.options.length; i++) {
+                                if (histSel.options[i].value === currentGlobalDistrict) {
+                                    histSel.selectedIndex = i;
+                                    break;
+                                }
+                            }
+                        }
+                        retrieveHistoricalAnalysis();
+                    } else if (!historicalPrecipChart) {
                         retrieveHistoricalAnalysis();
                     }
                 }, 150);
             } else if (tabId === 'early-warning') {
                 loadAlertsFeed();
-                const curSosDist = document.getElementById('district-sos-select') ? document.getElementById('district-sos-select').value : 'Belgaum';
+                // Sync: use the global district if set
+                const curSosDist = currentGlobalDistrict || (document.getElementById('district-sos-select') ? document.getElementById('district-sos-select').value : 'Belgaum');
+                if (currentGlobalDistrict) {
+                    const sosSel = document.getElementById('district-sos-select');
+                    if (sosSel) {
+                        for (let i = 0; i < sosSel.options.length; i++) {
+                            if (sosSel.options[i].value === currentGlobalDistrict) {
+                                sosSel.selectedIndex = i;
+                                break;
+                            }
+                        }
+                    }
+                }
                 loadDistrictContactsData(curSosDist);
                 loadSosDashboardHistory();
                 loadPublicSosHistory();
@@ -2276,6 +2452,19 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                                 },
                                 click: function(e) {
                                     displayDistrictProfile(dName);
+                                    // Also find the DB key for this district and sync globally
+                                    const matchData = findDistrictData(dName);
+                                    if (matchData) {
+                                        // Find the DB key
+                                        for (let k in districtsDatabase) {
+                                            if (districtsDatabase[k] === matchData) {
+                                                const tab2Sel = document.getElementById('district-dropdown-select');
+                                                if (tab2Sel) tab2Sel.value = k;
+                                                setGlobalDistrict(k);
+                                                break;
+                                            }
+                                        }
+                                    }
                                 }
                             });
                         }
@@ -2339,7 +2528,10 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
         }
 
         function onDistrictDropdownSelect(val) {
-            if (val) displayDistrictProfile(val);
+            if (val) {
+                displayDistrictProfile(val);
+                setGlobalDistrict(val);
+            }
         }
 
         function filterMapBasin() {
