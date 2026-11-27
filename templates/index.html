@@ -1471,12 +1471,48 @@
                     <div class="card-header-styled">
                         <div>
                             <h3 style="margin:0;">Historical Daily Precipitation (Open-Meteo Archive)</h3>
-                            <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">💡 Click any bar to inspect date-specific damages & hydrological telemetry</div>
+                            <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">💡 Hover or click any bar to see Causes, Lives Lost &amp; Flood Effects right here</div>
                         </div>
                         <span id="hist-chart-badge" class="badge badge-primary">Belagavi &bull; Aug 2019</span>
                     </div>
                     <div class="chart-box">
                         <canvas id="historicalPrecipChart"></canvas>
+                    </div>
+
+                    <!-- Inline Selected-Date Impact Panel (Right Inside Bar Chart Card) -->
+                    <div id="hist-inline-impact" style="margin-top:14px; background:#f8fafc; border:1.5px solid #bae6fd; border-radius:10px; padding:14px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid #e2e8f0;">
+                            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                                <span id="hist-selected-date-badge" class="badge badge-primary" style="font-size:0.82rem; padding:4px 10px;">Selected Date: 2019-08-08</span>
+                                <span id="hist-selected-severity-badge" class="badge badge-danger" style="font-size:0.82rem; padding:4px 10px;">Catastrophic Peak Flood</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px; font-size:0.82rem;">
+                                <span><strong>Rainfall:</strong> <span id="hist-damage-precip" style="color:#0369a1; font-weight:700;">-- mm/day</span></span>
+                                <span id="hist-lives-badge" style="background:#fee2e2; color:#991b1b; padding:3px 10px; border-radius:20px; font-weight:700;">Lives Lost: 0</span>
+                            </div>
+                        </div>
+
+                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:10px; font-size:0.82rem;">
+                            <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:8px; padding:10px;">
+                                <strong style="color:#9a3412; display:block; margin-bottom:4px;">⚡ Causes on This Day</strong>
+                                <div id="hist-damage-causes" style="color:#1e293b; line-height:1.45;">--</div>
+                            </div>
+                            <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:8px; padding:10px;">
+                                <strong style="color:#0369a1; display:block; margin-bottom:4px;">🌊 River &amp; Dam Effects</strong>
+                                <div id="hist-damage-river" style="color:#1e293b; line-height:1.45;">--</div>
+                            </div>
+                            <div style="background:#fef2f2; border:1px solid #fecaca; border-radius:8px; padding:10px;">
+                                <strong style="color:#b91c1c; display:block; margin-bottom:4px;">🌾 Crop &amp; Infrastructure Effects</strong>
+                                <div id="hist-damage-agri" style="color:#1e293b; line-height:1.45; margin-bottom:4px;">--</div>
+                                <div id="hist-damage-infra" style="color:#475569; line-height:1.4;">--</div>
+                            </div>
+                            <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:10px;">
+                                <strong style="color:#15803d; display:block; margin-bottom:4px;">🛟 Relief &amp; Evacuation</strong>
+                                <div id="hist-damage-relief" style="color:#1e293b; line-height:1.45;">--</div>
+                            </div>
+                        </div>
+
+                        <div id="hist-date-pills" style="display:flex; gap:5px; flex-wrap:wrap; margin-top:10px; padding-top:8px; border-top:1px dashed #cbd5e1;"></div>
                     </div>
                 </div>
 
@@ -1499,61 +1535,6 @@
                             <div class="label">Maximum Wind Speed Recorded</div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Interactive Date Selection & Documented Flood Damages -->
-            <div class="card" style="border: 2px solid #bae6fd; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08);">
-                <div class="card-header-styled" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
-                    <div>
-                        <h3 style="margin:0; display:flex; align-items:center; gap:8px;">
-                            <span>📅 Documented Flood Impacts & Daily Damage Assessment</span>
-                        </h3>
-                        <div style="font-size:0.80rem; color:#64748b; margin-top:3px;">
-                            Inspecting ground-truth impacts, breached river danger levels, submerged bridges, and relief operations for selected date.
-                        </div>
-                    </div>
-                    <div style="display:flex; gap:8px; align-items:center;">
-                        <span id="hist-selected-date-badge" class="badge badge-primary" style="font-size:0.82rem; padding:5px 10px;">Selected Date: 2019-08-08</span>
-                        <span id="hist-selected-severity-badge" class="badge badge-danger" style="font-size:0.82rem; padding:5px 10px;">Catastrophic Peak Flood</span>
-                    </div>
-                </div>
-
-                <!-- Date Pills Selector -->
-                <div style="margin-top:14px;">
-                    <div style="font-size:0.78rem; font-weight:700; color:#475569; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px;">
-                        Quick Date Selection (Click any date to inspect damages):
-                    </div>
-                    <div id="hist-date-pills" style="display:flex; gap:6px; flex-wrap:wrap; padding:8px 12px; background:#f8fafc; border-radius:8px; border:1px solid var(--border-color); min-height:42px; align-items:center;">
-                        <!-- Dynamically populated -->
-                    </div>
-                </div>
-
-                <!-- 2-Column Damage Details Grid -->
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top:16px;">
-                    <!-- Left: Hydrometeorology & River Stage -->
-                    <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:8px; padding:14px;">
-                        <h4 style="font-size:0.92rem; color:#0369a1; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
-                            <span>🌊 Hydrological & River Stage</span>
-                        </h4>
-                        <div class="inspector-row"><strong>24-Hour Precipitation:</strong> <span id="hist-damage-precip" style="font-weight:700; color:#0369a1;">-- mm</span></div>
-                        <div class="inspector-row"><strong>Flood Severity Tier:</strong> <span id="hist-damage-severity" style="font-weight:700;">--</span></div>
-                        <div class="inspector-row"><strong>River & Dam Status:</strong> <span id="hist-damage-river" style="font-size:0.82rem; color:#1e293b;">--</span></div>
-                    </div>
-
-                    <!-- Right: Agricultural & Infrastructure Damages -->
-                    <div style="background:#fef2f2; border:1px solid #fecaca; border-radius:8px; padding:14px;">
-                        <h4 style="font-size:0.92rem; color:#b91c1c; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
-                            <span>🌾 Damage Enumeration & Field Impacts</span>
-                        </h4>
-                        <div class="inspector-row"><strong>Crop & Farmland Inundation:</strong> <span id="hist-damage-agri" style="font-size:0.82rem; color:#1e293b;">--</span></div>
-                        <div class="inspector-row"><strong>Submerged Bridges & Roads:</strong> <span id="hist-damage-infra" style="font-size:0.82rem; color:#1e293b;">--</span></div>
-                        <div class="inspector-row"><strong>Evacuation & Relief Operations:</strong> <span id="hist-damage-relief" style="font-size:0.82rem; color:#1e293b;">--</span></div>
-                    </div>
-                </div>
-
-                <div id="hist-damage-source-tag" style="margin-top:14px; font-size:0.78rem; color:#475569; padding:8px 12px; background:#f1f5f9; border-radius:6px; border-left:4px solid #0284c7;">
-                    <strong>Data Verification Source:</strong> NRSC Bhuvan & KSNDMC Post-Disaster Damage Enumeration & CWC Gauge Hydrograph.
                 </div>
             </div>
 
@@ -2989,6 +2970,17 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
             const pElem = document.getElementById('hist-damage-precip');
             if (pElem) pElem.innerText = `${dam.precipitation_mm} mm/day`;
 
+            const causesElem = document.getElementById('hist-damage-causes');
+            if (causesElem) causesElem.innerText = dam.causes || 'Seasonal monsoon rainfall and catchment runoff.';
+
+            const livesBadge = document.getElementById('hist-lives-badge');
+            if (livesBadge) {
+                const lives = typeof dam.lives_lost === 'number' ? dam.lives_lost : 0;
+                livesBadge.innerText = `Lives Lost: ${lives}`;
+                livesBadge.style.background = lives > 0 ? '#fee2e2' : '#dcfce7';
+                livesBadge.style.color = lives > 0 ? '#991b1b' : '#166534';
+            }
+
             const sElem = document.getElementById('hist-damage-severity');
             if (sElem) sElem.innerText = dam.severity || 'Normal Monsoon Flow';
 
@@ -3120,13 +3112,21 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                                         legend: { display: false },
                                         tooltip: {
                                             callbacks: {
-                                                afterLabel: function(context) {
-                                                    const dateStr = context.label;
+                                                afterBody: function(items) {
+                                                    if (!items || !items.length) return [];
+                                                    const dateStr = items[0].label;
                                                     const dam = currentHistoricalDamages[dateStr];
-                                                    if (dam) {
-                                                        return [`Status: ${dam.severity}`, '👉 Click bar to inspect documented damages'];
-                                                    }
-                                                    return '👉 Click bar to inspect documented damages';
+                                                    if (!dam) return ['Click bar to inspect details'];
+                                                    const lives = typeof dam.lives_lost === 'number' ? dam.lives_lost : 0;
+                                                    const causes = (dam.causes || '').slice(0, 75);
+                                                    const effects = (dam.effects || dam.agricultural_damage || '').slice(0, 75);
+                                                    return [
+                                                        `Status: ${dam.severity}`,
+                                                        `Lives Lost: ${lives}`,
+                                                        `Causes: ${causes}`,
+                                                        `Effects: ${effects}`,
+                                                        '👉 Click bar to pin full details below'
+                                                    ];
                                                 }
                                             }
                                         }
