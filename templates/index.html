@@ -941,91 +941,8 @@
                 </div>
             </div>
 
-            <!-- DASHBOARD INTEGRATION: STATEWIDE EMERGENCY READINESS & SOS STATUS -->
-            <div class="card" style="margin-bottom: 24px; border: 1px solid #bfdbfe; background: linear-gradient(to right, #f8fafc, #eff6ff);">
-                <div class="card-header-styled" style="padding-bottom:8px; margin-bottom:12px; border-bottom:1px solid #dbeafe;">
-                    <div>
-                        <h3 style="margin:0; color:#1e3a8a; display:flex; align-items:center; gap:8px;">
-                            <span>🚨 Disaster Management & Emergency SOS Readiness</span>
-                        </h3>
-                        <p style="font-size:0.80rem; color:#475569; margin:2px 0 0 0;">
-                            Statewide disaster response monitoring, emergency contact directory, and live alert telemetry across all 31 Karnataka districts.
-                        </p>
-                    </div>
-                    <div style="display:flex; gap:8px; align-items:center;">
-                        <span class="badge badge-primary">Statewide Coverage: 31 Districts</span>
-                        <span id="dash-live-gateway-badge" class="badge badge-warning">Gateway: Test Mode</span>
-                    </div>
-                </div>
-
-                <!-- 6 Metric Cards -->
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap:12px; margin-bottom:16px;">
-                    <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
-                        <div style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Districts Covered</div>
-                        <div id="dash-total-districts" style="font-size:1.5rem; font-weight:800; color:#0369a1; margin-top:2px;">31 / 31</div>
-                        <div style="font-size:0.72rem; color:#16a34a; font-weight:600;">100% Karnataka Coverage</div>
-                    </div>
-
-                    <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
-                        <div style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Selected District</div>
-                        <div id="dash-selected-district" style="font-size:1.25rem; font-weight:800; color:#0f172a; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Belagavi</div>
-                        <div style="font-size:0.72rem; color:#64748b;">Active Incident Focus</div>
-                    </div>
-
-                    <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
-                        <div style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Flood Severity</div>
-                        <div id="dash-flood-severity" style="font-size:1.20rem; font-weight:800; color:#dc2626; margin-top:2px;">Severe Warning</div>
-                        <div style="font-size:0.72rem; color:#dc2626; font-weight:600;">Red Alert Active</div>
-                    </div>
-
-                    <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
-                        <div style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">Emergency Contacts</div>
-                        <div id="dash-total-contacts" style="font-size:1.5rem; font-weight:800; color:#0891b2; margin-top:2px;">217 Contacts</div>
-                        <div style="font-size:0.72rem; color:#64748b;">DDMA, SDRF & Incident Teams</div>
-                    </div>
-
-                    <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
-                        <div style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">SOS Alerts Triggered</div>
-                        <div id="dash-total-sos" style="font-size:1.5rem; font-weight:800; color:#ea580c; margin-top:2px;">1 Alert</div>
-                        <div style="font-size:0.72rem; color:#64748b;">Dispatched & Logged</div>
-                    </div>
-
-                    <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
-                        <div style="font-size:0.72rem; color:#64748b; font-weight:700; text-transform:uppercase;">SMS Delivery Status</div>
-                        <div id="dash-sms-status" style="font-size:1.10rem; font-weight:800; color:#16a34a; margin-top:2px;">Simulated (Test)</div>
-                        <div style="font-size:0.72rem; color:#64748b;">Twilio / Test Gateway</div>
-                    </div>
-                </div>
-
-                <!-- Recent Alert History Strip -->
-                <div>
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                        <span style="font-size:0.80rem; font-weight:700; color:#1e293b; text-transform:uppercase; letter-spacing:0.5px;">Recent Emergency Alert History</span>
-                        <button class="btn btn-outline" style="font-size:0.72rem; padding:2px 8px;" onclick="loadSosDashboardHistory()">Refresh History</button>
-                    </div>
-                    <div style="overflow-x:auto;">
-                        <table class="modern-table" style="font-size:0.78rem; background:white;">
-                            <thead>
-                                <tr>
-                                    <th>Alert ID</th>
-                                    <th>Timestamp</th>
-                                    <th>District</th>
-                                    <th>Flood Severity</th>
-                                    <th>SMS Delivery Status</th>
-                                    <th>Notified Contacts</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="dash-sos-history-tbody">
-                                <!-- Populated dynamically -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Statewide Basin Status Grid -->
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px;">
+            <!-- Statewide Basin Status -->
+            <div style="margin-bottom: 24px;">
                 <div class="card">
                     <div class="card-header-styled">
                         <h3>Major River Basin Operational Status</h3>
@@ -1105,19 +1022,6 @@
                     </div>
                 </div>
 
-                <!-- Earth Observation System Specifications Card (Clean project specs) -->
-                <div class="card" style="background: #f8fafc;">
-                    <h4 style="font-size: 1.05rem; color: var(--primary); margin-bottom: 12px; font-weight: 700;">
-                        Earth Observation & Remote Sensing Specifications
-                    </h4>
-                    <div style="font-size: 0.86rem; line-height: 1.7; color: #334155;">
-                        <p><strong>Radar Constellation:</strong><br>Copernicus Sentinel-1A & Sentinel-1B SAR</p>
-                        <p style="margin-top: 6px;"><strong>SAR Configuration:</strong><br>C-Band (5.405 GHz) | Interferometric Wide (IW) | VV+VH Dual Polarizations</p>
-                        <p style="margin-top: 6px;"><strong>Spatial & Temporal Metrics:</strong><br>10m Pixel Resolution | 6–12 Day Revisit Cycle</p>
-                        <p style="margin-top: 6px;"><strong>Calibration & Filtering:</strong><br>Terrain Flattened Gamma0 / Sigma0 | Lee Speckle Filter (5x5) | SRTM Slope Mask (&gt;8.5°)</p>
-                        <p style="margin-top: 8px;"><strong>Statewide Operational Status:</strong><br><span class="badge badge-success">Active Statewide Decision Support</span></p>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -1128,7 +1032,7 @@
                     <div>
                         <h3 style="margin-bottom: 2px;">Karnataka Statewide Flood Risk Choropleth Map</h3>
                         <p style="color: var(--text-muted); font-size: 0.88rem;">
-                            Live choropleth monitoring of all 31 Karnataka districts color-coded by real-time flood threat tier. Select any district to view its full hydrological profile, gauge stages, vulnerable taluks, and radar candidate metrics.
+                            Interactive map of all 31 Karnataka districts color-coded by flood risk level. Click any district to see its river levels, rainfall, and flood-prone areas.
                         </p>
                     </div>
                     <!-- Basin Filter -->
@@ -1211,11 +1115,7 @@
                             <option value="coastal">West Coast Basin (Netravathi / Bantwal)</option>
                             <option value="malnad">Malnad Catchment Basin (Tunga / Shivamogga)</option>
                         </select>
-                        <select id="sar-satellite-dataset" class="select-input" style="width:230px;" onchange="updateSarObservationSpecs()">
-                            <option value="S1A_IW_GRD">Sentinel-1A IW GRD (VV+VH)</option>
-                            <option value="S1B_IW_GRD">Sentinel-1B IW GRD (VV+VH)</option>
-                            <option value="S1_CONSTEL" selected>Copernicus S1 Constellation (Dual-Pol)</option>
-                        </select>
+
                     </div>
                 </div>
 
@@ -1279,34 +1179,22 @@
                         </div>
                     </div>
 
-                    <!-- Observation Metadata & Threshold Card -->
-                    <div class="pixel-inspector-card">
-                        <div class="layer-control-title">Satellite SAR Observation Details</div>
-                        <div class="inspector-row"><strong>Dataset Mode:</strong> <span id="sar-meta-sensor">Sentinel-1 C-SAR IW GRD</span></div>
-                        <div class="inspector-row"><strong>Polarization:</strong> <span>VV + VH Dual-Pol</span></div>
-                        <div class="inspector-row"><strong>Baseline Backscatter:</strong> <span id="sar-meta-pre">-10.2 dB</span></div>
-                        <div class="inspector-row"><strong>Peak Backscatter:</strong> <span id="sar-meta-post">-17.8 dB</span></div>
-                        <div class="inspector-row"><strong>Backscatter Drop (Δσ°):</strong> <span id="sar-meta-diff" style="color:var(--accent-red);">-7.6 dB</span></div>
-                        <div class="inspector-row"><strong>Threshold Condition:</strong> <span style="color:#16a34a;">Met (Δσ° &lt; -3.0 dB)</span></div>
-                        <div class="inspector-row"><strong>Spatial Resolution:</strong> <span>10m Pixel Spacing</span></div>
-                    </div>
-
                     <!-- Pixel Inspector Tool -->
                     <div class="pixel-inspector-card">
                         <div class="layer-control-title" style="display: flex; justify-content: space-between;">
-                            <span>Statewide SAR Pixel Probe</span>
+                            <span>Map Point Inspector</span>
                             <span style="color:#0284c7; font-size:0.75rem;">Click Any Coordinate</span>
                         </div>
                         <p style="font-size: 0.78rem; color: #64748b; margin-bottom: 8px;">
-                            Click anywhere on the map to inspect live radar backscatter values and surface classification:
+                            Click anywhere on the map to inspect elevation, radar signal change, and flood status:
                         </p>
                         <div id="pixel-inspector-details">
                             <div class="inspector-row"><strong>Latitude / Longitude:</strong> <span id="insp-coords">11.9720°, 76.3520°</span></div>
                             <div class="inspector-row"><strong>Hydrological Basin:</strong> <span id="insp-basin">Kabini River Basin</span></div>
                             <div class="inspector-row"><strong>Elevation (SRTM):</strong> <span id="insp-elev">676.4 m</span></div>
-                            <div class="inspector-row"><strong>Baseline SAR (VV):</strong> <span id="insp-june">-10.2 dB</span></div>
-                            <div class="inspector-row"><strong>Event Peak SAR (VV):</strong> <span id="insp-aug">-17.8 dB</span></div>
-                            <div class="inspector-row"><strong>Radar Drop (Δσ°):</strong> <span id="insp-drop" style="color:var(--accent-red);">-7.6 dB</span></div>
+                            <div class="inspector-row"><strong>Pre-Flood Radar:</strong> <span id="insp-june">-10.2 dB</span></div>
+                            <div class="inspector-row"><strong>During-Flood Radar:</strong> <span id="insp-aug">-17.8 dB</span></div>
+                            <div class="inspector-row"><strong>Signal Drop:</strong> <span id="insp-drop" style="color:var(--accent-red);">-7.6 dB</span></div>
                             <div class="inspector-row"><strong>Threshold Condition:</strong> <span id="insp-thresh" style="color:#16a34a;">Met (&lt; -3.0 dB)</span></div>
                             <div class="inspector-row"><strong>Classification:</strong> <span id="insp-class" style="color:var(--accent-orange);">Filtered Candidate</span></div>
                         </div>
@@ -1332,7 +1220,7 @@
                     Real-Time Data Integration & Dataset Upload Hub
                 </h3>
                 <p style="color: var(--text-muted); font-size: 0.90rem;">
-                    Integrate live Open-Meteo weather APIs, search verified Copernicus Sentinel-1 radar scenes, and upload custom ground telemetry (CSV) or spatial flood boundaries (GeoJSON & GeoTIFF). Never displays fabricated live figures.
+                    View live weather forecasts and upload your own rainfall/river-level CSVs or flood boundary maps (GeoJSON / GeoTIFF) for analysis.
                 </p>
             </div>
 
@@ -1341,7 +1229,7 @@
                 <div class="card-header-styled">
                     <div>
                         <h3>Live Meteorological & Precipitation API (Open-Meteo)</h3>
-                        <p style="font-size:0.84rem; color:#64748b;">Direct connection to live WMO meteorological grid stations for all 31 Karnataka districts.</p>
+                        <p style="font-size:0.84rem; color:#64748b;">Live weather and rainfall forecast for major Karnataka districts.</p>
                     </div>
                     <div style="display:flex; gap:10px; align-items:center;">
                         <select id="live-weather-district-select" class="select-input" style="width:200px;" onchange="fetchLiveWeather(this.value)">
@@ -1398,54 +1286,6 @@
                     <div style="position:relative; height:240px; width:100%;">
                         <canvas id="liveWeatherHourlyChart"></canvas>
                     </div>
-                </div>
-            </div>
-
-            <!-- SUB-SECTION 2: COPERNICUS SENTINEL-1 SEARCH -->
-            <div class="card">
-                <div class="card-header-styled">
-                    <div>
-                        <h3>Copernicus Sentinel-1 SAR Scene Catalogue Search</h3>
-                        <p style="font-size:0.84rem; color:#64748b;">Search authentic Sentinel-1 radar scenes acquired over Karnataka via AWS Earth Search / Copernicus STAC.</p>
-                    </div>
-                    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-                        <select id="stac-district-select" class="select-input" style="width:180px;">
-                            <option value="Belgaum">Belagavi</option>
-                            <option value="Mysore">Mysuru</option>
-                            <option value="South Kanara">Dakshina Kannada</option>
-                            <option value="Bellary">Ballari</option>
-                            <option value="Shimoga">Shivamogga</option>
-                        </select>
-                        <input type="date" id="stac-start-date" class="text-input" style="width:140px;" value="2024-07-25">
-                        <input type="date" id="stac-end-date" class="text-input" style="width:140px;" value="2024-08-10">
-                        <button class="btn btn-primary" onclick="searchSentinel1Scenes()">
-                            Search SAR Scenes
-                        </button>
-                    </div>
-                </div>
-
-                <div id="stac-results-container" style="overflow-x:auto;">
-                    <table class="modern-table" id="stac-table">
-                        <thead>
-                            <tr>
-                                <th>Granule ID</th>
-                                <th>Platform</th>
-                                <th>Acquisition Time (UTC)</th>
-                                <th>Mode</th>
-                                <th>Polarization</th>
-                                <th>Orbit</th>
-                                <th>Resolution</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="stac-table-body">
-                            <tr>
-                                <td colspan="8" style="text-align:center; color:#64748b; padding:18px;">
-                                    Click "Search SAR Scenes" to query the live Copernicus Sentinel-1 catalog.
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
 
@@ -1536,7 +1376,7 @@
                     <div>
                         <div id="spatial-upload-map" class="mini-map-frame"></div>
                         <p style="font-size:0.75rem; color:#64748b; margin-top:4px; text-align:right;">
-                            Leaflet.js Dynamic Polygon Visualization with Spherical Geodesic Area Calculation
+                            Interactive map preview with automatic flooded area calculation (km²)
                         </p>
                     </div>
                 </div>
@@ -1717,48 +1557,6 @@
                 </div>
             </div>
 
-            <!-- Sentinel-1 Satellite Pass & Reference Dataset Availability -->
-            <div class="card">
-                <div class="card-header-styled">
-                    <div>
-                        <h3 style="margin:0;">Sentinel-1 SAR Satellite Pass & Flood Reference Availability</h3>
-                        <div style="font-size:0.78rem; color:#64748b; margin-top:2px;">Copernicus Space Data & NRSC Bhuvan Historical Flood Records</div>
-                    </div>
-                    <span id="hist-satellite-status-badge" class="badge badge-primary">Querying STAC...</span>
-                </div>
-
-                <div id="hist-satellite-summary" style="margin-bottom:12px; font-size:0.85rem; line-height:1.5;"></div>
-
-                <div id="hist-satellite-table-container" style="overflow-x:auto; display:none; margin-top:10px;">
-                    <table class="data-table" style="font-size:0.80rem; width:100%;">
-                        <thead>
-                            <tr>
-                                <th>Granule ID</th>
-                                <th>Platform</th>
-                                <th>Acquisition Time (UTC)</th>
-                                <th>Instrument Mode</th>
-                                <th>Polarizations</th>
-                                <th>Orbit</th>
-                                <th>Resolution</th>
-                                <th>Copernicus Data Access</th>
-                            </tr>
-                        </thead>
-                        <tbody id="hist-satellite-tbody"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Pre-Flood vs Peak-Flood Comparative Analysis Cards -->
-            <div class="card">
-                <div class="card-header-styled">
-                    <h3>Pre-Flood Baseline vs Peak Inundation Comparison</h3>
-                    <span id="hist-baseline-badge" class="badge badge-primary">SAR Change Detection Benchmark</span>
-                </div>
-
-                <div id="hist-baseline-comparison-container">
-                    <!-- Populated dynamically via renderBaselineComparisonCard(data) -->
-                </div>
-            </div>
         </section>
 
         <!-- ==================== TAB 9: EARLY WARNING & DISPATCH CENTER ==================== -->
@@ -1786,7 +1584,7 @@
                             <span>🚨 Public Emergency SOS Broadcast System (PWS / Cell Broadcast)</span>
                         </h3>
                         <p style="font-size:0.82rem; color:#64748b; margin:3px 0 0 0;">
-                            Authorized District-Wide Cell Broadcast (3GPP TS 23.041 CBS Ch 4370) & Location-Based Bulk SMS to <strong>ALL mobile devices physically located within geographical boundaries</strong>.
+                            Send district-wide emergency flood warnings and safety instructions for the selected Karnataka district.
                         </p>
                     </div>
                     <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
@@ -1876,7 +1674,7 @@
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span class="step-badge">Step 2</span>
-                                <strong style="font-size:0.92rem; color:#0f172a;">Geographical Boundary & Cellular BTS Transmission Grid:</strong>
+                                <strong style="font-size:0.92rem; color:#0f172a;">Selected District Map & Coverage Area:</strong>
                             </div>
                             <span class="badge badge-success">Geo-fence Precision Enabled</span>
                         </div>
@@ -1907,7 +1705,7 @@
 
                         <!-- Broad Regional Notice -->
                         <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:8px 12px; font-size:0.78rem; color:#1e40af; margin-bottom:10px;">
-                            📡 <strong>Mass Public Warning Target:</strong> Broadcast reaches <strong>ALL mobile phones physically located inside this geographical boundary</strong> at the time of transmission via BTS Cell Towers, regardless of mobile operator or user registration.
+                            📍 <strong>Target Area:</strong> Alerts cover the selected district boundary and nearby vulnerable taluks shown on the map below.
                         </div>
 
                         <!-- Leaflet District Boundary & Cell Tower Map Container -->
@@ -2155,9 +1953,9 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span class="step-badge" style="background:#0284c7;">Step 6</span>
-                                <strong style="font-size:0.92rem; color:#0f172a;">Public Emergency Alert History (Statewide Broadcast Audit Log):</strong>
+                                <strong style="font-size:0.92rem; color:#0f172a;">Recent Emergency Alert History:</strong>
                             </div>
-                            <span class="badge badge-outline" style="font-size:0.72rem;">Audit-Compliant Disaster Log</span>
+                            <span class="badge badge-outline" style="font-size:0.72rem;">Alert Log</span>
                         </div>
                         <div style="overflow-x:auto;">
                             <table id="public-sos-history-table" class="modern-table" style="font-size:0.78rem;">
@@ -2758,18 +2556,23 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
         }
 
         function updateSarObservationSpecs() {
-            const sel = document.getElementById('sar-satellite-dataset').value;
+            const el = document.getElementById('sar-satellite-dataset');
             const metaSensor = document.getElementById('sar-meta-sensor');
+            if (!el || !metaSensor) return;
+            const sel = el.value;
             if (sel === 'S1A_IW_GRD') metaSensor.innerText = "Sentinel-1A C-SAR IW GRD";
             else if (sel === 'S1B_IW_GRD') metaSensor.innerText = "Sentinel-1B C-SAR IW GRD";
             else metaSensor.innerText = "Copernicus S1 Constellation (A/B)";
         }
 
         function updateSarTimeline() {
+            const preEl = document.getElementById('sar-meta-pre');
+            const postEl = document.getElementById('sar-meta-post');
+            if (!preEl || !postEl) return;
             const pre = document.getElementById('sar-pre-date').value;
             const post = document.getElementById('sar-post-date').value;
-            document.getElementById('sar-meta-pre').innerText = `-10.2 dB (${pre})`;
-            document.getElementById('sar-meta-post').innerText = `-17.8 dB (${post})`;
+            preEl.innerText = `-10.2 dB (${pre})`;
+            postEl.innerText = `-17.8 dB (${post})`;
         }
 
         // ==================== 3. STATEWIDE COMPARATIVE CHART ====================
@@ -3428,6 +3231,7 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
         function querySentinel1Availability(district, start, end, distLabel) {
             const badge = document.getElementById('hist-satellite-status-badge');
             const summary = document.getElementById('hist-satellite-summary');
+            if (!summary) return;
             const tableContainer = document.getElementById('hist-satellite-table-container');
             const tbody = document.getElementById('hist-satellite-tbody');
 
