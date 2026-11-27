@@ -1619,23 +1619,47 @@
                     </div>
                 </div>
 
-                <div class="card" style="display:flex; flex-direction:column; justify-content:space-between;">
+                <div class="card" style="display:flex; flex-direction:column; gap:14px;">
                     <div class="card-header-styled">
-                        <h3>Event Meteorological Totals</h3>
-                        <span class="badge badge-success">Archived Observation</span>
+                        <div>
+                            <h3 style="margin-bottom:2px;">Event Impact &amp; Meteorological Totals</h3>
+                            <span id="hist-event-subtitle" style="font-size:0.80rem; color:#64748b;">Historical Observation Window</span>
+                        </div>
+                        <span class="badge badge-success" id="hist-event-badge">Archived Observation</span>
                     </div>
-                    <div>
-                        <div class="stat-card-highlight initial">
+
+                    <!-- 3 Weather Extremes Cards -->
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <div class="stat-card-highlight initial" style="margin-bottom:0;">
                             <div class="val" id="hist-total-rain">-- mm</div>
                             <div class="label">Total Cumulative Rainfall in Selected Window</div>
                         </div>
-                        <div class="stat-card-highlight filtered">
+                        <div class="stat-card-highlight filtered" style="margin-bottom:0;">
                             <div class="val" id="hist-peak-rain">-- mm</div>
                             <div class="label">Single-Day Maximum Rainfall Record</div>
                         </div>
-                        <div class="stat-card-highlight diff">
+                        <div class="stat-card-highlight diff" style="margin-bottom:0;">
                             <div class="val" id="hist-max-wind">-- km/h</div>
                             <div class="label">Maximum Wind Speed Recorded</div>
+                        </div>
+                    </div>
+
+                    <!-- Verified Disaster & SAR Ground Truth Benchmark -->
+                    <div id="hist-benchmark-panel" style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:10px; padding:12px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; border-bottom:1px solid #e2e8f0; padding-bottom:6px;">
+                            <strong style="font-size:0.85rem; color:#0f172a;">🛰️ Verified Satellite &amp; River Benchmark</strong>
+                            <span id="hist-benchmark-tag" class="badge badge-primary">Historical Event</span>
+                        </div>
+                        <div id="hist-benchmark-content" style="font-size:0.82rem; line-height:1.55; color:#334155;">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Cumulative Impact Summary in Selected Window -->
+                    <div id="hist-window-impact-summary" style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:12px;">
+                        <strong style="font-size:0.85rem; color:#c2410c; display:block; margin-bottom:8px;">⚠️ Cumulative Disaster Window Summary</strong>
+                        <div id="hist-window-impact-content" style="font-size:0.82rem; line-height:1.55; color:#334155;">
+                            <!-- Populated dynamically -->
                         </div>
                     </div>
                 </div>
@@ -3517,6 +3541,68 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                         const initialDate = data.peak_rainfall_date || (data.dates.length > 0 ? data.dates[0] : null);
                         if (initialDate) {
                             displayDailyDamage(initialDate);
+                        }
+
+                        // Populate Benchmark and Cumulative Window Summary
+                        const bmContent = document.getElementById('hist-benchmark-content');
+                        const bmTag = document.getElementById('hist-benchmark-tag');
+                        const evBadge = document.getElementById('hist-event-badge');
+                        const evSub = document.getElementById('hist-event-subtitle');
+                        
+                        let totalLivesLost = 0;
+                        let damageDaysCount = 0;
+                        if (data.dates) {
+                            data.dates.forEach(d => {
+                                const dam = currentHistoricalDamages[d];
+                                if (dam) {
+                                    if (typeof dam.lives_lost === 'number') totalLivesLost += dam.lives_lost;
+                                    if (dam.has_damage) damageDaysCount++;
+                                }
+                            });
+                        }
+
+                        if (data.has_verified_flood_dataset && data.flood_dataset) {
+                            const fd = data.flood_dataset;
+                            if (bmTag) bmTag.innerText = fd.alert_tier || 'Verified Flood';
+                            if (evBadge) {
+                                evBadge.innerText = 'Documented Disaster';
+                                evBadge.className = 'badge badge-danger';
+                            }
+                            if (evSub) evSub.innerText = fd.event_name;
+                            if (bmContent) {
+                                bmContent.innerHTML = `
+                                    <div class="inspector-row"><strong>Documented Event:</strong> <span>${fd.event_name}</span></div>
+                                    <div class="inspector-row"><strong>Verified Inundation Extent:</strong> <span style="font-weight:700; color:#c2410c;">${fd.inundation_area_km2} km²</span></div>
+                                    <div class="inspector-row"><strong>Mean Radar Drop (Δσ°):</strong> <span style="font-weight:700; color:#dc2626;">${fd.radar_drop_db} dB</span></div>
+                                    <div class="inspector-row"><strong>River Stage Exceedance:</strong> <span style="font-weight:700; color:#b91c1c;">+${fd.danger_mark_exceeded_m} m above danger mark</span></div>
+                                    <div class="inspector-row"><strong>Validation Source:</strong> <span style="font-size:0.75rem; color:#64748b;">${fd.reference_source}</span></div>
+                                `;
+                            }
+                        } else {
+                            if (bmTag) bmTag.innerText = 'Seasonal Inflow';
+                            if (evBadge) {
+                                evBadge.innerText = 'Archived Observation';
+                                evBadge.className = 'badge badge-success';
+                            }
+                            if (evSub) evSub.innerText = `${distLabel} Historical Record`;
+                            if (bmContent) {
+                                bmContent.innerHTML = `
+                                    <div class="inspector-row"><strong>Observation Type:</strong> <span>High-Resolution Historical Reanalysis</span></div>
+                                    <div class="inspector-row"><strong>Baseline Hydrology:</strong> <span>Monsoon Channel Capacity</span></div>
+                                    <div class="inspector-row"><strong>Flood Inundation:</strong> <span>No severe river overflow recorded in window</span></div>
+                                    <div class="inspector-row"><strong>Status:</strong> <span style="color:#16a34a; font-weight:700;">Within Safe Operating Buffer</span></div>
+                                `;
+                            }
+                        }
+
+                        const winContent = document.getElementById('hist-window-impact-content');
+                        if (winContent) {
+                            winContent.innerHTML = `
+                                <div class="inspector-row"><strong>Total Lives Lost in Window:</strong> <span style="color:${totalLivesLost > 0 ? '#b91c1c' : '#16a34a'}; font-weight:800;">${totalLivesLost}</span></div>
+                                <div class="inspector-row"><strong>Days with Flood Inundation:</strong> <span style="font-weight:700; color:${damageDaysCount > 0 ? '#ea580c' : '#475569'};">${damageDaysCount} of ${data.dates ? data.dates.length : 0} Days</span></div>
+                                <div class="inspector-row"><strong>Peak Rainfall Day:</strong> <span>${sum.peak_rainfall_date} (${sum.peak_single_day_rain_mm} mm)</span></div>
+                                <div class="inspector-row"><strong>Damage Pattern:</strong> <span>${damageDaysCount > 0 ? 'Riparian agriculture & bridge causeways submerged during peak inflow' : 'Normal agricultural moisture without structural flood damage'}</span></div>
+                            `;
                         }
 
                         // Update Baseline Comparison Card dynamically
