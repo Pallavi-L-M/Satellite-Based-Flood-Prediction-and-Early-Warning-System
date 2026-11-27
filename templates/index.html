@@ -908,14 +908,49 @@
         <!-- ==================== TAB 1: EXECUTIVE DASHBOARD ==================== -->
         <section id="tab-overview" class="tab-panel active">
             <div class="card" style="margin-bottom: 22px;">
-                <div class="card-header-styled">
+                <div class="card-header-styled" style="flex-wrap: wrap; gap: 12px;">
                     <div>
                         <h3 style="margin-bottom: 4px;">Statewide Flood Intelligence Overview</h3>
                         <p style="font-size: 0.9rem; color: #64748b;">
                             Comprehensive satellite radar Earth Observation platform integrating Sentinel-1 SAR change detection, hydraulic river gauge telemetry, and automated early warning across all 31 districts of Karnataka.
                         </p>
                     </div>
-                    <span class="badge badge-success">Live Statewide Telemetry Active</span>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="font-size:0.85rem; font-weight:600; color:#334155;">District Focus:</span>
+                        <select id="overview-district-select" class="select-input" style="min-width:220px; font-weight:600;" onchange="setGlobalDistrict(this.value)">
+                            <option value="Bagalkot">Bagalkot</option>
+                            <option value="Bellary">Ballari (Bellary)</option>
+                            <option value="Belgaum" selected>Belagavi (Belgaum)</option>
+                            <option value="Bangalore Rural">Bengaluru Rural</option>
+                            <option value="Bangalore Urban">Bengaluru Urban</option>
+                            <option value="Bidar">Bidar</option>
+                            <option value="Chamrajnagar">Chamarajanagar</option>
+                            <option value="Chikkaballapura">Chikkaballapura</option>
+                            <option value="Chikmagalur">Chikkamagaluru</option>
+                            <option value="Chitradurga">Chitradurga</option>
+                            <option value="Dakshin Kannad">Dakshina Kannada (Mangaluru)</option>
+                            <option value="Davanagere">Davanagere</option>
+                            <option value="Dharwad">Dharwad</option>
+                            <option value="Gadag">Gadag</option>
+                            <option value="Hassan">Hassan</option>
+                            <option value="Haveri">Haveri</option>
+                            <option value="Gulbarga">Kalaburagi (Gulbarga)</option>
+                            <option value="Kodagu">Kodagu (Coorg)</option>
+                            <option value="Kolar">Kolar</option>
+                            <option value="Koppal">Koppal</option>
+                            <option value="Mandya">Mandya</option>
+                            <option value="Mysore">Mysuru (Mysore)</option>
+                            <option value="Raichur">Raichur</option>
+                            <option value="Ramanagara">Ramanagara</option>
+                            <option value="Shimoga">Shivamogga (Shimoga)</option>
+                            <option value="Tumkur">Tumakuru (Tumkur)</option>
+                            <option value="Udupi">Udupi</option>
+                            <option value="Uttar Kannand">Uttara Kannada (Karwar)</option>
+                            <option value="Bijapur">Vijayapura (Bijapur)</option>
+                            <option value="Vijayanagara">Vijayanagara</option>
+                            <option value="Yadgir">Yadgir</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -944,6 +979,10 @@
                     <div class="metric-value">25.0%</div>
                     <div class="metric-sub">86.20 km² Screened (Speckle & Slope)</div>
                 </div>
+            </div>
+
+            <!-- Selected District Live Spotlight Banner in Tab 1 -->
+            <div id="overview-district-spotlight" class="card" style="margin-bottom: 22px; border-left: 4px solid var(--primary); background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);">
             </div>
 
             <!-- Statewide Basin Status -->
@@ -1113,6 +1152,41 @@
                     </div>
                     <!-- Regional Controls -->
                     <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                        <span style="font-size:0.85rem; font-weight:600; color:#334155;">District:</span>
+                        <select id="sar-district-select" class="select-input" style="min-width:210px; font-weight:600;" onchange="onSarDistrictSelect(this.value)">
+                            <option value="Bagalkot">Bagalkot</option>
+                            <option value="Bellary">Ballari (Bellary)</option>
+                            <option value="Belgaum" selected>Belagavi (Belgaum)</option>
+                            <option value="Bangalore Rural">Bengaluru Rural</option>
+                            <option value="Bangalore Urban">Bengaluru Urban</option>
+                            <option value="Bidar">Bidar</option>
+                            <option value="Chamrajnagar">Chamarajanagar</option>
+                            <option value="Chikkaballapura">Chikkaballapura</option>
+                            <option value="Chikmagalur">Chikkamagaluru</option>
+                            <option value="Chitradurga">Chitradurga</option>
+                            <option value="Dakshin Kannad">Dakshina Kannada (Mangaluru)</option>
+                            <option value="Davanagere">Davanagere</option>
+                            <option value="Dharwad">Dharwad</option>
+                            <option value="Gadag">Gadag</option>
+                            <option value="Hassan">Hassan</option>
+                            <option value="Haveri">Haveri</option>
+                            <option value="Gulbarga">Kalaburagi (Gulbarga)</option>
+                            <option value="Kodagu">Kodagu (Coorg)</option>
+                            <option value="Kolar">Kolar</option>
+                            <option value="Koppal">Koppal</option>
+                            <option value="Mandya">Mandya</option>
+                            <option value="Mysore">Mysuru (Mysore)</option>
+                            <option value="Raichur">Raichur</option>
+                            <option value="Ramanagara">Ramanagara</option>
+                            <option value="Shimoga">Shivamogga (Shimoga)</option>
+                            <option value="Tumkur">Tumakuru (Tumkur)</option>
+                            <option value="Udupi">Udupi</option>
+                            <option value="Uttar Kannand">Uttara Kannada (Karwar)</option>
+                            <option value="Bijapur">Vijayapura (Bijapur)</option>
+                            <option value="Vijayanagara">Vijayanagara</option>
+                            <option value="Yadgir">Yadgir</option>
+                        </select>
+                        <span style="font-size:0.85rem; font-weight:600; color:#334155;">Basin:</span>
                         <select id="sar-region-select" class="select-input" style="width:230px; font-weight:600;" onchange="loadRegionalSar(this.value)">
                             <option value="kabini">Kabini & Southern Kaveri Basin (Mysuru)</option>
                             <option value="krishna">Krishna & Almatti Basin (Belagavi / Bagalkot)</option>
@@ -1120,7 +1194,6 @@
                             <option value="coastal">West Coast Basin (Netravathi / Bantwal)</option>
                             <option value="malnad">Malnad Catchment Basin (Tunga / Shivamogga)</option>
                         </select>
-
                     </div>
                 </div>
 
@@ -1237,13 +1310,38 @@
                         <p style="font-size:0.84rem; color:#64748b;">Live weather and rainfall forecast for major Karnataka districts.</p>
                     </div>
                     <div style="display:flex; gap:10px; align-items:center;">
-                        <select id="live-weather-district-select" class="select-input" style="width:200px;" onchange="fetchLiveWeather(this.value); syncWeatherToGlobal(this.value)">
-                            <option value="Belgaum">Belagavi (Krishna Basin)</option>
-                            <option value="Mysore">Mysuru (Cauvery Basin)</option>
-                            <option value="South Kanara">Dakshina Kannada (Coastal)</option>
-                            <option value="Bellary">Ballari (Tungabhadra)</option>
-                            <option value="Shimoga">Shivamogga (Malnad)</option>
-                            <option value="Bangalore">Bengaluru Urban</option>
+                        <select id="live-weather-district-select" class="select-input" style="width:200px;" onchange="fetchLiveWeather(this.value); setGlobalDistrict(this.value)">
+                            <option value="Bagalkot">Bagalkot</option>
+                            <option value="Bellary">Ballari (Bellary)</option>
+                            <option value="Belgaum" selected>Belagavi (Belgaum)</option>
+                            <option value="Bangalore Rural">Bengaluru Rural</option>
+                            <option value="Bangalore Urban">Bengaluru Urban</option>
+                            <option value="Bidar">Bidar</option>
+                            <option value="Chamrajnagar">Chamarajanagar</option>
+                            <option value="Chikkaballapura">Chikkaballapura</option>
+                            <option value="Chikmagalur">Chikkamagaluru</option>
+                            <option value="Chitradurga">Chitradurga</option>
+                            <option value="Dakshin Kannad">Dakshina Kannada (Mangaluru)</option>
+                            <option value="Davanagere">Davanagere</option>
+                            <option value="Dharwad">Dharwad</option>
+                            <option value="Gadag">Gadag</option>
+                            <option value="Hassan">Hassan</option>
+                            <option value="Haveri">Haveri</option>
+                            <option value="Gulbarga">Kalaburagi (Gulbarga)</option>
+                            <option value="Kodagu">Kodagu (Coorg)</option>
+                            <option value="Kolar">Kolar</option>
+                            <option value="Koppal">Koppal</option>
+                            <option value="Mandya">Mandya</option>
+                            <option value="Mysore">Mysuru (Mysore)</option>
+                            <option value="Raichur">Raichur</option>
+                            <option value="Ramanagara">Ramanagara</option>
+                            <option value="Shimoga">Shivamogga (Shimoga)</option>
+                            <option value="Tumkur">Tumakuru (Tumkur)</option>
+                            <option value="Udupi">Udupi</option>
+                            <option value="Uttar Kannand">Uttara Kannada (Karwar)</option>
+                            <option value="Bijapur">Vijayapura (Bijapur)</option>
+                            <option value="Vijayanagara">Vijayanagara</option>
+                            <option value="Yadgir">Yadgir</option>
                         </select>
                         <button class="btn btn-primary" onclick="fetchLiveWeather(document.getElementById('live-weather-district-select').value)">
                             Refresh Live API
@@ -2128,25 +2226,8 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
         });
 
         // ==================== GLOBAL DISTRICT SYNC ====================
-        let currentGlobalDistrict = null; // DB key e.g. 'Belgaum', 'Mysore'
+        let currentGlobalDistrict = 'Belgaum'; // DB key e.g. 'Belgaum', 'Mysore'
         let _syncingDistrict = false; // guard against infinite loops
-
-        // Master mapping: DB key → closest option value in each tab's dropdown
-        const DISTRICT_TO_WEATHER_KEY = {
-            'Belgaum': 'Belgaum', 'Bagalkot': 'Belgaum', 'Bijapur': 'Belgaum',
-            'Dharwad': 'Belgaum', 'Gadag': 'Belgaum', 'Haveri': 'Belgaum',
-            'Raichur': 'Bellary', 'Gulbarga': 'Bellary', 'Bidar': 'Bellary',
-            'Bellary': 'Bellary', 'Koppal': 'Bellary', 'Davanagere': 'Bellary',
-            'Vijayanagara': 'Bellary', 'Yadgir': 'Bellary',
-            'Shimoga': 'Shimoga', 'Chikmagalur': 'Shimoga', 'Hassan': 'Shimoga',
-            'Chitradurga': 'Shimoga', 'Kodagu': 'Shimoga',
-            'Dakshin Kannad': 'South Kanara', 'Udupi': 'South Kanara',
-            'Uttar Kannand': 'South Kanara',
-            'Mysore': 'Mysore', 'Chamrajnagar': 'Mysore', 'Mandya': 'Mysore',
-            'Tumkur': 'Mysore', 'Ramanagara': 'Mysore',
-            'Bangalore Urban': 'Bangalore', 'Bangalore Rural': 'Bangalore',
-            'Kolar': 'Bangalore', 'Chikkaballapura': 'Bangalore'
-        };
 
         // DB key → SAR basin region key
         const DISTRICT_TO_SAR_BASIN = {
@@ -2163,73 +2244,144 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
             'Kolar': 'kabini', 'Chikkaballapura': 'kabini'
         };
 
+        function updateOverviewDistrictSpotlight(districtKey) {
+            const card = document.getElementById('overview-district-spotlight');
+            if (!card) return;
+            const data = findDistrictData(districtKey);
+            if (!data) return;
+            
+            let badgeClass = 'badge-success';
+            if (data.risk_level === 'Severe Warning') badgeClass = 'badge-danger';
+            else if (data.risk_level === 'Flood Watch') badgeClass = 'badge-warning';
+            else if (data.risk_level === 'Advisory') badgeClass = 'badge-warning';
+
+            card.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:12px;">
+                    <div>
+                        <span style="font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; font-weight:700; color:#64748b;">Selected District Live Telemetry Spotlight</span>
+                        <h3 style="margin:2px 0 0 0; color:var(--primary); font-size:1.25rem;">📍 ${data.display_name}</h3>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="badge ${badgeClass}" style="font-size:0.85rem; padding:6px 12px;">${data.risk_level} (${data.alert_badge})</span>
+                        <span class="badge badge-primary">${data.basin}</span>
+                    </div>
+                </div>
+                <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom:14px;">
+                    <div style="background:#fff; padding:10px 14px; border-radius:8px; border:1px solid #e2e8f0;">
+                        <div style="font-size:0.75rem; color:#64748b; font-weight:600;">RIVER GAUGE STAGE</div>
+                        <div style="font-size:1.15rem; font-weight:800; color:#b91c1c;">${data.gauge_stage_m} m</div>
+                        <div style="font-size:0.72rem; color:#64748b;">Danger Mark: ${data.gauge_danger_m} m</div>
+                    </div>
+                    <div style="background:#fff; padding:10px 14px; border-radius:8px; border:1px solid #e2e8f0;">
+                        <div style="font-size:0.75rem; color:#64748b; font-weight:600;">24H ACCUMULATED RAIN</div>
+                        <div style="font-size:1.15rem; font-weight:800; color:#0369a1;">${data.rainfall_24h_mm} mm</div>
+                        <div style="font-size:0.72rem; color:#64748b;">Soil Moisture: ${data.soil_moisture_pct}%</div>
+                    </div>
+                    <div style="background:#fff; padding:10px 14px; border-radius:8px; border:1px solid #e2e8f0;">
+                        <div style="font-size:0.75rem; color:#64748b; font-weight:600;">SAR INUNDATION EXTENT</div>
+                        <div style="font-size:1.15rem; font-weight:800; color:#c2410c;">${data.filtered_candidate_km2} km²</div>
+                        <div style="font-size:0.72rem; color:#64748b;">Raw Extent: ${data.initial_candidate_km2} km²</div>
+                    </div>
+                    <div style="background:#fff; padding:10px 14px; border-radius:8px; border:1px solid #e2e8f0;">
+                        <div style="font-size:0.75rem; color:#64748b; font-weight:600;">POPULATION AT RISK</div>
+                        <div style="font-size:1.15rem; font-weight:800; color:#7c3aed;">${data.population_at_risk.toLocaleString()}</div>
+                        <div style="font-size:0.72rem; color:#64748b;">Active Shelters: ${data.evacuation_shelters_active}</div>
+                    </div>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                    <div style="font-size:0.82rem; color:#475569;">
+                        <strong>Key Reservoirs & Rivers:</strong> ${data.key_river} &bull; ${data.key_reservoirs}
+                    </div>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <button class="btn btn-outline" style="font-size:0.78rem; padding:5px 10px;" onclick="switchTab('district-map')">View Map →</button>
+                        <button class="btn btn-outline" style="font-size:0.78rem; padding:5px 10px;" onclick="switchTab('regional-analysis')">SAR Radar →</button>
+                        <button class="btn btn-outline" style="font-size:0.78rem; padding:5px 10px;" onclick="switchTab('realtime-data')">Live Weather →</button>
+                        <button class="btn btn-outline" style="font-size:0.78rem; padding:5px 10px;" onclick="switchTab('historical-analysis')">Historical Analysis →</button>
+                        <button class="btn btn-primary" style="font-size:0.78rem; padding:5px 10px;" onclick="switchTab('early-warning')">Dispatch SOS →</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function onSarDistrictSelect(val) {
+            if (val) setGlobalDistrict(val);
+        }
+
         function setGlobalDistrict(dbKey) {
             if (_syncingDistrict || !dbKey) return;
             _syncingDistrict = true;
             currentGlobalDistrict = dbKey;
 
-            // 1. Sync Tab 2 dropdown (district-dropdown-select) — values are DB keys
+            // 1. Sync Tab 1 Overview dropdown & spotlight
+            const tab1Sel = document.getElementById('overview-district-select');
+            if (tab1Sel && tab1Sel.value !== dbKey) {
+                tab1Sel.value = dbKey;
+            }
+            updateOverviewDistrictSpotlight(dbKey);
+
+            // 2. Sync Tab 2 Risk Map dropdown
             const tab2Sel = document.getElementById('district-dropdown-select');
             if (tab2Sel && tab2Sel.value !== dbKey) {
-                // The dropdown options are populated dynamically from districtsDatabase
-                // Try exact match first, then fuzzy
-                let found = false;
                 for (let i = 0; i < tab2Sel.options.length; i++) {
                     if (tab2Sel.options[i].value === dbKey) {
                         tab2Sel.selectedIndex = i;
-                        found = true;
                         break;
                     }
                 }
             }
+            displayDistrictProfile(dbKey);
 
-            // 2. Sync Tab 3 SAR dropdown (sar-region-select)
+            // 3. Sync Tab 3 SAR dropdowns (district + basin)
+            const sarDistSel = document.getElementById('sar-district-select');
+            if (sarDistSel && sarDistSel.value !== dbKey) {
+                sarDistSel.value = dbKey;
+            }
             const sarSel = document.getElementById('sar-region-select');
-            const sarBasin = DISTRICT_TO_SAR_BASIN[dbKey];
-            if (sarSel && sarBasin && sarSel.value !== sarBasin) {
+            const sarBasin = DISTRICT_TO_SAR_BASIN[dbKey] || 'krishna';
+            if (sarSel && sarSel.value !== sarBasin) {
                 sarSel.value = sarBasin;
             }
-
-            // 3. Sync Tab 4 Live Weather dropdown (live-weather-district-select)
-            const weatherSel = document.getElementById('live-weather-district-select');
-            const weatherKey = DISTRICT_TO_WEATHER_KEY[dbKey];
-            if (weatherSel && weatherKey && weatherSel.value !== weatherKey) {
-                weatherSel.value = weatherKey;
+            if (sarMap) {
+                loadRegionalSar(sarBasin, dbKey);
             }
 
-            // 4. Sync Tab 5 Historical dropdown (hist-district-select)
+            // 4. Sync Tab 4 Live Weather dropdown
+            const weatherSel = document.getElementById('live-weather-district-select');
+            if (weatherSel && weatherSel.value !== dbKey) {
+                weatherSel.value = dbKey;
+            }
+            fetchLiveWeather(dbKey);
+
+            // 5. Sync Tab 5 Historical dropdown
             const histSel = document.getElementById('hist-district-select');
-            if (histSel) {
-                // Try exact match on value
-                let matched = false;
+            if (histSel && histSel.value !== dbKey) {
                 for (let i = 0; i < histSel.options.length; i++) {
                     if (histSel.options[i].value === dbKey) {
                         histSel.selectedIndex = i;
-                        matched = true;
                         break;
                     }
                 }
             }
+            retrieveHistoricalAnalysis();
 
-            // 5. Sync Tab 6 SOS dropdown (district-sos-select)
+            // 6. Sync Tab 6 SOS dropdown
             const sosSel = document.getElementById('district-sos-select');
-            if (sosSel) {
-                let matched = false;
+            if (sosSel && sosSel.value !== dbKey) {
                 for (let i = 0; i < sosSel.options.length; i++) {
                     if (sosSel.options[i].value === dbKey) {
                         sosSel.selectedIndex = i;
-                        matched = true;
                         break;
                     }
                 }
             }
+            onDistrictSosSelectChanged(dbKey);
 
-            // Show sync indicator
+            // Show sync indicator badge
             const syncBadge = document.getElementById('global-district-badge');
             if (syncBadge) {
                 const data = findDistrictData(dbKey);
                 const displayName = data ? data.display_name : dbKey;
-                syncBadge.innerHTML = `🔗 <strong>${displayName}</strong> selected across all tabs`;
+                syncBadge.innerHTML = `🔗 <strong>${displayName}</strong> selected & synchronized across all 6 tabs`;
                 syncBadge.style.display = 'flex';
                 clearTimeout(syncBadge._hideTimer);
                 syncBadge._hideTimer = setTimeout(() => { syncBadge.style.opacity = '0.6'; }, 3000);
@@ -2237,22 +2389,6 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
             }
 
             _syncingDistrict = false;
-        }
-
-        // Reverse mapping: when user changes the weather dropdown (which has limited keys),
-        // map it back to the closest DB key for global sync
-        function syncWeatherToGlobal(weatherVal) {
-            // Weather keys: Belgaum, Mysore, South Kanara, Bellary, Shimoga, Bangalore
-            const reverseMap = {
-                'Belgaum': 'Belgaum',
-                'Mysore': 'Mysore',
-                'South Kanara': 'Dakshin Kannad',
-                'Bellary': 'Bellary',
-                'Shimoga': 'Shimoga',
-                'Bangalore': 'Bangalore Urban'
-            };
-            const dbKey = reverseMap[weatherVal];
-            if (dbKey) setGlobalDistrict(dbKey);
         }
 
         // Tab Switching
@@ -2293,10 +2429,12 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                     }
                     // Sync: load the SAR basin for the global district
                     if (currentGlobalDistrict) {
-                        const basin = DISTRICT_TO_SAR_BASIN[currentGlobalDistrict] || 'kabini';
+                        const basin = DISTRICT_TO_SAR_BASIN[currentGlobalDistrict] || 'krishna';
                         const sarSel = document.getElementById('sar-region-select');
                         if (sarSel) sarSel.value = basin;
-                        loadRegionalSar(basin);
+                        const sarDistSel = document.getElementById('sar-district-select');
+                        if (sarDistSel) sarDistSel.value = currentGlobalDistrict;
+                        loadRegionalSar(basin, currentGlobalDistrict);
                     }
                 }, 150);
             } else if (tabId === 'realtime-data') {
@@ -2309,12 +2447,11 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                     if (liveHourlyWeatherChart) {
                         liveHourlyWeatherChart.resize();
                     }
-                    // Sync: fetch weather for the global district's mapped weather key
+                    // Sync: fetch weather for the global district
                     if (currentGlobalDistrict) {
-                        const wKey = DISTRICT_TO_WEATHER_KEY[currentGlobalDistrict] || 'Belgaum';
                         const weatherSel = document.getElementById('live-weather-district-select');
-                        if (weatherSel) weatherSel.value = wKey;
-                        fetchLiveWeather(wKey);
+                        if (weatherSel) weatherSel.value = currentGlobalDistrict;
+                        fetchLiveWeather(currentGlobalDistrict);
                     } else {
                         const tempEl = document.getElementById('w-temp');
                         if (tempEl && tempEl.innerText.includes('--')) {
@@ -2377,6 +2514,7 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                 .then(data => {
                     districtsDatabase = data;
                     populateDistrictDropdown();
+                    setGlobalDistrict(currentGlobalDistrict || 'Belgaum');
                 });
 
             fetch('/api/statewide/summary')
@@ -2690,16 +2828,41 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
             loadRegionalSar('kabini');
         }
 
-        function loadRegionalSar(regionId) {
+        function loadRegionalSar(regionId, districtKey) {
             fetch(`/api/regional/sar/${regionId}`)
                 .then(r => r.json())
                 .then(reg => {
+                    const activeDist = districtKey || currentGlobalDistrict;
+                    const distData = findDistrictData(activeDist);
+
                     if (sarMap) {
-                        sarMap.setView(reg.center, reg.zoom);
+                        if (distData && distData.center) {
+                            sarMap.setView(distData.center, 9);
+                        } else {
+                            sarMap.setView(reg.center, reg.zoom);
+                        }
                     }
 
                     document.getElementById('basin-summary-title').innerText = reg.name;
+
+                    let distCardHtml = '';
+                    if (distData) {
+                        distCardHtml = `
+                            <div style="background:#fff; border:1.5px solid #fdba74; border-radius:6px; padding:8px 10px; margin-bottom:10px;">
+                                <div style="font-weight:700; color:#c2410c; font-size:0.85rem; margin-bottom:4px;">📍 District Focus: ${distData.display_name}</div>
+                                <div style="font-size:0.80rem; line-height:1.5;">
+                                    <strong>SAR Inundation:</strong> <span style="font-weight:700; color:#ea580c;">${distData.filtered_candidate_km2} km²</span> (Raw: ${distData.initial_candidate_km2} km²)<br>
+                                    <strong>Mean Backscatter Drop:</strong> ${distData.mean_backscatter_drop_db} dB<br>
+                                    <strong>Soil Moisture:</strong> ${distData.soil_moisture_pct}% &bull; <strong>24h Rain:</strong> ${distData.rainfall_24h_mm} mm<br>
+                                    <strong>River Stage:</strong> <span style="color:#b91c1c; font-weight:700;">${distData.gauge_stage_m} m</span> (Danger: ${distData.gauge_danger_m} m)<br>
+                                    <strong>Alert Level:</strong> <span class="badge ${distData.risk_level === 'Severe Warning' ? 'badge-danger' : 'badge-warning'}">${distData.risk_level}</span>
+                                </div>
+                            </div>
+                        `;
+                    }
+
                     document.getElementById('basin-summary-body').innerHTML = `
+                        ${distCardHtml}
                         <strong>Monitored Districts:</strong> ${reg.districts.join(', ')}<br>
                         <strong>Observation Timeline:</strong> ${reg.baseline_date} vs ${reg.event_date}<br>
                         <strong>Filtered Flood Extent:</strong> <span style="font-weight:700; color:#c2410c;">${reg.filtered_area_km2} km²</span> (Initial: ${reg.initial_area_km2} km²)<br>
