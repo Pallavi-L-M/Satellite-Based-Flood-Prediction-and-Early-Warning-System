@@ -1,0 +1,50 @@
+{
+  "type": "FeatureCollection",
+  "name": "Belagavi_Krishna_Flood_Zone_Sample",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chikkodi - Kallol Krishna Floodplain",
+        "district": "Belagavi",
+        "basin": "Krishna Basin",
+        "severity": "Severe Warning",
+        "source": "Sentinel-1 SAR Sample Polygon"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [74.55, 16.42],
+            [74.68, 16.42],
+            [74.71, 16.51],
+            [74.58, 16.53],
+            [74.55, 16.42]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Athani Riparian Inundation Zone",
+        "district": "Belagavi",
+        "basin": "Krishna Basin",
+        "severity": "Flood Watch",
+        "source": "Sentinel-1 SAR Sample Polygon"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [74.98, 16.65],
+            [75.10, 16.65],
+            [75.12, 16.73],
+            [75.00, 16.74],
+            [74.98, 16.65]
+          ]
+        ]
+      }
+    }
+  ]
+}

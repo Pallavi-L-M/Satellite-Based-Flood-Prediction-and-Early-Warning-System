@@ -1296,9 +1296,17 @@
                         <h3>Upload CSV Hydrological & River Gauge Telemetry</h3>
                         <p style="font-size:0.84rem; color:#64748b;">Ingest real ground observations. Supports rainfall, gauge stage, danger mark, and reservoir discharge.</p>
                     </div>
-                    <button class="btn btn-outline" onclick="loadSampleCsvData()">
-                        Load Pre-Built Sample CSV
-                    </button>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <a href="/static/data/samples/belagavi_krishna_flood_telemetry.csv" download class="btn btn-outline" style="font-size:0.80rem;">
+                            ⬇ Download Belagavi CSV
+                        </a>
+                        <a href="/static/data/samples/kodagu_cauvery_gauge_telemetry.csv" download class="btn btn-outline" style="font-size:0.80rem;">
+                            ⬇ Download Kodagu CSV
+                        </a>
+                        <button class="btn btn-outline" onclick="loadSampleCsvData()">
+                            Load Pre-Built Sample CSV
+                        </button>
+                    </div>
                 </div>
 
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -1349,9 +1357,17 @@
                             Upload verified flood boundary GeoJSON or SAR GeoTIFF files. Computes exact geodesic surface area in km² and verifies Karnataka geographic bounds.
                         </p>
                     </div>
-                    <button class="btn btn-outline" onclick="loadSampleGeoJsonData()">
-                        Load Sample Flood Candidate GeoJSON
-                    </button>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <a href="/static/data/samples/belagavi_flood_zone_sample.geojson" download class="btn btn-outline" style="font-size:0.80rem;">
+                            ⬇ Download Belagavi GeoJSON
+                        </a>
+                        <a href="/static/data/kabini_filtered_flood_candidate.geojson" download class="btn btn-outline" style="font-size:0.80rem;">
+                            ⬇ Download Kabini GeoJSON
+                        </a>
+                        <button class="btn btn-outline" onclick="loadSampleGeoJsonData()">
+                            Load Sample Flood Candidate GeoJSON
+                        </button>
+                    </div>
                 </div>
 
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -2162,6 +2178,14 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                     } else {
                         spatialUploadMap.invalidateSize();
                     }
+                    if (liveHourlyWeatherChart) {
+                        liveHourlyWeatherChart.resize();
+                    }
+                    const tempEl = document.getElementById('w-temp');
+                    if (tempEl && tempEl.innerText.includes('--')) {
+                        const distSel = document.getElementById('live-weather-district-select');
+                        fetchLiveWeather(distSel ? distSel.value : 'Belgaum');
+                    }
                 }, 150);
             } else if (tabId === 'historical-analysis') {
                 setTimeout(() => {
@@ -2630,14 +2654,16 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                         document.getElementById('w-wind').innerText = `${cur.wind_speed_10m_kmh} km/h`;
                         document.getElementById('w-pressure').innerText = `${cur.surface_pressure_hpa} hPa`;
 
-                        if (tsLabel) tsLabel.innerText = `Observed at: ${cur.time} (UTC) &bull; Coordinates: ${data.coordinates.latitude.toFixed(2)}°N, ${data.coordinates.longitude.toFixed(2)}°E`;
+                        if (tsLabel) tsLabel.innerHTML = `Observed at: ${cur.time} &bull; Coordinates: ${data.coordinates.latitude.toFixed(2)}°N, ${data.coordinates.longitude.toFixed(2)}°E`;
 
                         // Render 48h Hourly Chart
                         renderLiveHourlyChart(data.forecast_hourly);
+                    } else {
+                        if (tsLabel) tsLabel.innerText = data.message || "Unable to fetch weather data right now.";
                     }
                 })
                 .catch(err => {
-                    if (tsLabel) tsLabel.innerText = "Live API query completed with cached parameters.";
+                    if (tsLabel) tsLabel.innerText = "Unable to reach weather service. Click Refresh Live API to retry.";
                 });
         }
 
