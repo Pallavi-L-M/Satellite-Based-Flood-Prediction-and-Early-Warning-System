@@ -1346,6 +1346,9 @@
                         <button class="btn btn-primary" onclick="fetchLiveWeather(document.getElementById('live-weather-district-select').value)">
                             Refresh Live API
                         </button>
+                        <button class="btn btn-outline" style="font-size:0.80rem;" onclick="toggleSimulatedMonsoonRain()">
+                            🌧️ Simulate Monsoon Flood Curve
+                        </button>
                     </div>
                 </div>
 
@@ -3213,6 +3216,33 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                 });
         }
 
+        let isSimulatedMonsoon = false;
+        function toggleSimulatedMonsoonRain() {
+            isSimulatedMonsoon = !isSimulatedMonsoon;
+            if (isSimulatedMonsoon) {
+                const simulatedTimes = [];
+                const simulatedRain = [];
+                const now = new Date();
+                for (let i = 0; i < 48; i++) {
+                    const d = new Date(now.getTime() + i * 3600 * 1000);
+                    simulatedTimes.push(d.toISOString().slice(11, 16));
+                    // Heavy monsoon peak curve
+                    const p1 = Math.exp(-Math.pow((i - 14) / 4.0, 2)) * 38.5;
+                    const p2 = Math.exp(-Math.pow((i - 32) / 5.0, 2)) * 24.0;
+                    const val = Math.max(0.5, p1 + p2 + (i % 3 === 0 ? 3.5 : 1.0));
+                    simulatedRain.push(parseFloat(val.toFixed(1)));
+                }
+                renderLiveHourlyChart({ time: simulatedTimes, precipitation_mm: simulatedRain });
+                document.getElementById('w-curr-rain').innerText = '18.4 mm/h';
+                document.getElementById('w-24h-rain').innerText = '148.5 mm';
+                const tsLabel = document.getElementById('live-weather-timestamp');
+                if (tsLabel) tsLabel.innerHTML = `⚠️ <strong>Simulated Severe Monsoon Rainstorm</strong> &bull; Peak: 38.5 mm/h &bull; 24h Total: 148.5 mm &bull; Click button again to restore live API`;
+            } else {
+                const dist = document.getElementById('live-weather-district-select').value;
+                fetchLiveWeather(dist);
+            }
+        }
+
         function renderLiveHourlyChart(hourly) {
             const ctx = document.getElementById('liveWeatherHourlyChart');
             if (!ctx || !hourly || !hourly.time) return;
@@ -3222,6 +3252,23 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
 
             if (liveHourlyWeatherChart) {
                 liveHourlyWeatherChart.destroy();
+            }
+
+            // Check if all values are 0
+            const maxVal = Math.max(...rainVals, 0);
+            let zeroNote = document.getElementById('zero-rain-chart-note');
+            if (maxVal === 0) {
+                if (!zeroNote) {
+                    zeroNote = document.createElement('div');
+                    zeroNote.id = 'zero-rain-chart-note';
+                    zeroNote.style.cssText = 'position:absolute; top:45%; left:50%; transform:translate(-50%, -50%); background:rgba(255,255,255,0.95); border:1.5px dashed #94a3b8; padding:12px 18px; border-radius:8px; font-size:0.82rem; color:#334155; pointer-events:none; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.06); z-index:10;';
+                    zeroNote.innerHTML = '☀️ <strong>Clear Weather (0.0 mm Rain):</strong> Live Open-Meteo forecast indicates completely dry skies across the next 48 hours.<br><span style="font-size:0.75rem; color:#4f46e5; font-weight:600;">👉 Click <strong>"🌧️ Simulate Monsoon Flood Curve"</strong> above to demo active flood hydrograph!</span>';
+                    ctx.parentElement.appendChild(zeroNote);
+                } else {
+                    zeroNote.style.display = 'block';
+                }
+            } else {
+                if (zeroNote) zeroNote.style.display = 'none';
             }
 
             liveHourlyWeatherChart = new Chart(ctx, {
@@ -3244,6 +3291,7 @@ KS-FEWS – Karnataka Flood Early Warning System</pre>
                     scales: {
                         y: {
                             beginAtZero: true,
+                            suggestedMax: 10,
                             title: { display: true, text: 'Hourly Rain (mm)' }
                         },
                         x: {
